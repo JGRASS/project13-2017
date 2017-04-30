@@ -11,7 +11,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -32,7 +31,6 @@ public class MainWindow extends JFrame {
 	
 	private static Color grayDark = new Color(32, 32, 32); 
 	private static Color grayLight = new Color(49, 49, 49); 
-	private JLabel lblNewLabel_1;
 
 	
 
