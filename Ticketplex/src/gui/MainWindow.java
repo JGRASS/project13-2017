@@ -4,12 +4,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class MainWindow extends JFrame {
 
@@ -28,6 +32,8 @@ public class MainWindow extends JFrame {
 	
 	private static Color grayDark = new Color(32, 32, 32); 
 	private static Color grayLight = new Color(49, 49, 49); 
+	private JLabel lblNewLabel_1;
+
 	
 
 	
@@ -51,6 +57,8 @@ public class MainWindow extends JFrame {
 		initHeader();
 		initMain();
 		initSide();
+
+		setSideGuest();
 		
 
 		
@@ -94,6 +102,7 @@ public class MainWindow extends JFrame {
 		mainPanel.setBounds(0, 30, 690, 490);
 		mainPanel.setBackground(grayDark);
 		containerPane.add(mainPanel);
+		mainPanel.setLayout(null);
 		
 
 	}
@@ -103,6 +112,74 @@ public class MainWindow extends JFrame {
 		sidePanel.setBounds(690, 30, 210, 490);
 		sidePanel.setBackground(grayLight);
 		containerPane.add(sidePanel);
+		sidePanel.setLayout(null);
+
+	}
+	
+	
+	public void setSideGuest(){		
+		sidePanel.removeAll();
+		JLabel lblName = new JLabel("Ticketplex");
+		lblName.setForeground(new Color(255, 255, 255));
+		lblName.setFont(new Font("Arial", Font.BOLD, 18));
+		lblName.setBounds(10, 21, 141, 14);
+		
+		
+		
+		JTextField tfUsername = new JTextField();
+		tfUsername.setForeground(new Color(153, 153, 153));
+		tfUsername.setFont(new Font("Arial", Font.PLAIN, 14));
+		tfUsername.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		tfUsername.setText("Username");
+		tfUsername.setBounds(10, 63, 190, 27);
+		
+		tfUsername.setColumns(10);
+		
+		JTextField tfPassword = new JTextField();
+		tfPassword.setForeground(new Color(153, 153, 153));
+		tfPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+		tfPassword.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		tfPassword.setText("Password");
+		tfPassword.setColumns(10);
+		tfPassword.setBounds(10, 101, 190, 27);
+		
+		
+		JButton btnLogin = new JButton("LOGIN");
+		btnLogin.setBounds(10, 139, 190, 27);
+		btnLogin.setFont(new Font("Arial", Font.BOLD, 14));
+		btnLogin.setForeground(new Color(153, 153, 153));
+		btnLogin.setBackground(grayDark);
+		btnLogin.setBorder(null);
+		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		JLabel lblForgot = new JLabel("<html><u>Zaboravio sam lozinku</u></html>");
+		lblForgot.setForeground(new Color(153, 153, 153));
+		lblForgot.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblForgot.setBounds(10, 177, 153, 14);
+		lblForgot.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		JLabel lblRegister = new JLabel("<html><u>Registracija naloga</u></html>");
+		lblRegister.setForeground(new Color(153, 153, 153));
+		lblRegister.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblRegister.setBounds(10, 199, 153, 14);
+		lblRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		lblRegister.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e)  
+		    {  
+				showRegisterDialog();
+		    }  
+		});
+		
+		
+		sidePanel.add(lblName);
+		sidePanel.add(tfUsername);
+		sidePanel.add(tfPassword);
+		sidePanel.add(btnLogin);
+				
+		sidePanel.add(lblForgot);
+		sidePanel.add(lblRegister);
+		
 	}
 	
 	public void setBreadcrumbs(String[] paths){
@@ -117,4 +194,8 @@ public class MainWindow extends JFrame {
 		lblBreadcrumbs.setText(full);
 		return;
 	}	
+	
+	public void showRegisterDialog(){
+		System.out.println("register clicked");
+	}
 }
