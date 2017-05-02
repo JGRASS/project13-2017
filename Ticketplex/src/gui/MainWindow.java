@@ -1,16 +1,26 @@
 package gui;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import models.Movie;
+
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -55,12 +65,14 @@ public class MainWindow extends JFrame {
 		initHeader();
 		initMain();
 		initSide();
+		
+		mainPanel.requestFocus();
 
 		setSideGuest();
-		
-
-		
+			
 	}
+	
+
 	
 	public void initHeader(){
 		headerPanel = new HeaderPanel(this);
@@ -102,6 +114,8 @@ public class MainWindow extends JFrame {
 		containerPane.add(mainPanel);
 		mainPanel.setLayout(null);
 		
+		
+		
 
 	}
 	
@@ -114,7 +128,7 @@ public class MainWindow extends JFrame {
 
 	}
 	
-	
+	//SIDE PANEL
 	public void setSideGuest(){		
 		sidePanel.removeAll();
 		JLabel lblName = new JLabel("Ticketplex");
@@ -180,6 +194,7 @@ public class MainWindow extends JFrame {
 		
 	}
 	
+	//HEADER
 	public void setBreadcrumbs(String[] paths){
 		String full = "<html>";
 		full += "<b><font color=#5a5a5a>Ticketplex </font></b>";
@@ -195,5 +210,50 @@ public class MainWindow extends JFrame {
 	
 	public void showRegisterDialog(){
 		System.out.println("register clicked");
+	}
+	
+	public void listMovies(LinkedList<Movie> movies){
+		mainPanel.removeAll();
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0,0, mainPanel.getWidth(), mainPanel.getHeight());
+		scrollPane.setBackground(mainPanel.getBackground());
+		scrollPane.setBorder(null);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
+		
+		
+		JPanel listPanel = new JPanel();
+		listPanel.setLayout(null);
+		listPanel.setBounds(0,0, mainPanel.getWidth(), mainPanel.getHeight());
+		listPanel.setBackground(mainPanel.getBackground());
+		
+
+
+		scrollPane.setViewportView(listPanel);
+		
+		
+		
+		
+		int title_width = 120, title_height = 200;
+		int title_padding = 15, per_line = 5;
+		int i = 0;
+		
+		for(Movie movie : movies){
+			ImageIcon imageIcon = new ImageIcon(new ImageIcon(movie.getImg()).getImage().getScaledInstance(title_width, title_height, Image.SCALE_SMOOTH));
+			int x = 13 + (title_width + title_padding) * (i % per_line);
+			int y = 10 + (title_height + title_padding) * (i / per_line);
+			
+			JLabel lblMovie = new JLabel("");
+			lblMovie.setBounds(x, y, title_width, title_height);
+			lblMovie.setIcon(imageIcon);
+			listPanel.add(lblMovie);
+			i++;
+		}
+		
+		listPanel.setPreferredSize(new Dimension(listPanel.getWidth(), (i / per_line) * (title_height + title_padding) + 10));
+		
+		mainPanel.add(scrollPane);
 	}
 }

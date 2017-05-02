@@ -1,6 +1,10 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.util.LinkedList;
+
+import db.MovieHandler;
+import models.Movie;
 
 public class Controller {
 	
@@ -12,10 +16,25 @@ public class Controller {
 				try {
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
+					
+					init();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	
+	public static void init(){
+		LinkedList<Movie> movies = MovieHandler.getAllMoviesTest();//MovieHandler.getAllMovies();
+		
+
+		
+		mainWindow.listMovies(movies);
+	}
+	
+	
+	
+	
+	
 }
