@@ -146,6 +146,7 @@ public class MovieHandler {
             for (int len; (len = fis.read(buffer)) != -1;) {
                 bos.write(buffer, 0, len);
             }
+            fis.close();
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         } catch (IOException e2) {
