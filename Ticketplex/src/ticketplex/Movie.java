@@ -1,4 +1,4 @@
-package models;
+package ticketplex;
 
 public class Movie {
 	

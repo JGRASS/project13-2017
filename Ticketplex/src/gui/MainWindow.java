@@ -17,7 +17,7 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-import models.Movie;
+import ticketplex.Movie;
 
 import java.awt.Font;
 import java.awt.Image;

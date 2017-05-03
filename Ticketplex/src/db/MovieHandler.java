@@ -12,10 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
-import models.Movie;
+import ticketplex.Movie;
 
+//deprecated
 public class MovieHandler {
-	
+	//this became SOLoadMovies
 	public static LinkedList<Movie> getAllMovies(){
 		
 		LinkedList<Movie> movies = new LinkedList<Movie>();		

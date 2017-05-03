@@ -1,15 +1,14 @@
 package gui;
 
 import java.awt.EventQueue;
-import java.util.LinkedList;
 
 import admin.AdminController;
-import db.MovieHandler;
 import gui.dialogs.RegistrationDialog;
-import models.Movie;
+import ticketplex.TicketplexClient;
 
 public class Controller {
 	
+	static TicketplexClient ticketplexClient;
 	static MainWindow mainWindow;
 	static RegistrationDialog regDialog;
 	
@@ -17,6 +16,7 @@ public class Controller {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					ticketplexClient = new TicketplexClient();
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
 					
@@ -29,11 +29,13 @@ public class Controller {
 	}
 	
 	public static void init(){
-		LinkedList<Movie> movies = MovieHandler.getAllMovies();
+		ticketplexClient.loadAllData();
 		
-
-		
-		mainWindow.listMovies(movies);
+		setViewMovies();
+	}
+	
+	public static void setViewMovies(){
+		mainWindow.listMovies(ticketplexClient.movies);
 	}
 
 	/**
