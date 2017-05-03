@@ -29,7 +29,7 @@ public class Controller {
 	}
 	
 	public static void init(){
-		LinkedList<Movie> movies = MovieHandler.getAllMoviesTest();//MovieHandler.getAllMovies();
+		LinkedList<Movie> movies = MovieHandler.getAllMovies();
 		
 
 		

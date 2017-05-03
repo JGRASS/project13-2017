@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -50,6 +51,35 @@ public class MovieHandler {
 	    }
 	    
 	    return movies;
+	}
+	
+	public static boolean saveAllMovies(LinkedList<Movie> movies){
+		Connection con = Database.getInstance().getConnection();
+		
+		String sql = "INSERT INTO movies(name,year,genre,description,cast,director,length,imdbRating,imdbLink,img,status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		
+		for(Movie movie : movies){ 
+	        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+	            pstmt.setString(1, movie.getName());
+	            pstmt.setInt(2, movie.getYear());
+	            pstmt.setString(3, movie.getGenre());
+	            pstmt.setString(4, movie.getDescription());
+	            pstmt.setString(5, movie.getCast());
+	            pstmt.setString(6, movie.getDirector());
+	            pstmt.setInt(7, movie.getLength());
+	            pstmt.setString(8, movie.getImdbRating());
+	            pstmt.setString(9, movie.getImdbLink());
+	            pstmt.setBytes(10, movie.getImg());
+	            pstmt.setInt(11, movie.getStatus());
+	            
+	            pstmt.executeUpdate();
+	        } catch (SQLException e) {
+	            System.out.println(e.getMessage());
+	    		
+	    		return false;
+	        }
+		}
+		return true;
 	}
 	
 	
@@ -104,6 +134,7 @@ public class MovieHandler {
 				0
 				));
 		
+		int a = 4;
 		int last_rand = 3;
 		for(int i=0; i<17; i++){
 			int rand = random(posters.length-1);
@@ -112,8 +143,8 @@ public class MovieHandler {
 			}
 			last_rand = rand;
 			
-			
-			movies.add(new Movie(2, "Movie", 2017, "genre",
+			a++;
+			movies.add(new Movie(a, "Movie "+a, 2017, "genre",
 					"Desc",
 					"Cast",
 					"Direc",
@@ -124,7 +155,6 @@ public class MovieHandler {
 					0
 					));
 		} 
-		
 		
 		return movies;
 		
