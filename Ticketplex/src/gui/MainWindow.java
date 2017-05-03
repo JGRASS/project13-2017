@@ -4,6 +4,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 
 import java.awt.Color;
@@ -12,6 +13,9 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 import models.Movie;
 
@@ -23,6 +27,10 @@ import java.util.LinkedList;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow extends JFrame {
 
@@ -136,24 +144,45 @@ public class MainWindow extends JFrame {
 		lblName.setFont(new Font("Arial", Font.BOLD, 18));
 		lblName.setBounds(10, 21, 141, 14);
 		
-		
+		Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
+		CompoundBorder errortBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
 		
 		JTextField tfUsername = new JTextField();
 		tfUsername.setForeground(new Color(153, 153, 153));
 		tfUsername.setFont(new Font("Arial", Font.PLAIN, 14));
-		tfUsername.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
-		tfUsername.setText("Username");
-		tfUsername.setBounds(10, 63, 190, 27);
-		
+		tfUsername.setBorder(emptyBorder);
+		tfUsername.setText("Username");		
 		tfUsername.setColumns(10);
+		tfUsername.setBounds(10, 63, 190, 27);
+		tfUsername.addFocusListener(new FocusListener() {  
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if(tfUsername.getText().equals("Username"))
+					tfUsername.setText("");
+				
+			}
+			@Override
+			public void focusLost(FocusEvent arg0){}  
+		});
 		
-		JTextField tfPassword = new JTextField();
+		JTextField tfPassword = new JPasswordField();
 		tfPassword.setForeground(new Color(153, 153, 153));
 		tfPassword.setFont(new Font("Arial", Font.PLAIN, 14));
-		tfPassword.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		tfPassword.setBorder(emptyBorder);
 		tfPassword.setText("Password");
 		tfPassword.setColumns(10);
 		tfPassword.setBounds(10, 101, 190, 27);
+		tfPassword.addFocusListener(new FocusListener() {  
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if(tfPassword.getText().equals("Password"))
+					tfPassword.setText("");
+				
+			}
+			@Override
+			public void focusLost(FocusEvent arg0){}  
+		});
+		
 		
 		
 		JButton btnLogin = new JButton("LOGIN");
@@ -163,6 +192,36 @@ public class MainWindow extends JFrame {
 		btnLogin.setBackground(grayDark);
 		btnLogin.setBorder(null);
 		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String user = tfUsername.getText();
+				String pass = tfPassword.getText();
+				boolean[] error = new boolean[2];
+				tfUsername.setBorder(emptyBorder); tfPassword.setBorder(emptyBorder);
+				
+				if(user == "" || user == "Username" || user.length() < 4){
+					error[0] = true;
+				}
+				if(pass == "" || pass == "Password" || pass.length() < 4){
+					error[1] = true;
+				}
+				
+				if(!error[0] && !error[1]){
+					int feedback = Controller.handleLogin(user, pass);
+					if(feedback <= 1) error[feedback] = true;
+					
+				}
+				
+				if(error[0]){
+					tfUsername.setBorder(errortBorder);
+				}else if(error[1]){
+					tfPassword.setBorder(errortBorder);
+				}
+				
+			}
+		});
 		
 		JLabel lblForgot = new JLabel("<html><u>Zaboravio sam lozinku</u></html>");
 		lblForgot.setForeground(new Color(153, 153, 153));
@@ -179,7 +238,7 @@ public class MainWindow extends JFrame {
 		lblRegister.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
 		    {  
-				showRegisterDialog();
+				Controller.showRegisterDialog();
 		    }  
 		});
 		
@@ -248,6 +307,7 @@ public class MainWindow extends JFrame {
 			JLabel lblMovie = new JLabel("");
 			lblMovie.setBounds(x, y, title_width, title_height);
 			lblMovie.setIcon(imageIcon);
+			lblMovie.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			listPanel.add(lblMovie);
 			i++;
 		}
@@ -256,4 +316,5 @@ public class MainWindow extends JFrame {
 		
 		mainPanel.add(scrollPane);
 	}
+	
 }
