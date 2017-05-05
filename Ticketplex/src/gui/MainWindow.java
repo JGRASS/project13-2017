@@ -47,8 +47,8 @@ public class MainWindow extends JFrame {
 	private JLabel lblBreadcrumbs;
 	
 	
-	private static Color grayDark = new Color(32, 32, 32); 
-	private static Color grayLight = new Color(49, 49, 49); 
+	public static Color grayDark = new Color(32, 32, 32); 
+	public static Color grayLight = new Color(49, 49, 49); 
 
 	
 
@@ -61,6 +61,7 @@ public class MainWindow extends JFrame {
 		setResizable(false);
 		setVisible(true);		
 		setBounds(100, 100, 900, 520);
+		setLocationRelativeTo(null);
 		
 		containerPane = new JPanel();
 		containerPane.setBackground(grayLight);	
@@ -139,13 +140,14 @@ public class MainWindow extends JFrame {
 	//SIDE PANEL
 	public void setSideGuest(){		
 		sidePanel.removeAll();
-		JLabel lblName = new JLabel("Ticketplex");
+		JLabel lblName = new JLabel("TICKETPLEX");
+		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName.setForeground(new Color(255, 255, 255));
 		lblName.setFont(new Font("Arial", Font.BOLD, 18));
-		lblName.setBounds(10, 21, 141, 14);
+		lblName.setBounds(10, 21, 190, 36);
 		
 		Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
-		CompoundBorder errortBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
+		CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
 		
 		JTextField tfUsername = new JTextField();
 		tfUsername.setForeground(new Color(153, 153, 153));
@@ -215,9 +217,9 @@ public class MainWindow extends JFrame {
 				}
 				
 				if(error[0]){
-					tfUsername.setBorder(errortBorder);
+					tfUsername.setBorder(errorBorder);
 				}else if(error[1]){
-					tfPassword.setBorder(errortBorder);
+					tfPassword.setBorder(errorBorder);
 				}
 				
 			}
