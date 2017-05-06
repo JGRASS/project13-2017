@@ -18,6 +18,7 @@ public class Movie {
 	
 	private int status;
 	private int endDate;
+	
 	/**
 	 * @param id
 	 * @param name
