@@ -227,9 +227,20 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblForgot = new JLabel("<html><u>Zaboravio sam lozinku</u></html>");
 		lblForgot.setForeground(new Color(153, 153, 153));
-		lblForgot.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblForgot.setFont(new Font("Arial", Font.PLAIN, 12)); 
 		lblForgot.setBounds(10, 177, 153, 14);
 		lblForgot.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		lblForgot.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e)  
+		    {  
+				Controller.showfpDialog();
+		    } 
+			
+			
+			
+		});
+		
 		
 		JLabel lblRegister = new JLabel("<html><u>Registracija naloga</u></html>");
 		lblRegister.setForeground(new Color(153, 153, 153));
@@ -271,6 +282,10 @@ public class MainWindow extends JFrame {
 	
 	public void showRegisterDialog(){
 		System.out.println("register clicked");
+	}
+
+	public void showfpDialog(){
+		System.out.println("forgot clicked");
 	}
 	
 	public void listMovies(LinkedList<Movie> movies){

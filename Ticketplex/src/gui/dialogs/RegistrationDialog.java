@@ -28,6 +28,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class RegistrationDialog extends JDialog {
 
@@ -42,6 +43,7 @@ public class RegistrationDialog extends JDialog {
 	
 	public static Color okvir = new Color(22, 22, 22); 
 	private JLabel lblBack;
+	private JLabel label;
 	
 	
 
@@ -57,7 +59,7 @@ public class RegistrationDialog extends JDialog {
 		setUndecorated(true);
 		setVisible(true);
 		this.requestFocus();
-		setBounds(0, 0, 255, 265);
+		setBounds(0, 0, 255, 317);
 		getRootPane().setBorder(BorderFactory.createMatteBorder(
                 1, 1, 1, 1, okvir));
 		setLocationRelativeTo(null);
@@ -79,11 +81,11 @@ public class RegistrationDialog extends JDialog {
 		headerPanel.add(lblNewLabel);
 		
 		txtUsername = new JTextField();
+		txtUsername.setBounds(10, 50, 236, 35);
 		txtUsername.setBorder(emptyBorder);
 		txtUsername.setForeground(new Color(153, 153, 153));
 		txtUsername.setFont(new Font("Arial", Font.PLAIN, 14));
 		txtUsername.setText("Username");
-		txtUsername.setBounds(10, 50, 236, 35);
 		contentPanel.add(txtUsername);
 		txtUsername.setColumns(10);
 		
@@ -95,12 +97,12 @@ public class RegistrationDialog extends JDialog {
 		});
 		
 		txtEmail = new JTextField();
+		txtEmail.setBounds(10, 96, 236, 35);
 		txtEmail.setBorder(emptyBorder);
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 14));
 		txtEmail.setForeground(new Color(153, 153, 153));
 		txtEmail.setText("Email");
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(10, 96, 236, 35);
 		contentPanel.add(txtEmail);
 		
 		txtEmail.addFocusListener(new FocusAdapter() {
@@ -111,20 +113,20 @@ public class RegistrationDialog extends JDialog {
 		});
 		
 		txtPassword = new JPasswordField();
+		txtPassword.setBounds(10, 142, 236, 35);
 		txtPassword.setBorder(emptyBorder);
 		txtPassword.setFont(new Font("Arial", Font.PLAIN, 14));
 		txtPassword.setForeground(new Color(153, 153, 153));
 		txtPassword.setText("Password");
 		txtPassword.setColumns(10);
-		txtPassword.setBounds(10, 142, 236, 35);
 		contentPanel.add(txtPassword);
 		
 		JButton btnRegister = new JButton("REGISTRUJ SE");
+		btnRegister.setBounds(10, 188, 236, 30);
 		UIManager.put(btnRegister.getBackground(), MainWindow.grayDark);
 		btnRegister.setForeground(new Color(153,153,153));
 		btnRegister.setBackground(MainWindow.grayDark);
 		btnRegister.setFont(new Font("Arial", Font.BOLD, 14));
-		btnRegister.setBounds(10, 188, 236, 30);
 		btnRegister.setBorder(null);
 		btnRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
@@ -142,6 +144,7 @@ public class RegistrationDialog extends JDialog {
 		contentPanel.add(btnRegister);
 		
 		lblBack = new JLabel("<html><u>Nazad</u></html>");
+		lblBack.setBounds(10, 281, 46, 25);
 		lblBack.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
@@ -152,8 +155,14 @@ public class RegistrationDialog extends JDialog {
 				setVisible(false);
 			}
 		});
-		lblBack.setBounds(10, 229, 46, 25);
 		contentPanel.add(lblBack);
+		
+		label = new JLabel("Uspesno ste se registrovali");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(new Color(211, 211, 211));
+		label.setFont(new Font("Arial", Font.BOLD, 13));
+		label.setBounds(0, 245, 255, 25);
+		contentPanel.add(label);
 		txtPassword.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
