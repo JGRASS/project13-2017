@@ -3,7 +3,9 @@ package gui;
 import java.awt.EventQueue;
 
 import admin.AdminController;
+import gui.dialogs.ForgotPasswordDialog;
 import gui.dialogs.RegistrationDialog;
+import gui.dialogs.SettingsDialog;
 import ticketplex.TicketplexClient;
 
 public class Controller {
@@ -11,6 +13,8 @@ public class Controller {
 	static TicketplexClient ticketplexClient;
 	static MainWindow mainWindow;
 	static RegistrationDialog regDialog;
+	static ForgotPasswordDialog fpDialog;
+	static SettingsDialog settDialog;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -54,10 +58,22 @@ public class Controller {
 		return 0;
 	}
 
-	public static void showRegisterDialog() {
+	/*public static void showRegisterDialog() {
 		regDialog = new RegistrationDialog();
 		regDialog.setVisible(true);
 		
+	}*/
+	
+	
+	public static void showfpDialog() {
+		fpDialog = new ForgotPasswordDialog();
+		fpDialog.setVisible(true);
+		
+	}
+	
+	public static void showRegisterDialog(){
+		settDialog=new SettingsDialog();
+		settDialog.setVisible(true);
 	}
 	
 	
