@@ -19,6 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
 
 public class AdminWindow extends JFrame {
 
@@ -31,6 +36,9 @@ public class AdminWindow extends JFrame {
 	private JLabel lblNazivFilma;
 	private JScrollPane scrollPane;
 	private JButton btnNewButton;
+	private JMenuBar menuBar;
+	private JMenu mnOpcije;
+	private JMenuItem mntmKorisnici;
 
 
 
@@ -40,6 +48,15 @@ public class AdminWindow extends JFrame {
 	public AdminWindow() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		mnOpcije = new JMenu("Opcije");
+		menuBar.add(mnOpcije);
+		
+		mntmKorisnici = new JMenuItem("Korisnici");
+		mnOpcije.add(mntmKorisnici);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);		
@@ -73,6 +90,7 @@ public class AdminWindow extends JFrame {
 		int h = 25;
 		for (Movie m : movies) {
 			JLabel lblNewLabel;
+			JLabel lblOpcije;
 			JLabel lblDelete;
 			lblNewLabel = new JLabel(m.getName());
 			lblNewLabel.setBounds(0, h*i, 200, h);
@@ -80,7 +98,7 @@ public class AdminWindow extends JFrame {
 			
 			lblDelete = new JLabel("<HTML><u>Izbrisi</u></HTML>");
 			lblDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblDelete.setBounds(220, h*i, 147, h);
+			lblDelete.setBounds(220, h*i, 60, h);
 			lblDelete.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e)  
 			    {  
@@ -88,8 +106,17 @@ public class AdminWindow extends JFrame {
 			    }  
 			});
 			panel.add(lblDelete);
+			lblOpcije = new JLabel("<HTML><u>Opcije</u></HTML>");
+			lblOpcije.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblOpcije.setBounds(330, h*i, 147, h);
+			lblOpcije.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e)  
+			    {  
+					AdminController.showMovie(m);
+			    }  
+			});
+			panel.add(lblOpcije);
 			i++;
-			
 		}
 		panel.setPreferredSize(new Dimension(listPanel.getWidth(), i*h));
 		
@@ -112,5 +139,22 @@ public class AdminWindow extends JFrame {
 			btnNewButton.setBounds(279, 18, 125, 23);
 		}
 		return btnNewButton;
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
