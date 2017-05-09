@@ -19,7 +19,7 @@ public class Controller {
 					ticketplexClient = new TicketplexClient();
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
-					
+					AdminController.startAdminPanel();
 					init();
 				} catch (Exception e) {
 					e.printStackTrace();
