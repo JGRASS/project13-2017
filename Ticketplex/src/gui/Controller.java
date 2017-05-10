@@ -5,7 +5,9 @@ import java.awt.EventQueue;
 import admin.AdminController;
 import gui.dialogs.ForgotPasswordDialog;
 import gui.dialogs.RegistrationDialog;
+import gui.dialogs.ReservationDialog;
 import gui.dialogs.SettingsDialog;
+import gui.dialogs.UserReservationsDialog;
 import ticketplex.TicketplexClient;
 
 public class Controller {
@@ -15,6 +17,8 @@ public class Controller {
 	static RegistrationDialog regDialog;
 	static ForgotPasswordDialog fpDialog;
 	static SettingsDialog settDialog;
+	static ReservationDialog resDialog;
+	static UserReservationsDialog urDialog;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -34,7 +38,6 @@ public class Controller {
 	
 	public static void init(){
 		ticketplexClient.loadAllData();
-		
 		setViewMovies();
 	}
 	
@@ -55,14 +58,16 @@ public class Controller {
 			return 2;
 		}
 		
+		mainWindow.setSideUser();
+		
 		return 0;
 	}
 
-	/*public static void showRegisterDialog() {
+	public static void showRegisterDialog() {
 		regDialog = new RegistrationDialog();
 		regDialog.setVisible(true);
 		
-	}*/
+	}
 	
 	
 	public static void showfpDialog() {
@@ -71,13 +76,20 @@ public class Controller {
 		
 	}
 	
-	public static void showRegisterDialog(){
+	public static void showSettingsDialog(){
 		settDialog=new SettingsDialog();
 		settDialog.setVisible(true);
 	}
 	
 	
 	
+	public static void showReservationDialog(){
+		resDialog=new ReservationDialog();
+		resDialog.setVisible(true);
+	}
 	
-	
+	public static void showUserReservationsDialog(){
+		urDialog=new UserReservationsDialog();
+		urDialog.setVisible(true);
+	}
 }

@@ -40,8 +40,8 @@ public class RegistrationDialog extends JDialog {
 	
 	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
 	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
-	
-	public static Color okvir = new Color(22, 22, 22); 
+	public static Color okvir = new Color(22, 22, 22);
+	 
 	private JLabel lblBack;
 	private JLabel label;
 	
