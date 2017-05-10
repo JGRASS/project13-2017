@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.JScrollBar;
 
 public class SettingsDialog extends JDialog {
 
