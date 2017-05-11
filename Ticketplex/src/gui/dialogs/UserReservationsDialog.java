@@ -84,9 +84,10 @@ public class UserReservationsDialog extends JDialog {
 		reservations = tc.getUserReservations();
 		for(int k=0; k<100; k++){
 			reservations.add(reservations.getFirst());
+			
 		}
 		
-		int i=0;
+		int i=0; 
 		int height=20;
 		for(Reservation res: reservations){
 			JLabel txtRes=new JLabel(res.getMovieName());
