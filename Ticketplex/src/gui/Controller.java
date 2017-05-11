@@ -37,12 +37,12 @@ public class Controller {
 	}
 	
 	public static void init(){
-		ticketplexClient.loadAllData();
+		
 		setViewMovies();
 	}
 	
 	public static void setViewMovies(){
-		mainWindow.listMovies(ticketplexClient.movies);
+		mainWindow.listMovies(ticketplexClient.getAllMovies());
 	}
 
 	/**
