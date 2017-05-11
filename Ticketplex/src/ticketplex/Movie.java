@@ -17,7 +17,7 @@ public class Movie {
 	private byte[] img;
 	
 	private int status;
-	private int endDate;
+	
 	/**
 	 * @param id
 	 * @param name
@@ -31,10 +31,9 @@ public class Movie {
 	 * @param imdbLink
 	 * @param img
 	 * @param status
-	 * @param endDate
 	 */
 	public Movie(int id, String name, int year, String genre, String description, String cast, String director,
-			int length, String imdbRating, String imdbLink, byte[] img, int status, int endDate) {
+			int length, String imdbRating, String imdbLink, byte[] img, int status) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -48,7 +47,6 @@ public class Movie {
 		this.imdbLink = imdbLink;
 		this.img = img;
 		this.status = status;
-		this.endDate = endDate;
 	}
 	
 	
@@ -124,12 +122,7 @@ public class Movie {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(int endDate) {
-		this.endDate = endDate;
-	}
+
 	
 	
 	

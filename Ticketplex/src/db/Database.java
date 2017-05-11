@@ -10,16 +10,18 @@ public class Database {
     private static Connection conn;
 
     public static Database getInstance(){
-    	return (dbIsntance == null) ? new Database() : dbIsntance;
+    	if(dbIsntance == null){
+    		dbIsntance = new Database();
+    	}
+    	return dbIsntance;
+    	
     }
 
     public  Connection getConnection(){
 
         if(conn == null){
             try {
-            	// db parameters
                 String url = "jdbc:sqlite:db/database.db";
-                // create a connection to the database
                 conn = DriverManager.getConnection(url);
             } catch (SQLException ex) {
             	System.out.println(ex.getMessage());
