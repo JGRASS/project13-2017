@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import gui.Controller;
 import gui.HeaderPanel;
 import gui.MainWindow;
 
@@ -35,6 +37,7 @@ public class ForgotPasswordDialog extends JDialog {
 	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
 	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
 	private JTextField txtUsername;
+	private JLabel lblError;
 	
 	
 
@@ -102,6 +105,10 @@ public class ForgotPasswordDialog extends JDialog {
 		});
 		
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				Controller.processResetPassword(txtUsername.getText());
+			}
+			
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		        btnNewPass.setBackground(new Color(25, 25, 25));
 		    }
@@ -126,17 +133,24 @@ public class ForgotPasswordDialog extends JDialog {
 		lblBack.setBounds(10, 197, 46, 25);
 		contentPanel.add(lblBack);
 		
-		JLabel lblNewLabel = new JLabel("Uspesno ste se registrovali");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
-		lblNewLabel.setForeground(new Color(211, 211, 211));
-		lblNewLabel.setBounds(0, 161, 255, 25);
-		contentPanel.add(lblNewLabel);
+		lblError = new JLabel("");
+		lblError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblError.setFont(new Font("Arial", Font.BOLD, 13));
+		lblError.setForeground(new Color(211, 211, 211));
+		lblError.setBounds(0, 161, 255, 25);
+		contentPanel.add(lblError);
 		
 		
 		
 		
 		
+		
+	}
+
+
+
+	public void showMsg(String msg) {
+		lblError.setText(msg);
 		
 	}
 }

@@ -12,6 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
+import gui.Controller;
 import gui.HeaderPanel;
 import gui.MainWindow;
 import java.awt.event.ActionListener;
@@ -43,7 +44,7 @@ public class RegistrationDialog extends JDialog {
 	public static Color okvir = new Color(22, 22, 22);
 	 
 	private JLabel lblBack;
-	private JLabel label;
+	private JLabel lblError;
 	
 	
 
@@ -131,8 +132,16 @@ public class RegistrationDialog extends JDialog {
 		btnRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		
-		btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		btnRegister.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				showMsg("");
+				Controller.processRegister(txtUsername.getText(), txtPassword.getText(), txtEmail.getText());
+			}			
+
+
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
 		        btnRegister.setBackground(new Color(25, 25, 25));
 		    }
 
@@ -157,12 +166,12 @@ public class RegistrationDialog extends JDialog {
 		});
 		contentPanel.add(lblBack);
 		
-		label = new JLabel("Uspesno ste se registrovali");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(new Color(211, 211, 211));
-		label.setFont(new Font("Arial", Font.BOLD, 13));
-		label.setBounds(0, 245, 255, 25);
-		contentPanel.add(label);
+		lblError = new JLabel("");
+		lblError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblError.setForeground(new Color(211, 211, 211));
+		lblError.setFont(new Font("Arial", Font.BOLD, 13));
+		lblError.setBounds(0, 245, 255, 25);
+		contentPanel.add(lblError);
 		txtPassword.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
@@ -175,4 +184,10 @@ public class RegistrationDialog extends JDialog {
 		
 		
 	}
+	
+	public void showMsg(String msg){
+		lblError.setText(msg);
+	}
+	
+	
 }

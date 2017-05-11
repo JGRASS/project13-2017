@@ -80,7 +80,12 @@ public class UserReservationsDialog extends JDialog {
 		LinkedList<Reservation> reservations;
 		TicketplexClient tc=new TicketplexClient();
 		//tc.register("test123", "test123", "sdadsa");
-		tc.login("test123", "test123");
+		try {
+			tc.login("test123", "test123");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		reservations = tc.getUserReservations();
 		for(int k=0; k<100; k++){
 			reservations.add(reservations.getFirst());

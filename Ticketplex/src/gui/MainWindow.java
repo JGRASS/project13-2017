@@ -19,6 +19,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
 import ticketplex.Movie;
+import ticketplex.User;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -278,7 +279,7 @@ public class MainWindow extends JFrame {
 	
 	//USER
 	
-	public void  setSideUser(){
+	public void  setSideUser(User user){
 		sidePanel.removeAll();
 		sidePanel.repaint();
 		JLabel lblName = new JLabel("TICKETPLEX");
@@ -563,7 +564,7 @@ public class MainWindow extends JFrame {
 			lblMovie.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					setMovie(movie);
+					Controller.showMovie(movie);
 				}
 			});
 		}
