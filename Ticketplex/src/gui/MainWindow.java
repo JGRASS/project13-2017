@@ -501,6 +501,8 @@ public class MainWindow extends JFrame {
 		btnReserve.setForeground(new Color(0,0,0));
 		btnReserve.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnReserve.setBorder(null);
+		btnReserve.setFocusPainted(false);
+		btnReserve.setBorderPainted(false);
 		
 		btnReserve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

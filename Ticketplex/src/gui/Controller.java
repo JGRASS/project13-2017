@@ -27,6 +27,7 @@ public class Controller {
 					ticketplexClient = new TicketplexClient();
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
+					showUserReservationsDialog();
 					
 					init();
 				} catch (Exception e) {

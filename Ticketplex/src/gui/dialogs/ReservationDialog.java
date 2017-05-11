@@ -20,6 +20,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -56,7 +58,7 @@ public class ReservationDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		HeaderPanel headerPanel = new HeaderPanel((JDialog) null);
+		HeaderPanel headerPanel = new HeaderPanel(this);
 		headerPanel.setLayout(null);
 		headerPanel.setBounds(0, 0, 450, 30);
 		contentPanel.add(headerPanel);
@@ -149,8 +151,26 @@ public class ReservationDialog extends JDialog {
 		contentPanel.add(lblBack);
 		
 		JSlider slider = new JSlider();
-		slider.setBounds(27, 182, 200, 26);
+		slider.setForeground(UIManager.getColor("Button.background"));
+		slider.setSnapToTicks(true);
+		slider.setPaintLabels(true);
+		slider.setMajorTickSpacing(1);
+		slider.setMaximum(5);
+		slider.setMinimum(1);
+		slider.setBounds(27, 182, 200, 45);
+		slider.setBorder(null);
 		slider.setBackground(MainWindow.grayLight);
+		Dictionary dictionary = slider.getLabelTable();
+	      if (dictionary != null) {
+	         Enumeration keys = dictionary.keys();
+	         while (keys.hasMoreElements()) {
+	            JLabel label = (JLabel) dictionary.get(keys.nextElement());
+	            // uncomment these following lines to get a background for your labels
+	            label.setOpaque(true);
+	            label.setForeground(new Color(211,211,211));
+	            label.setBackground(MainWindow.grayLight);
+	         }
+	      }
 		contentPanel.add(slider);
 		
 		JLabel lblUspesnoSteRezervisali = new JLabel("Uspe\u0161no ste rezervisali mesta");

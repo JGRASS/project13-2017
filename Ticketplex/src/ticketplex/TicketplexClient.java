@@ -56,7 +56,7 @@ public class TicketplexClient implements TicketplexClientInterface{
 		if(!isGuest()){
 			throw new RuntimeException("Vec ste ulogovani");
 		}
-		if(!username.isEmpty() && !password.isEmpty()){
+		if(username.isEmpty() || password.isEmpty()){
 			throw new RuntimeException("Unesi username i lozinku");
 		}
 		
