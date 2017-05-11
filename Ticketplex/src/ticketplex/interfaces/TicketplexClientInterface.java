@@ -2,23 +2,29 @@ package ticketplex.interfaces;
 
 import java.util.LinkedList;
 
+import ticketplex.Movie;
 import ticketplex.Reservation;
 import ticketplex.Showtime;
-import ticketplex.User;
 
 public interface TicketplexClientInterface {
+	public void register(String username, String password, String email);
+	public void login(String username, String password);
+	public void logout();
 	
-	public void loadAllData();
-	public void saveUserData();
+	public boolean isGuest();
+	public String resetPassword(String username);
+	public void changePassword(String old_password, String new_password);
 	
-	public User getUser(String name, String password);
+	public LinkedList<Movie> getAllMovies();
+	public Movie loadMovie(int movie_id);
 	
-	public void registerUser(String name, String email, String password);
-	public String restartPassword(String name); 
-	public String changePassword(User user, String password);
+	public LinkedList<Showtime> getAllMovieShowings(int movie_id);
+	public int getShowtimeSpace(int showtime_id);
+	public void makeReservation(int showtime_id);
+	
+	public LinkedList<Reservation> getUserReservations();
+	public void deleteReservation(int reservation_id);
 	
 	
-	public void registerReservation(User user, Showtime showtime, int seats);	
-	public LinkedList<Reservation> getUserReservations(User user);
-	public void removeReservation(Reservation reservation);
+	
 }
