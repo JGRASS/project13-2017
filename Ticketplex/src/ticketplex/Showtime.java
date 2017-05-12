@@ -36,9 +36,10 @@ public class Showtime {
 		this.timestamp = datetime;
 	}
 	
-	public void getDateAsCalendar(){
+	public GregorianCalendar getDateAsCalendar(){
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(this.timestamp);
+		return cal;
 	}
 	
 	public int getNumOfReservations(){

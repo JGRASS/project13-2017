@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import admin.dialogs.NewMovieDialog;
 import admin.dialogs.NewShowtimeDialog;
 import ticketplex.Movie;
+import ticketplex.Showtime;
 import ticketplex.TicketplexAdmin;
 
 public class AdminController {
@@ -41,6 +42,14 @@ public class AdminController {
 	public static void showMovie(Movie movie){
 		movieWindow  = new MovieWindow();
 		movieWindow.setVisible(true);
+		movieWindow.setMovie(movie);
+		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(movie.getId()));
+	}
+	public static void processRemoveShowtime(Showtime s) {
+		ticketplexAdmin.removeMovieShowtime(s.getId());
+		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(s.getMovie_id()));
+
+		
 	}
 	
 	public static void showUsers(){
@@ -57,6 +66,11 @@ public class AdminController {
 		ticketplexAdmin.addMovie(name, year, genre, description, cast, director, length, imdbRating, imdbLink, img);
 		adminWindow.setList(ticketplexAdmin.getAllMovies());
 	}
+	
+	public static int processGetNumberOfReservations(int movie_id){
+		return ticketplexAdmin.getMovieNumOfReservations(movie_id);
+	}
+	
 
 	// stackoverflow
 	public static byte[] readImageFile(String file) {
@@ -82,4 +96,6 @@ public class AdminController {
 		NewShowtimeDialog dialog = new NewShowtimeDialog();
 		dialog.setVisible(true);
 	}
+
+	
 }
