@@ -16,7 +16,7 @@ public interface TicketplexAdminInterface {
 
 	public int getMovieNumOfReservations(int movie_id);
 	public void addMovie(String name, int year, String genre, String description, String cast, String director,
-			int length, String imdbRating, String imdbLink, byte[] img);
+			int length, String imdbRating, String imdbLink, byte[] img) throws Exception;
 	public void setMovieStatus(int movie_id, int status);
 	public void removeMovie(int movie_id);
 	

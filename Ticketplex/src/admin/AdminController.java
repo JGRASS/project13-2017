@@ -15,19 +15,22 @@ import java.util.GregorianCalendar;
 import admin.dialogs.NewMovieDialog;
 import admin.dialogs.NewShowtimeDialog;
 import ticketplex.Movie;
+import ticketplex.TicketplexAdmin;
 
 public class AdminController {
 
 	static AdminWindow adminWindow;
 	static MovieWindow movieWindow;
 	static UsersWindow usersWindow;
+	static TicketplexAdmin ticketplexAdmin;
 
 	public static void startAdminPanel() {
-		
+		ticketplexAdmin = new TicketplexAdmin();
 
 		
 		adminWindow = new AdminWindow();
 		adminWindow.setVisible(true);
+		adminWindow.setList(ticketplexAdmin.getAllMovies());
 	}
 
 	public static void addNewMovie() {
@@ -43,6 +46,16 @@ public class AdminController {
 	public static void showUsers(){
 		usersWindow = new UsersWindow();
 		usersWindow.setVisible(true);
+	}
+	public static void processRemoveMovie(Movie m){
+		ticketplexAdmin.removeMovie(m.getId());
+		adminWindow.setList(ticketplexAdmin.getAllMovies());
+	}
+	
+	public static void processAddNewMovie(String name, int year, String genre, String description, String cast, String director,
+			int length, String imdbRating, String imdbLink, byte[] img) throws Exception{
+		ticketplexAdmin.addMovie(name, year, genre, description, cast, director, length, imdbRating, imdbLink, img);
+		adminWindow.setList(ticketplexAdmin.getAllMovies());
 	}
 
 	// stackoverflow

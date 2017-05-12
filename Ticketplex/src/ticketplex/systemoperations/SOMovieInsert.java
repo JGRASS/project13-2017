@@ -12,7 +12,7 @@ public class SOMovieInsert {
 
 		Connection con = Database.getInstance().getConnection();
 
-		String sql = "INSERT INTO users(name, year, genre, description, cast, director, length, img, imdbRating, imdbLink, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO movies(name, year, genre, description, cast, director, length, img, imdbRating, imdbLink, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 		try (PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, name);

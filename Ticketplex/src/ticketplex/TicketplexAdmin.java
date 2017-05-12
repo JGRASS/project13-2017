@@ -1,6 +1,5 @@
 package ticketplex;
 
-import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -19,22 +18,7 @@ import ticketplex.systemoperations.SOMovieLoadAll;
 import ticketplex.systemoperations.SOMovieUpdateStatus;
 
 public class TicketplexAdmin implements TicketplexAdminInterface{
-	public static void main(String[] args) {
-		TicketplexAdmin ta = new TicketplexAdmin();
-		
-		LinkedList<Movie> mvs = ta.getAllMovies();
-		LinkedList<Showtime> sts = ta.getAllMovieShowings(mvs.getFirst().getId());
-		
-		for(Showtime s : sts){
-			System.out.println(s);
-		}
-		
-		for(int i=0; i<100; i++){
-			Random rnd = new Random();
-			int n = 100000 + rnd.nextInt(900000);
-			System.out.println(n);
-		}
-	}
+
 	
 	@Override
 	public LinkedList<Movie> getAllMovies() {
@@ -64,8 +48,10 @@ public class TicketplexAdmin implements TicketplexAdminInterface{
 	
 	@Override
 	public void addMovie(String name, int year, String genre, String description, String cast, String director,
-			int length, String imdbRating, String imdbLink, byte[] img) {
-		
+			int length, String imdbRating, String imdbLink, byte[] img) throws Exception {
+		if(name.isEmpty()){
+			throw new Exception("Ime je obavezno.");
+		}
 		SOMovieInsert.execute(name, year, genre, description, cast, director, length, imdbRating, imdbLink, img, Movie.STATUS_ACTIVE);
 		
 	}

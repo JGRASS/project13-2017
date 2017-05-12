@@ -54,9 +54,8 @@ public class UsersWindow extends JFrame {
 	}
 	
 	void setList(){
-		TicketplexClient t = new TicketplexClient();
-		t.loadAllData();
-		LinkedList<Movie> movies = t.movies;
+		LinkedList<Movie> movies = null;
+		
 		
 		lblNazivFilma = new JLabel("Lista prikazivanja filmova:");
 		lblNazivFilma.setHorizontalAlignment(SwingConstants.CENTER);

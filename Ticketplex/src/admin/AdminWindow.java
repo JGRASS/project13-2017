@@ -33,8 +33,10 @@ public class AdminWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel listPanel;
-	private JLabel lblNazivFilma;
 	private JScrollPane scrollPane;
+	private JPanel innerPanel;
+	
+	private JLabel lblNazivFilma;
 	private JButton btnNewButton;
 	private JMenuBar menuBar;
 	private JMenu mnOpcije;
@@ -62,13 +64,6 @@ public class AdminWindow extends JFrame {
 		setContentPane(contentPane);		
 		contentPane.setLayout(null);
 		
-		setList();
-	}
-	
-	void setList(){
-		TicketplexClient t = new TicketplexClient();
-		t.loadAllData();
-		LinkedList<Movie> movies = t.movies;
 		
 		lblNazivFilma = new JLabel("Lista filmova");
 		lblNazivFilma.setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,9 +78,20 @@ public class AdminWindow extends JFrame {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, listPanel.getWidth(), listPanel.getHeight());
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		scrollPane.setViewportView(panel);
+		innerPanel = new JPanel();
+		innerPanel.setLayout(null);
+		scrollPane.setViewportView(innerPanel);
+		
+		listPanel.add(scrollPane);
+		contentPane.add(listPanel);
+		contentPane.add(getBtnNewButton());
+		
+	}
+	
+	void setList(LinkedList<Movie> movies){
+		innerPanel.removeAll();
+		innerPanel.repaint();
+		
 		int i = 0;
 		int h = 25;
 		for (Movie m : movies) {
@@ -94,7 +100,7 @@ public class AdminWindow extends JFrame {
 			JLabel lblDelete;
 			lblNewLabel = new JLabel(m.getName());
 			lblNewLabel.setBounds(0, h*i, 200, h);
-			panel.add(lblNewLabel);
+			innerPanel.add(lblNewLabel);
 			
 			lblDelete = new JLabel("<HTML><u>Izbrisi</u></HTML>");
 			lblDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -103,9 +109,10 @@ public class AdminWindow extends JFrame {
 				public void mouseClicked(MouseEvent e)  
 			    {  
 					System.out.println("Izbrisan film: " + m.getName() + ".");
+					AdminController.processRemoveMovie(m);
 			    }  
 			});
-			panel.add(lblDelete);
+			innerPanel.add(lblDelete);
 			lblOpcije = new JLabel("<HTML><u>Opcije</u></HTML>");
 			lblOpcije.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblOpcije.setBounds(330, h*i, 147, h);
@@ -115,14 +122,13 @@ public class AdminWindow extends JFrame {
 					AdminController.showMovie(m);
 			    }  
 			});
-			panel.add(lblOpcije);
+			innerPanel.add(lblOpcije);
 			i++;
 		}
-		panel.setPreferredSize(new Dimension(listPanel.getWidth(), i*h));
+		innerPanel.setPreferredSize(new Dimension(listPanel.getWidth(), i*h));
 		
-		listPanel.add(scrollPane);
-		contentPane.add(listPanel);
-		contentPane.add(getBtnNewButton());
+		
+
 		
 	}
 	

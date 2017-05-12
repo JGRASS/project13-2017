@@ -103,6 +103,7 @@ public class TicketplexClient implements TicketplexClientInterface{
 		for(int i=0; i<movies.size(); i++){
 			if(movies.get(i).getStatus() == Movie.STATUS_INACTIVE)
 				movies.remove(i);
+
 		}
 		return movies;
 	}

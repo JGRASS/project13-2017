@@ -90,6 +90,7 @@ public class NewMovieDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
+						lblException.setText("");
 						try {
 							String name = textFieldName.getText();
 							int year = Integer.parseInt(textFieldYear.getText());
@@ -101,9 +102,11 @@ public class NewMovieDialog extends JDialog {
 							String imdbRating = textFieldImdbRating.getText();
 							String imdbLink = textFieldImdbLink.getText();
 							byte[] img = AdminController.readImageFile(file.getAbsolutePath());
+							AdminController.processAddNewMovie(name, year, genre, description, cast, director, length, imdbRating, imdbLink, img);
 						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							lblException.setText(e.getMessage());
+						} catch (Exception e) {
+							lblException.setText(e.getMessage());
 						}
 						
 						
