@@ -2,6 +2,7 @@ package ticketplex;
 
 import java.util.GregorianCalendar;
 
+
 public class Showtime {
 	static int seats = 120;
 	
@@ -46,6 +47,7 @@ public class Showtime {
 	}
 	public void setNumOfReservations(int num){
 		this._num_of_reservations = num;
+
 	}
 
 	public int getId() {

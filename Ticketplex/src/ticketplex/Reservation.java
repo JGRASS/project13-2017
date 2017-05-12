@@ -4,17 +4,17 @@ public class Reservation {
 	private int id;
 	private int showtime_id;
 	private int user_id;
-	
+
 	private String _movie;
 	private long _showtime_timestamp;
-	
+
 
 	public Reservation(int id, int showtime_id, int user_id) {
 		this.id = id;
 		this.showtime_id = showtime_id;
 		this.user_id = user_id;
 	}
-	
+
 	public String getMovieName(){
 		return _movie;
 		
@@ -30,6 +30,7 @@ public class Reservation {
 	public void setShowtimeTimesamp(long timestamp){
 		this._showtime_timestamp = timestamp;
 	}
+
 
 	public int getShowtime_id() {
 		return showtime_id;
