@@ -42,7 +42,7 @@ public class ReservationDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ReservationDialog() {
+	public ReservationDialog(Movie mov) {
 		setResizable(false);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
@@ -63,7 +63,7 @@ public class ReservationDialog extends JDialog {
 		headerPanel.setBounds(0, 0, 450, 30);
 		contentPanel.add(headerPanel);
 		
-		JLabel lblRes = new JLabel("Rezervacija: ");
+		JLabel lblRes = new JLabel("Rezervacija: "+mov.getName());
 		lblRes.setForeground(Color.WHITE);
 		lblRes.setFont(new Font("Arial", Font.BOLD, 18));
 		lblRes.setBounds(10, 0, 244, 30);

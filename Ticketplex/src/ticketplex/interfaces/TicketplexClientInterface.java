@@ -20,7 +20,7 @@ public interface TicketplexClientInterface {
 	
 	public LinkedList<Showtime> getAllMovieShowings(int movie_id);
 	public int getShowtimeSpace(int showtime_id);
-	public void makeReservation(int showtime_id);
+	public void makeReservation(int showtime_id, int number_of_seats);
 	
 	public LinkedList<Reservation> getUserReservations();
 	public void deleteReservation(int reservation_id);

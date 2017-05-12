@@ -234,6 +234,16 @@ public class MainWindow extends JFrame {
 			}
 		});
 		
+		btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        btnLogin.setBackground(new Color(25, 25, 25));
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        btnLogin.setBackground(MainWindow.grayDark);
+		    }
+		});
+		
 		
 		JLabel lblForgot = new JLabel("<html><u>Zaboravio sam lozinku</u></html>");
 		lblForgot.setForeground(new Color(153, 153, 153));
@@ -290,7 +300,7 @@ public class MainWindow extends JFrame {
 		sidePanel.add(lblName);
 		
 		
-		JLabel lblUser=new JLabel("Username");
+		JLabel lblUser=new JLabel(user.getUsername());
 		lblUser.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUser.setForeground(new Color(211, 211, 211));
 		lblUser.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
@@ -507,7 +517,7 @@ public class MainWindow extends JFrame {
 		
 		btnReserve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controller.showReservationDialog();
+				Controller.showReservationDialog(mov);
 			}
 		});
 		mainPanel.add(btnReserve);
@@ -555,6 +565,8 @@ public class MainWindow extends JFrame {
 			
 			JLabel lblMovie = new JLabel("");
 			lblMovie.setBounds(x, y, title_width, title_height);
+			lblMovie.setBorder(BorderFactory.createMatteBorder(
+	                1, 1, 1, 1, okvir));
 			lblMovie.setIcon(imageIcon);
 			lblMovie.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			listPanel.add(lblMovie);

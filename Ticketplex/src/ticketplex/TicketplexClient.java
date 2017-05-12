@@ -140,11 +140,11 @@ public class TicketplexClient implements TicketplexClientInterface{
 	}
 
 	@Override
-	public void makeReservation(int showtime_id) {
+	public void makeReservation(int showtime_id, int number_of_seats) {
 		if(isGuest())
 			throw new RuntimeException("Morate biti ulogovani");
 		
-		SOReservationInsert.execute(showtime_id, this.user.getId());
+		SOReservationInsert.execute(showtime_id, this.user.getId(),number_of_seats);
 	}
 
 	@Override

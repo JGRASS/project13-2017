@@ -83,12 +83,12 @@ public class Controller {
 	}	
 	
 	
-	public static void showReservationDialog(){
+	public static void showReservationDialog(Movie movie){
 		if(ticketplexClient.isGuest()){
 			//show alert
 			return;
 		}
-		resDialog=new ReservationDialog();
+		resDialog=new ReservationDialog(movie);
 		resDialog.setVisible(true);
 	}
 	
@@ -114,6 +114,7 @@ public class Controller {
 		}
 		
 		try {
+			System.out.println(user + pass);
 			ticketplexClient.login(user, pass);
 			hideGuestGUI();
 			mainWindow.setSideUser(ticketplexClient.user);

@@ -15,7 +15,7 @@ public class SOReservationLoadByMovie {
 
 		Connection con = Database.getInstance().getConnection();
 
-		String sql = "SELECT reservations.id as 'id', reservations.showtime_id as 'showtime_id', reservations.user_id as 'user_id', movies.name as 'movie_name', showtimes.timestamp as 'showtime_timesamp'";
+		String sql = "SELECT reservations.id as 'id', reservations.showtime_id as 'showtime_id', reservations.user_id as 'user_id', reservations.number_of_seats as 'number_of_seats', movies.name as 'movie_name', showtimes.timestamp as 'showtime_timesamp'";
 		sql += " FROM reservations JOIN showtimes ON showtimes.id = reservations.id JOIN movies ON movies.id = showtimes.movie_id";
 		sql += " WHERE movie_id = ?";
 
@@ -27,7 +27,7 @@ public class SOReservationLoadByMovie {
 
 			while (rs.next()) {
 
-				Reservation reservation = new Reservation(rs.getInt("id"), rs.getInt("showtime_id"), rs.getInt("user_id"));
+				Reservation reservation = new Reservation(rs.getInt("id"), rs.getInt("showtime_id"), rs.getInt("user_id"), rs.getInt("number_of_seats"));
 				reservation.setMovieName(rs.getString("movie_name"));
 				reservation.setShowtimeTimesamp(rs.getLong("showtime_timesamp"));
 				reservations.add(reservation);
