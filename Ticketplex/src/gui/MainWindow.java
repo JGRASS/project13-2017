@@ -311,6 +311,7 @@ public class MainWindow extends JFrame {
 		JButton btnReservations = new JButton("MOJE REZERVACIJE");
 		btnReservations.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controller.showUserReservationsDialog();
 			}
 		});
 		UIManager.put(btnReservations.getBackground(), MainWindow.grayDark);
@@ -366,6 +367,7 @@ public class MainWindow extends JFrame {
 		JButton btnLogOut = new JButton("LOGOUT");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controller.processLogout();
 			}
 		});
 		UIManager.put(btnLogOut.getBackground(), MainWindow.grayDark);
