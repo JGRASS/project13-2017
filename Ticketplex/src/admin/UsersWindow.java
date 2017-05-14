@@ -120,7 +120,7 @@ public class UsersWindow extends JFrame {
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					AdminController.addNewShowtime();
+					
 				}
 			});
 			btnNewButton.setBounds(232, 18, 172, 23);

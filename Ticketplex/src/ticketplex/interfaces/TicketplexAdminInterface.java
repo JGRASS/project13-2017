@@ -17,10 +17,10 @@ public interface TicketplexAdminInterface {
 	public int getMovieNumOfReservations(int movie_id);
 	public void addMovie(String name, int year, String genre, String description, String cast, String director,
 			int length, String imdbRating, String imdbLink, byte[] img) throws Exception;
-	public void setMovieStatus(int movie_id, int status);
+	public void setMovieStatus(int movie_id, int status) throws Exception;
 	public void removeMovie(int movie_id);
 	
-	public void addMovieShowtime(int movie_id, long timestamp);
+	public void addMovieShowtime(int movie_id, long timestamp) throws Exception;
 	public void removeMovieShowtime(int showtime_id);
 	
 	

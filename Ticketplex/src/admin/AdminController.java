@@ -24,10 +24,12 @@ public class AdminController {
 	static MovieWindow movieWindow;
 	static UsersWindow usersWindow;
 	static TicketplexAdmin ticketplexAdmin;
-
+	static NewMovieDialog newMovieDialog;
+	static NewShowtimeDialog newShowtimeDialog;
+	
+	
 	public static void startAdminPanel() {
 		ticketplexAdmin = new TicketplexAdmin();
-
 		
 		adminWindow = new AdminWindow();
 		adminWindow.setVisible(true);
@@ -35,27 +37,33 @@ public class AdminController {
 	}
 
 	public static void addNewMovie() {
-		NewMovieDialog dialog = new NewMovieDialog();
-		dialog.setVisible(true);
+		if(newMovieDialog == null)
+			newMovieDialog = new NewMovieDialog();
+		newMovieDialog.setVisible(true);
+	}
+	
+	public static void addNewShowtime(Movie movie) {
+		if(newShowtimeDialog == null)
+			newShowtimeDialog = new NewShowtimeDialog(movie);
+		newShowtimeDialog.setVisible(true);
 	}
 	
 	public static void showMovie(Movie movie){
-		movieWindow  = new MovieWindow();
-		movieWindow.setVisible(true);
+		movieWindow  = new MovieWindow(movie);
 		movieWindow.setMovie(movie);
 		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(movie.getId()));
+		movieWindow.setVisible(true);
 	}
-	public static void processRemoveShowtime(Showtime s) {
-		ticketplexAdmin.removeMovieShowtime(s.getId());
-		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(s.getMovie_id()));
-
-		
-	}
+	
 	
 	public static void showUsers(){
 		usersWindow = new UsersWindow();
 		usersWindow.setVisible(true);
 	}
+	
+	
+	
+	
 	public static void processRemoveMovie(Movie m){
 		ticketplexAdmin.removeMovie(m.getId());
 		adminWindow.setList(ticketplexAdmin.getAllMovies());
@@ -64,6 +72,7 @@ public class AdminController {
 	public static void processAddNewMovie(String name, int year, String genre, String description, String cast, String director,
 			int length, String imdbRating, String imdbLink, byte[] img) throws Exception{
 		ticketplexAdmin.addMovie(name, year, genre, description, cast, director, length, imdbRating, imdbLink, img);
+		newMovieDialog.closeDialog();
 		adminWindow.setList(ticketplexAdmin.getAllMovies());
 	}
 	
@@ -71,7 +80,28 @@ public class AdminController {
 		return ticketplexAdmin.getMovieNumOfReservations(movie_id);
 	}
 	
-
+	
+	public static void processAddNewShowtime(Movie movie, long timestamp){
+		//todo
+	}
+	
+	public static void processRemoveShowtime(Showtime s) {
+		ticketplexAdmin.removeMovieShowtime(s.getId());
+		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(s.getMovie_id()));
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// stackoverflow
 	public static byte[] readImageFile(String file) {
 		ByteArrayOutputStream bos = null;
@@ -92,10 +122,6 @@ public class AdminController {
 		return bos != null ? bos.toByteArray() : null;
 	}
 
-	public static void addNewShowtime() {
-		NewShowtimeDialog dialog = new NewShowtimeDialog();
-		dialog.setVisible(true);
-	}
 
 	
 }

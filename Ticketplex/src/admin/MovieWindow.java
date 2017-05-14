@@ -26,6 +26,8 @@ import java.awt.Component;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JMenuBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MovieWindow extends JFrame {
 
@@ -54,9 +56,9 @@ public class MovieWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MovieWindow() {
+	public MovieWindow(Movie m) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 724, 396);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,7 +75,7 @@ public class MovieWindow extends JFrame {
 		contentPane.add(getLblReservationNumber());
 		
 		listPanel = new JPanel();
-		listPanel.setBounds(10, 59, 414, 191);
+		listPanel.setBounds(284, 166, 414, 191);
 		listPanel.setLayout(null);
 		
 		
@@ -86,6 +88,19 @@ public class MovieWindow extends JFrame {
 		
 		listPanel.add(scrollPane);
 		contentPane.add(listPanel);
+		
+		JButton btnDodajPrikazivanje = new JButton("Dodaj prikazivanje");
+		btnDodajPrikazivanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AdminController.addNewShowtime(m);
+			}
+		});
+		btnDodajPrikazivanje.setBounds(577, 142, 121, 23);
+		contentPane.add(btnDodajPrikazivanje);
+		
+		JLabel lblPrikazivanja = new JLabel("Prikazivanja");
+		lblPrikazivanja.setBounds(284, 141, 121, 14);
+		contentPane.add(lblPrikazivanja);
 		
 	
 	}
@@ -134,20 +149,7 @@ public class MovieWindow extends JFrame {
 		innerPanel.setPreferredSize(new Dimension(listPanel.getWidth(), i*h));
 	}
 	
-	private JButton getBtnNewButton() {
-		
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("Dodaj novo prikazivanje");
-			btnNewButton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					AdminController.addNewShowtime();
-				}
-			});
-			btnNewButton.setBounds(232, 18, 172, 23);
-		}
-		return btnNewButton;
-	}
+
 	private JLabel getLblName() {
 		if (lblName == null) {
 			lblName = new JLabel("Ime");
@@ -167,7 +169,7 @@ public class MovieWindow extends JFrame {
 			lblDescription = new JLabel("Description");
 			lblDescription.setVerticalAlignment(SwingConstants.TOP);
 			lblDescription.setHorizontalAlignment(SwingConstants.LEFT);
-			lblDescription.setBounds(177, 21, 230, 77);
+			lblDescription.setBounds(284, 21, 414, 85);
 		}
 		return lblDescription;
 	}

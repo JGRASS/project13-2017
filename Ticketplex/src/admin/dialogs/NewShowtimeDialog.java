@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import admin.AdminController;
 import admin.AdminWindow;
+import ticketplex.Movie;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -41,8 +42,9 @@ public class NewShowtimeDialog extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param movie 
 	 */
-	public NewShowtimeDialog() {
+	public NewShowtimeDialog(Movie movie) {
 		setBounds(100, 100, 472, 340);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,7 +75,7 @@ public class NewShowtimeDialog extends JDialog {
 							Date d = dateFormat.parse(time + " " + date);
 							Calendar cal = GregorianCalendar.getInstance();
 							cal.setTime(d);
-							System.out.println(cal);
+							AdminController.processAddNewShowtime(movie, cal.getTimeInMillis());
 						} catch (NumberFormatException e) {
 							lblException.setText("Lose ste uneli datum ili vreme.");
 							e.printStackTrace();

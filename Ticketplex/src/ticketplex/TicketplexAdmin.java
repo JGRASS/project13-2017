@@ -1,5 +1,6 @@
 package ticketplex;
 
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -49,17 +50,43 @@ public class TicketplexAdmin implements TicketplexAdminInterface{
 	@Override
 	public void addMovie(String name, int year, String genre, String description, String cast, String director,
 			int length, String imdbRating, String imdbLink, byte[] img) throws Exception {
-		if(name.isEmpty()){
+		if(name == null || name.isEmpty())
 			throw new Exception("Ime je obavezno.");
+		if(year <= 0)
+			throw new Exception("Godina je obavezna.");
+		if(genre == null || genre.isEmpty())
+			throw new Exception("Zanr je obavezan.");
+		if(description == null || description.isEmpty())
+			throw new Exception("Opis je obavezan.");
+		if(cast == null || cast.isEmpty())
+			throw new Exception("Uloge su obavezne.");
+		if(director == null || director.isEmpty())
+			throw new Exception("Reziser je obavezno.");
+		if(length <= 0)
+			throw new Exception("Duzina filma mora biti pozitivan broj.");
+		
+		if(imdbRating == null || imdbRating.isEmpty())
+			throw new Exception("IMDB ocena je obavezna");
+		try {
+			if(Float.parseFloat(imdbRating) < 0 || Float.parseFloat(imdbRating) > 10)
+				throw new Exception("IMDB ocena mora biti izmedju 0 i 10");
+		} catch (NumberFormatException e) {
+			throw new Exception("IMDB ocena mora biti broj");
 		}
+		if(imdbLink == null || imdbLink.isEmpty())
+			throw new Exception("Imdb link je obavezan.");
+		if(img == null)
+			throw new Exception("Poster je obavezan.");
+		
+		
 		SOMovieInsert.execute(name, year, genre, description, cast, director, length, imdbRating, imdbLink, img, Movie.STATUS_ACTIVE);
 		
 	}
 
 	@Override
-	public void setMovieStatus(int movie_id, int status) {
+	public void setMovieStatus(int movie_id, int status) throws Exception {
 		if(status != Movie.STATUS_ACTIVE && status != Movie.STATUS_INACTIVE){
-			throw new RuntimeException("Nevazeci status");
+			throw new Exception("Nevazeci status");
 		}
 		
 		SOMovieUpdateStatus.execute(movie_id, status);
@@ -72,7 +99,13 @@ public class TicketplexAdmin implements TicketplexAdminInterface{
 		
 	}
 	@Override
-	public void addMovieShowtime(int movie_id, long timestamp) {
+	public void addMovieShowtime(int movie_id, long timestamp) throws Exception {
+		GregorianCalendar now = new GregorianCalendar();
+		now.add(GregorianCalendar.MONTH, -1);
+		
+		if(timestamp < now.getTimeInMillis()){
+			throw new Exception("Vreme prikazivanja mora biti u buducnosti");
+		}
 		SOShowtimeInsert.execute(movie_id, timestamp);
 		
 	}

@@ -101,10 +101,12 @@ public class NewMovieDialog extends JDialog {
 							int length = Integer.parseInt(textFieldLength.getText());
 							String imdbRating = textFieldImdbRating.getText();
 							String imdbLink = textFieldImdbLink.getText();
+							if(file == null)
+								throw new Exception("Poster je obavezan");
 							byte[] img = AdminController.readImageFile(file.getAbsolutePath());
 							AdminController.processAddNewMovie(name, year, genre, description, cast, director, length, imdbRating, imdbLink, img);
 						} catch (NumberFormatException e) {
-							lblException.setText(e.getMessage());
+							lblException.setText("Godina i trajanje filma moraju biti pozitivni brojevi");
 						} catch (Exception e) {
 							lblException.setText(e.getMessage());
 						}
@@ -119,6 +121,12 @@ public class NewMovieDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						closeDialog();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -302,5 +310,9 @@ public class NewMovieDialog extends JDialog {
 			lblException.setBounds(26, 243, 292, 14);
 		}
 		return lblException;
+	}
+	
+	public void closeDialog(){
+		dispose();
 	}
 }

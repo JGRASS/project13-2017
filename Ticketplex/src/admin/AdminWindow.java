@@ -48,7 +48,7 @@ public class AdminWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public AdminWindow() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
 		menuBar = new JMenuBar();
