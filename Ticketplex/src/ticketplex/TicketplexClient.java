@@ -2,6 +2,8 @@ package ticketplex;
 
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ticketplex.interfaces.TicketplexClientInterface;
 import ticketplex.systemoperations.SOUserEmailExists;
@@ -27,42 +29,50 @@ public class TicketplexClient implements TicketplexClientInterface{
 	}
 	
 	@Override
-	public void register(String username, String password, String email) {
+	public void register(String username, String password, String email) throws Exception {
 		if(!isGuest()){
-			throw new RuntimeException("Vec ste ulogovani");
+			throw new Exception("Već ste ulogovani!");
 		}
-		if(username.isEmpty())
-			throw new RuntimeException("Username prazan");
+		if(username.isEmpty() || username.equals("Username"))
+			throw new Exception("Username prazan");
 
-		if(password.isEmpty())
-			throw new RuntimeException("Password prazan");
+		if(password.isEmpty() || password.equals("Password"))
+			throw new Exception("Password prazan");
 
 		if(email.isEmpty())
-			throw new RuntimeException("Email prazan");
+			throw new Exception("Popunite email!");
 		
 		if(SOUserExists.execute(username))
-			throw new RuntimeException("Username zauzet");
+			throw new Exception("Username već postoji!");
 		
 		if(SOUserEmailExists.execute(email))
-			throw new RuntimeException("Email zauzet");
+			throw new Exception("Email već postoji!");
+		
+		if(!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
+			throw new Exception("Email mora biti validan!");
 		
 		if(!SOUserRegister.execute(username, password, email))
-			throw new RuntimeException("Doslo je do greske");
+			throw new Exception("Doslo je do greške");
 		
 	}
 
 	@Override
-	public void login(String username, String password) {
+	public void login(String username, String password) throws Exception {
 		if(!isGuest()){
-			throw new RuntimeException("Vec ste ulogovani");
+			throw new Exception("Već ste ulogovani!");
 		}
-		if(!username.isEmpty() && !password.isEmpty()){
-			throw new RuntimeException("Unesi username i lozinku");
+		if(username.isEmpty() || password.isEmpty()){
+			throw new Exception("Unesite username i lozinku!");
 		}
 		
 		this.user = SOUserLogin.execute(username, password);
-		if(this.user == null)
-			throw new RuntimeException("Pogresan username ili lozinka");
+		if(this.user == null){
+			if(SOUserExists.execute(username)){
+				throw new Exception("error password");
+			}
+			throw new Exception("error username");
+		}
+			
 
 
 	}
@@ -76,10 +86,10 @@ public class TicketplexClient implements TicketplexClientInterface{
 	@Override
 	public String resetPassword(String username) {
 		Random rnd = new Random();
-		String npwd = String.valueOf(100000 + rnd.nextInt(900000));
+		String npwd = String.valueOf(1000 + rnd.nextInt(9000));
 		
 		if(!SOUserSetPassword.execute(username, npwd))
-			throw new RuntimeException("Ne postoji takav korisnik");
+			throw new RuntimeException("Ne postoji takav korisnik!");
 		
 		
 		return npwd;
@@ -88,10 +98,10 @@ public class TicketplexClient implements TicketplexClientInterface{
 	@Override
 	public void changePassword(String old_password, String new_password) {
 		if(isGuest())
-			throw new RuntimeException("Morate biti ulogovani");
+			throw new RuntimeException("Morate biti ulogovani!");
 		
 		if(!SOGenerateSHA2.execute(old_password).equals(this.user.getPassword()))
-			throw new RuntimeException("Pogresna lozinka");		
+			throw new RuntimeException("Pogrešna lozinka!");		
 		
 		SOUserSetPassword.execute(this.user.getUsername(), new_password);
 		
@@ -130,17 +140,17 @@ public class TicketplexClient implements TicketplexClientInterface{
 	}
 
 	@Override
-	public void makeReservation(int showtime_id) {
+	public void makeReservation(int showtime_id, int number_of_seats) {
 		if(isGuest())
 			throw new RuntimeException("Morate biti ulogovani");
 		
-		SOReservationInsert.execute(showtime_id, this.user.getId());
+		SOReservationInsert.execute(showtime_id, this.user.getId(),number_of_seats);
 	}
 
 	@Override
 	public LinkedList<Reservation> getUserReservations() {
 		if(isGuest())
-			throw new RuntimeException("Morate biti ulogovani");
+			throw new RuntimeException("Morate biti ulogovani!");
 		
 		return SOReservationLoadByUser.execute(this.user.getId());
 	}

@@ -15,8 +15,8 @@ public class SOReservationLoadByUser {
 
 		Connection con = Database.getInstance().getConnection();
 
-		String sql = "SELECT reservations.id as 'id', reservations.showtime_id as 'showtime_id', reservations.user_id as 'user_id', movies.name as 'movie_name', showtimes.timestamp as 'showtime_timesamp'";
-		sql += " FROM reservations JOIN showtimes ON showtimes.id = reservations.id JOIN movies ON movies.id = showtimes.movie_id";
+		String sql = "SELECT reservations.id as 'id', reservations.number_of_seats as 'number_of_seats', reservations.showtime_id as 'showtime_id', reservations.user_id as 'user_id', movies.name as 'movie_name', showtimes.timestamp as 'showtime_timesamp'";
+		sql += " FROM reservations JOIN showtimes ON showtimes.id = reservations.showtime_id JOIN movies ON movies.id = showtimes.movie_id";
 		sql += " WHERE user_id = ?";
 
 		try (PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -25,13 +25,14 @@ public class SOReservationLoadByUser {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				System.out.println(rs.getString("movie_name"));
 				Reservation reservation = new Reservation(rs.getInt("id"), rs.getInt("showtime_id"),
-						rs.getInt("user_id"));
+						rs.getInt("user_id"), rs.getInt("number_of_seats"));
 				reservation.setMovieName(rs.getString("movie_name"));
 				reservation.setShowtimeTimesamp(rs.getLong("showtime_timesamp"));
 				reservations.add(reservation);
 			}
+			
 			System.out.println("Loaded reservations from user: "+user_id);
 
 		} catch (SQLException e) {

@@ -1,9 +1,17 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.util.LinkedList;
 
 import admin.AdminController;
+import gui.dialogs.AlertDialog;
+import gui.dialogs.ForgotPasswordDialog;
 import gui.dialogs.RegistrationDialog;
+import gui.dialogs.ReservationDialog;
+import gui.dialogs.SettingsDialog;
+import gui.dialogs.UserReservationsDialog;
+import ticketplex.Movie;
+import ticketplex.Showtime;
 import ticketplex.TicketplexClient;
 
 public class Controller {
@@ -11,6 +19,11 @@ public class Controller {
 	static TicketplexClient ticketplexClient;
 	static MainWindow mainWindow;
 	static RegistrationDialog regDialog;
+	static ForgotPasswordDialog fpDialog;
+	static SettingsDialog settDialog;
+	static ReservationDialog resDialog;
+	static UserReservationsDialog urDialog;
+	static AlertDialog alertDialog;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -19,6 +32,7 @@ public class Controller {
 					ticketplexClient = new TicketplexClient();
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
+
 					
 					init();
 				} catch (Exception e) {
@@ -29,15 +43,71 @@ public class Controller {
 	}
 	
 	public static void init(){
-		ticketplexClient.loadAllData();
 		
 		setViewMovies();
 	}
 	
+	
+	
+	
+	public static void hideGuestGUI(){
+		if(regDialog != null) regDialog.setVisible(false);
+		if(fpDialog != null) fpDialog.setVisible(false);
+	}
+	
+	public static void hideUserGUI(){
+		if(urDialog != null) urDialog.setVisible(false);
+		if(settDialog != null) settDialog.setVisible(false);		
+		if(resDialog != null) resDialog.setVisible(false);
+	}
+	
 	public static void setViewMovies(){
-		mainWindow.listMovies(ticketplexClient.movies);
+		mainWindow.listMovies(ticketplexClient.getAllMovies());
+	}
+	
+	public static void showMovie(Movie movie){
+		mainWindow.setMovie(movie);
 	}
 
+	
+	public static void showRegisterDialog() {
+		regDialog = new RegistrationDialog();
+		regDialog.setVisible(true);		
+	}
+	
+	public static void showfpDialog() {
+		fpDialog = new ForgotPasswordDialog();
+		fpDialog.setVisible(true);
+		
+	}
+	
+	public static void showSettingsDialog(){
+		settDialog=new SettingsDialog();
+		settDialog.setVisible(true);
+	}	
+	
+	public static void showAlertDialog(){
+		alertDialog=new AlertDialog();
+		alertDialog.setVisible(true);
+	}
+	
+	
+	public static void showReservationDialog(Movie movie){
+		if(ticketplexClient.isGuest()){
+			showAlertDialog();
+			return;
+		}
+		resDialog=new ReservationDialog(movie, ticketplexClient.getAllMovieShowings(movie.getId()));
+		resDialog.setVisible(true);
+	}
+	
+	public static void showUserReservationsDialog(){
+		urDialog = new UserReservationsDialog();
+		urDialog.setVisible(true);
+		urDialog.renderList(ticketplexClient.getUserReservations());
+	}
+
+	
 	/**
 	 * Handle login information
 	 * @param user
@@ -46,22 +116,70 @@ public class Controller {
 	 */
 	public static int handleLogin(String user, String pass) {
 		if(user.equals("admin") && pass.equals("admin")){
-			System.out.println("Admin login");
 			AdminController.startAdminPanel();
+			mainWindow.setVisible(false);
+			hideGuestGUI();
+			hideUserGUI();
 			return 2;
 		}
 		
-		return 0;
+		try {
+			
+			ticketplexClient.login(user, pass);
+			System.out.println("logged");
+			hideGuestGUI();
+			mainWindow.setSideUser(ticketplexClient.user);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			if(e.getMessage().equals("error password"))
+				return 1;
+			return 0;
+		}
+		return 2;
+	}
+	
+	public static void processLogout(){
+		ticketplexClient.logout();
+		hideUserGUI();
 	}
 
-	public static void showRegisterDialog() {
-		regDialog = new RegistrationDialog();
-		regDialog.setVisible(true);
-		
+	public static void processRegister(String username, String password, String email){
+		try {
+			ticketplexClient.register(username, password, email);
+			handleLogin(username, password);
+		} catch (Exception e) {
+			regDialog.showMsg(e.getMessage());
+		}
 	}
 	
-	
-	
-	
-	
+	public static void processResetPassword(String username){
+		try {
+			String newpass = ticketplexClient.resetPassword(username);
+			fpDialog.showMsg("Vasa nova lozinka je: "+newpass);
+		} catch (Exception e) {
+			fpDialog.showMsg(e.getMessage());
+		}
+	}
+
+	public static void processNewReservation(int showtime_id, int number_of_seats) {
+		try {
+			ticketplexClient.makeReservation(showtime_id, number_of_seats);
+			resDialog.showMsg("Uspešno ste rezervisali projekciju.");
+		} catch (Exception e) {
+			resDialog.showMsg("Došlo je do greške");
+		}
+		
+	}
+
+	public static void processSetNewPassword(String old_password,String new_password) {
+		try {
+			ticketplexClient.changePassword(old_password, new_password);
+			settDialog.showMsg("Uspešno ste promenili lozinku.");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			settDialog.showMsg(e.getMessage());
+		}
+		
+	}
+
 }
