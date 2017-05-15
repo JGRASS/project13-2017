@@ -81,6 +81,8 @@ public class NewShowtimeDialog extends JDialog {
 							e.printStackTrace();
 						} catch (ParseException e) {
 							lblException.setText("Lose ste uneli datum ili vreme.");
+						} catch (Exception e) {
+							lblException.setText(e.getMessage());
 						}
 						
 						
@@ -94,6 +96,13 @@ public class NewShowtimeDialog extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						closeDialog();
+					}
+				});
+				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
@@ -101,7 +110,7 @@ public class NewShowtimeDialog extends JDialog {
 	private JLabel getLblImeFilma() {
 		if (lblImeFilma == null) {
 			lblImeFilma = new JLabel("Datum prikazivanja [dd/mm/yyyy]");
-			lblImeFilma.setBounds(26, 21, 171, 14);
+			lblImeFilma.setBounds(26, 21, 199, 14);
 		}
 		return lblImeFilma;
 	}
@@ -134,5 +143,8 @@ public class NewShowtimeDialog extends JDialog {
 			lblException.setBounds(26, 243, 292, 14);
 		}
 		return lblException;
+	}
+	public void closeDialog(){
+		dispose();
 	}
 }
