@@ -124,7 +124,7 @@ public class AdminWindow extends JFrame {
 			lblOpcije.setBounds(330, h * i, 147, h);
 			lblOpcije.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					AdminController.showMovie(m);
+					AdminController.showMovie(m.getId());
 				}
 			});
 			innerPanel.add(lblOpcije);

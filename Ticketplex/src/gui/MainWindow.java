@@ -609,7 +609,6 @@ public class MainWindow extends JFrame {
 	}
 
 	public void listMovies(LinkedList<Movie> movies) {
-		long b = System.currentTimeMillis();
 		mainPanel.removeAll();
 		mainPanel.repaint();
 
@@ -644,8 +643,6 @@ public class MainWindow extends JFrame {
 
 		mainPanel.add(scrollPane);
 
-		long spent = System.currentTimeMillis() - b;
-		System.out.println(spent + "ms");
 	}
 
 }

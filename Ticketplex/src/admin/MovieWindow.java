@@ -26,6 +26,7 @@ public class MovieWindow extends JFrame {
 	/**
 	 * 
 	 */
+	public int movie_id = 0;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel listPanel, innerPanel;
@@ -40,6 +41,8 @@ public class MovieWindow extends JFrame {
 	private JLabel lblImdblink;
 	private JLabel lblGenre;
 	private JLabel lblReservationNumber;
+	
+	private JButton btnDodajPrikazivanje, btnIzmeniDetalje;
 
 
 
@@ -47,6 +50,7 @@ public class MovieWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MovieWindow(Movie m) {
+		movie_id = m.getId();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 724, 396);
 		contentPane = new JPanel();
@@ -79,12 +83,8 @@ public class MovieWindow extends JFrame {
 		listPanel.add(scrollPane);
 		contentPane.add(listPanel);
 		
-		JButton btnDodajPrikazivanje = new JButton("Dodaj prikazivanje");
-		btnDodajPrikazivanje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AdminController.addNewShowtime(m);
-			}
-		});
+		btnDodajPrikazivanje = new JButton("Dodaj prikazivanje");
+		
 		btnDodajPrikazivanje.setBounds(525, 142, 173, 23);
 		contentPane.add(btnDodajPrikazivanje);
 		
@@ -92,12 +92,8 @@ public class MovieWindow extends JFrame {
 		lblPrikazivanja.setBounds(284, 141, 121, 14);
 		contentPane.add(lblPrikazivanja);
 		
-		JButton btnIzmeniDetalje = new JButton("Izmeni detalje");
-		btnIzmeniDetalje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AdminController.showEditMovieDialog(m);
-			}
-		});
+		btnIzmeniDetalje = new JButton("Izmeni detalje");
+
 		btnIzmeniDetalje.setBounds(20, 300, 148, 23);
 		contentPane.add(btnIzmeniDetalje);
 		
@@ -106,6 +102,7 @@ public class MovieWindow extends JFrame {
 	//prosiriiiii//
 	void setMovie(Movie m){
 		lblName.setText(m.getName());
+		lblYear.setText(String.valueOf(m.getYear()));
 		lblGenre.setText(m.getGenre());
 		lblDescription.setText("<html>"+m.getDescription()+"</html>");
 		lblCast.setText(m.getCast());
@@ -114,6 +111,25 @@ public class MovieWindow extends JFrame {
 		lblimdbRating.setText(m.getImdbRating());
 		lblImdblink.setText(m.getImdbLink());
 		lblReservationNumber.setText(String.valueOf(AdminController.processGetNumberOfReservations(m.getId())));
+		
+
+		for( ActionListener al : btnDodajPrikazivanje.getActionListeners() ) {
+			btnDodajPrikazivanje.removeActionListener( al );
+		}
+		btnDodajPrikazivanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AdminController.addNewShowtime(m);
+			}
+		});
+		
+		for( ActionListener al : btnIzmeniDetalje.getActionListeners() ) {
+			btnIzmeniDetalje.removeActionListener( al );
+		}
+		btnIzmeniDetalje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AdminController.showEditMovieDialog(m.getId());
+			}
+		});
 	}
 	void setList(LinkedList<Showtime> showtimes){
 
@@ -138,7 +154,6 @@ public class MovieWindow extends JFrame {
 			lblDelete.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e)  
 			    {  
-					//System.out.println("Izbrisan film: " + m.getName() + ".");
 					AdminController.processRemoveShowtime(s);
 			    }  
 			});

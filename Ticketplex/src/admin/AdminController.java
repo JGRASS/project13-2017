@@ -45,7 +45,7 @@ public class AdminController {
 		if(newMovieDialog != null) newMovieDialog.setVisible(false);
 		if(newShowtimeDialog != null) newShowtimeDialog.setVisible(false);
 		if(userWindow != null) userWindow.setVisible(false);
-		Controller.startMainWindow();
+		Controller.restartMainWindow();
 	}
 
 	public static void addNewMovie() {
@@ -60,23 +60,33 @@ public class AdminController {
 		newShowtimeDialog.setVisible(true);
 	}
 	
-	public static void showMovie(Movie movie){
-		movieWindow  = new MovieWindow(movie);
-		movieWindow.setMovie(movie);
-		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(movie.getId()));
+	public static void showMovie(int movie_id){
+		if(movieWindow == null)
+			movieWindow  = new MovieWindow(ticketplexAdmin.getMovie(movie_id));
+		movieWindow.setMovie(ticketplexAdmin.getMovie(movie_id));
+		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(movie_id));
 		movieWindow.setVisible(true);
 	}
 	
+	public static void hideMovieWindow(int movie_id){
+		if(movieWindow == null || movieWindow.movie_id != movie_id) return;
+		movieWindow.setVisible(false);
+		if(editMovieDialog != null) editMovieDialog.setVisible(false);
+	}
+	
 
-	public static void showEditMovieDialog(Movie movie) {
+	public static void showEditMovieDialog(int movie_id) {
 		if(editMovieDialog == null)
-			editMovieDialog = new EditMovieDialog(movie);
+			editMovieDialog = new EditMovieDialog();
+		
+		editMovieDialog.setMovie(ticketplexAdmin.getMovie(movie_id));
 		editMovieDialog.setVisible(true);
 		
 	}
 	
 	public static void showUsers(){
-		usersWindow = new UsersWindow();
+		if(usersWindow == null)
+			usersWindow = new UsersWindow();
 		usersWindow.setVisible(true);
 		usersWindow.setList(ticketplexAdmin.getAllUsers());
 	}
@@ -87,6 +97,8 @@ public class AdminController {
 	public static void processRemoveMovie(Movie m){
 		ticketplexAdmin.removeMovie(m.getId());
 		adminWindow.setList(ticketplexAdmin.getAllMovies());
+		hideMovieWindow(m.getId());
+		
 	}
 	
 	public static void processAddNewMovie(String name, int year, String genre, String description, String cast, String director,
@@ -124,9 +136,8 @@ public class AdminController {
 		
 
 	public static void showUser(User u) {
-		if(userWindow == null){
-			userWindow = new UserWindow();
-		}
+		if(userWindow == null)
+			userWindow = new UserWindow();		
 		userWindow.setVisible(true);
 		userWindow.setUser(u);
 		userWindow.setList(ticketplexAdmin.getUserReservations(u.getId()));

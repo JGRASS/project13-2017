@@ -3,6 +3,7 @@ package admin;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -73,6 +74,10 @@ public class UserWindow extends JFrame {
 	void setUser(User u){
 		lblUsername.setText(u.getUsername());
 		lblEmail.setText(u.getEmail());
+		
+		for( ActionListener al : btnIzbrisiKorisnika.getActionListeners() ) {
+			btnIzbrisiKorisnika.removeActionListener( al );
+		}
 		btnIzbrisiKorisnika.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

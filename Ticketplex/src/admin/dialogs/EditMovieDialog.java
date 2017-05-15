@@ -18,6 +18,8 @@ import ticketplex.Movie;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -26,6 +28,7 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 public class EditMovieDialog extends JDialog {
 
+	private int movie_id;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblImeFilma;
 	private JTextField textFieldName;
@@ -54,8 +57,8 @@ public class EditMovieDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EditMovieDialog(Movie m) {
-		setTitle("Dodaj novi film");
+	public EditMovieDialog() {
+		
 		setResizable(false);
 		setBounds(100, 100, 608, 382);
 		getContentPane().setLayout(new BorderLayout());
@@ -85,25 +88,17 @@ public class EditMovieDialog extends JDialog {
 		contentPanel.add(getLblImage());
 		contentPanel.add(getLblException());
 		
-		textFieldName.setText(m.getName());
-		textFieldYear.setText(m.getYear()+"");
-		textFieldDescription.setText(m.getDescription());
-		textFieldGenre.setText(m.getGenre());
-		textFieldCast.setText(m.getCast());
-		textFieldDirector.setText(m.getDirector());
-		textFieldLength.setText(m.getLength()+"");
-		textFieldImdbRating.setText(m.getImdbRating());
-		textFieldImdbLink.setText(m.getImdbLink());
-		
-		ImageIcon imageIcon = new ImageIcon(new ImageIcon(m.getImg()).getImage()
-				.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH));
-		lblImage.setIcon(imageIcon);
+
+
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
 		JButton okButton = new JButton("OK");
+		for( ActionListener al : okButton.getActionListeners() ) {
+			okButton.removeActionListener( al );
+		}
 		okButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -122,7 +117,7 @@ public class EditMovieDialog extends JDialog {
 					if (file != null)
 						img = AdminController.readImageFile(file.getAbsolutePath());
 					
-					AdminController.processEditNewMovie(m.getId(), name, year, genre, description, cast, director, length,
+					AdminController.processEditNewMovie(movie_id, name, year, genre, description, cast, director, length,
 							imdbRating, imdbLink, img);
 				} catch (NumberFormatException e) {
 					lblException.setText("Godina i trajanje filma moraju biti pozitivni brojevi");
@@ -146,6 +141,26 @@ public class EditMovieDialog extends JDialog {
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 
+	}
+	
+	public void setMovie(Movie m){
+		setTitle("Izmeni film: "+m.getName());
+		
+		textFieldName.setText(m.getName());
+		textFieldYear.setText(m.getYear()+"");
+		textFieldDescription.setText(m.getDescription());
+		textFieldGenre.setText(m.getGenre());
+		textFieldCast.setText(m.getCast());
+		textFieldDirector.setText(m.getDirector());
+		textFieldLength.setText(m.getLength()+"");
+		textFieldImdbRating.setText(m.getImdbRating());
+		textFieldImdbLink.setText(m.getImdbLink());
+		movie_id = m.getId();
+		
+		
+		ImageIcon imageIcon = new ImageIcon(new ImageIcon(m.getImg()).getImage()
+				.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH));
+		lblImage.setIcon(imageIcon);
 	}
 
 	private JLabel getLblImeFilma() {
@@ -346,7 +361,7 @@ public class EditMovieDialog extends JDialog {
 	private JLabel getLblException() {
 		if (lblException == null) {
 			lblException = new JLabel("");
-			lblException.setBounds(26, 243, 292, 14);
+			lblException.setBounds(26, 284, 292, 14);
 		}
 		return lblException;
 	}

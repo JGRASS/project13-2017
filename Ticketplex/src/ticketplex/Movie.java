@@ -1,5 +1,6 @@
 package ticketplex;
 
+
 public class Movie {
 	
 	public static final int STATUS_INACTIVE = 0;

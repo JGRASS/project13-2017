@@ -27,7 +27,10 @@ public class Controller {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					startMainWindow();
+					ticketplexClient = new TicketplexClient();
+					mainWindow = new MainWindow();
+					mainWindow.setVisible(true);
+					init();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,16 +38,17 @@ public class Controller {
 		});
 	}
 	
-	public static void init(){
-	
+	public static void init(){	
 		setViewMovies();
 	}
 	
 	
 	
-	public static void startMainWindow(){
+	public static void restartMainWindow(){
+		ticketplexClient = null;
 		ticketplexClient = new TicketplexClient();
-		if(mainWindow == null) mainWindow = new MainWindow();
+		mainWindow.dispose();
+		mainWindow = new MainWindow();
 		mainWindow.setVisible(true);
 		init();
 	}
@@ -70,23 +74,27 @@ public class Controller {
 
 	
 	public static void showRegisterDialog() {
-		regDialog = new RegistrationDialog();
+		if(regDialog == null)
+			regDialog = new RegistrationDialog();
 		regDialog.setVisible(true);		
 	}
 	
 	public static void showfpDialog() {
-		fpDialog = new ForgotPasswordDialog();
+		if(fpDialog == null)
+			fpDialog = new ForgotPasswordDialog();
 		fpDialog.setVisible(true);
 		
 	}
 	
 	public static void showSettingsDialog(){
-		settDialog=new SettingsDialog();
+		if(settDialog == null)
+			settDialog=new SettingsDialog();
 		settDialog.setVisible(true);
 	}	
 	
 	public static void showAlertDialog(){
-		alertDialog=new AlertDialog();
+		if(alertDialog == null)
+			alertDialog=new AlertDialog();
 		alertDialog.setVisible(true);
 	}
 	
@@ -101,7 +109,8 @@ public class Controller {
 	}
 	
 	public static void showUserReservationsDialog(){
-		urDialog = new UserReservationsDialog();
+		if(urDialog == null)
+			urDialog = new UserReservationsDialog();
 		urDialog.setVisible(true);
 		urDialog.renderList(ticketplexClient.getUserReservations());
 	}
