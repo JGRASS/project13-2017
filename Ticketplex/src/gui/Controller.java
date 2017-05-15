@@ -33,7 +33,6 @@ public class Controller {
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
 
-					
 					init();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +42,7 @@ public class Controller {
 	}
 	
 	public static void init(){
-		
+	
 		setViewMovies();
 	}
 	
@@ -67,6 +66,7 @@ public class Controller {
 	
 	public static void showMovie(Movie movie){
 		mainWindow.setMovie(movie);
+
 	}
 
 	

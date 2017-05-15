@@ -8,9 +8,10 @@ public class Reservation {
 	private int user_id;
 	private int number_of_seats;
 	
+
 	private String _movie;
 	private long _showtime_timestamp;
-	
+
 
 	public Reservation(int id, int showtime_id, int user_id, int number_of_seats) {
 		this.id = id;
@@ -18,7 +19,7 @@ public class Reservation {
 		this.user_id = user_id;
 		this.number_of_seats=number_of_seats;
 	}
-	
+
 	public String getMovieName(){
 		return _movie;
 		
@@ -34,6 +35,7 @@ public class Reservation {
 	public void setShowtimeTimesamp(long timestamp){
 		this._showtime_timestamp = timestamp;
 	}
+
 
 	public int getShowtime_id() {
 		return showtime_id;
@@ -63,13 +65,13 @@ public class Reservation {
 		this.number_of_seats = number_of_seats;
 	}
 	
+
 	public GregorianCalendar getDateAsCalendar(){
 		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTimeInMillis(this._showtime_timestamp*1000);
+		cal.setTimeInMillis(this._showtime_timestamp);
 		return cal;
 	}
-	
-	
+
 	
 	
 	

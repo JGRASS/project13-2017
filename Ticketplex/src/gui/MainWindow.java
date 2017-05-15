@@ -597,6 +597,8 @@ public class MainWindow extends JFrame {
 		int i = 0;
 		
 		for(Movie movie : movies){
+
+			System.out.println(movies.get(i).getName());
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon(movie.getImg()).getImage().getScaledInstance(title_width, title_height, Image.SCALE_SMOOTH));
 			int x = 13 + (title_width + title_padding) * (i % per_line);
 			int y = 10 + (title_height + title_padding) * (i / per_line);
