@@ -1,14 +1,17 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.util.LinkedList;
 
 import admin.AdminController;
+import gui.dialogs.AlertDialog;
 import gui.dialogs.ForgotPasswordDialog;
 import gui.dialogs.RegistrationDialog;
 import gui.dialogs.ReservationDialog;
 import gui.dialogs.SettingsDialog;
 import gui.dialogs.UserReservationsDialog;
 import ticketplex.Movie;
+import ticketplex.Showtime;
 import ticketplex.TicketplexClient;
 
 public class Controller {
@@ -20,6 +23,7 @@ public class Controller {
 	static SettingsDialog settDialog;
 	static ReservationDialog resDialog;
 	static UserReservationsDialog urDialog;
+	static AlertDialog alertDialog;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -28,7 +32,6 @@ public class Controller {
 					ticketplexClient = new TicketplexClient();
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
-					showUserReservationsDialog();
 					
 					init();
 				} catch (Exception e) {
@@ -82,13 +85,18 @@ public class Controller {
 		settDialog.setVisible(true);
 	}	
 	
+	public static void showAlertDialog(){
+		alertDialog=new AlertDialog();
+		alertDialog.setVisible(true);
+	}
+	
 	
 	public static void showReservationDialog(Movie movie){
 		if(ticketplexClient.isGuest()){
-			//show alert
+			showAlertDialog();
 			return;
 		}
-		resDialog=new ReservationDialog(movie);
+		resDialog=new ReservationDialog(movie, ticketplexClient.getAllMovieShowings(movie.getId()));
 		resDialog.setVisible(true);
 	}
 	
@@ -131,7 +139,6 @@ public class Controller {
 		hideUserGUI();
 	}
 
-	
 	public static void processRegister(String username, String password, String email){
 		try {
 			ticketplexClient.register(username, password, email);
@@ -149,4 +156,5 @@ public class Controller {
 			fpDialog.showMsg(e.getMessage());
 		}
 	}
+
 }

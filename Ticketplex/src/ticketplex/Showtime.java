@@ -1,5 +1,6 @@
 package ticketplex;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class Showtime {
@@ -8,7 +9,6 @@ public class Showtime {
 	private int id;
 	private int movie_id;
 	private long timestamp;
-	
 	private int _num_of_reservations;
 
 	public Showtime(int id, int movie_id, int timestamp) {
@@ -35,9 +35,10 @@ public class Showtime {
 		this.timestamp = datetime;
 	}
 	
-	public void getDateAsCalendar(){
+	public GregorianCalendar getDateAsCalendar(){
 		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTimeInMillis(this.timestamp);
+		cal.setTimeInMillis(this.timestamp*1000);
+		return cal;
 	}
 	
 	public int getNumOfReservations(){
@@ -50,6 +51,13 @@ public class Showtime {
 
 	public int getId() {
 		return id;
+	}
+	
+	public String toString(){
+		SimpleDateFormat fmt=new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String datum=fmt.format(getDateAsCalendar().getTime());
+		
+		return datum;
 	}
 	
 	
