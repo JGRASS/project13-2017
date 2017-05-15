@@ -31,7 +31,7 @@ public class TicketplexClient implements TicketplexClientInterface{
 	@Override
 	public void register(String username, String password, String email) throws Exception {
 		if(!isGuest()){
-			throw new Exception("Vec ste ulogovani");
+			throw new Exception("Već ste ulogovani!");
 		}
 		if(username.isEmpty() || username.equals("Username"))
 			throw new Exception("Username prazan");
@@ -40,29 +40,29 @@ public class TicketplexClient implements TicketplexClientInterface{
 			throw new Exception("Password prazan");
 
 		if(email.isEmpty())
-			throw new Exception("Email prazan");
+			throw new Exception("Popunite email!");
 		
 		if(SOUserExists.execute(username))
-			throw new Exception("Username zauzet");
+			throw new Exception("Username već postoji!");
 		
 		if(SOUserEmailExists.execute(email))
-			throw new Exception("Email zauzet");
+			throw new Exception("Email već postoji!");
 		
 		if(!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
-			throw new Exception("Email mora biti validan");
+			throw new Exception("Email mora biti validan!");
 		
 		if(!SOUserRegister.execute(username, password, email))
-			throw new Exception("Doslo je do greske");
+			throw new Exception("Doslo je do greške");
 		
 	}
 
 	@Override
 	public void login(String username, String password) throws Exception {
 		if(!isGuest()){
-			throw new Exception("Vec ste ulogovani");
+			throw new Exception("Već ste ulogovani!");
 		}
 		if(username.isEmpty() || password.isEmpty()){
-			throw new Exception("Unesi username i lozinku");
+			throw new Exception("Unesite username i lozinku!");
 		}
 		
 		this.user = SOUserLogin.execute(username, password);
@@ -89,7 +89,7 @@ public class TicketplexClient implements TicketplexClientInterface{
 		String npwd = String.valueOf(1000 + rnd.nextInt(9000));
 		
 		if(!SOUserSetPassword.execute(username, npwd))
-			throw new RuntimeException("Ne postoji takav korisnik");
+			throw new RuntimeException("Ne postoji takav korisnik!");
 		
 		
 		return npwd;
@@ -98,10 +98,10 @@ public class TicketplexClient implements TicketplexClientInterface{
 	@Override
 	public void changePassword(String old_password, String new_password) {
 		if(isGuest())
-			throw new RuntimeException("Morate biti ulogovani");
+			throw new RuntimeException("Morate biti ulogovani!");
 		
 		if(!SOGenerateSHA2.execute(old_password).equals(this.user.getPassword()))
-			throw new RuntimeException("Pogresna lozinka");		
+			throw new RuntimeException("Pogrešna lozinka!");		
 		
 		SOUserSetPassword.execute(this.user.getUsername(), new_password);
 		
@@ -150,7 +150,7 @@ public class TicketplexClient implements TicketplexClientInterface{
 	@Override
 	public LinkedList<Reservation> getUserReservations() {
 		if(isGuest())
-			throw new RuntimeException("Morate biti ulogovani");
+			throw new RuntimeException("Morate biti ulogovani!");
 		
 		return SOReservationLoadByUser.execute(this.user.getId());
 	}

@@ -48,14 +48,19 @@ public class MainWindow extends JFrame {
 	private JPanel sidePanel;
 	private HeaderPanel headerPanel;
 	private JLabel lblBreadcrumbs;
+	private JScrollPane scrollPane;
+	private JPanel listPanel;
 	
 	
 	public static Color grayDark = new Color(32, 32, 32); 
 	public static Color grayLight = new Color(49, 49, 49); 
 	public static Color okvir = new Color(22, 22, 22);
-
+	public static Color white = new Color(255,255,255);
+	
 	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
 	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
+	
+	
 	
 
 	
@@ -131,6 +136,25 @@ public class MainWindow extends JFrame {
 		mainPanel.setBackground(grayDark);
 		containerPane.add(mainPanel);
 		mainPanel.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0,0, mainPanel.getWidth(), mainPanel.getHeight());
+		scrollPane.setBackground(mainPanel.getBackground());
+		scrollPane.setBorder(null);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
+		
+		
+		listPanel = new JPanel();
+		listPanel.setLayout(null);
+		listPanel.setBounds(0,0, mainPanel.getWidth(), mainPanel.getHeight());
+		listPanel.setBackground(mainPanel.getBackground());
+		
+
+
+		scrollPane.setViewportView(listPanel);
 		
 		
 		
@@ -475,7 +499,7 @@ public class MainWindow extends JFrame {
 		lblDuration.setBounds(180,200, 100, 20);
 		mainPanel.add(lblDuration);
 		
-		JLabel lblDirector=new JLabel("Reûiser:");
+		JLabel lblDirector=new JLabel("Re≈æiser:");
 		lblDirector.setFont(new Font("Arial", Font.BOLD, 14));
 		lblDirector.setForeground(new Color(211,211,211));
 		lblDirector.setBounds(180,218, 100, 20);
@@ -506,7 +530,7 @@ public class MainWindow extends JFrame {
 		lblC.setBounds(250,237, 300, 20);
 		mainPanel.add(lblC);
 		
-		JButton btnReserve=new JButton("Rezerviöi kartu");
+		JButton btnReserve=new JButton("Rezervi≈°i kartu");
 		btnReserve.setHorizontalAlignment(SwingConstants.CENTER);
 		btnReserve.setFont(new Font("Arial", Font.BOLD, 20));
 		btnReserve.setBounds(180, 270, 200, 50);
@@ -530,28 +554,40 @@ public class MainWindow extends JFrame {
 		lblRating.setFont(new Font("Arial", Font.BOLD, 19));
 		lblRating.setForeground(new Color(211,211,211));
 		mainPanel.add(lblRating);
+		
+		
+		JLabel lblBack=new JLabel("< Povratak na repertoar");
+		lblBack.setBounds(10,455,230,30);
+		lblBack.setFont(new Font("Arial", Font.BOLD, 14));
+		lblBack.setForeground(new Color(255, 255, 255));
+		lblBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mainPanel.add(lblBack);
+		
+		
+		lblBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mainPanel.removeAll();
+				Controller.setViewMovies();
+			}
+		});
+		
+		lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        lblBack.setForeground(new Color(163,163,163));
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        lblBack.setForeground(new Color(255,255,255));
+		    }
+		});
+		
 	}
 	
 	public void listMovies(LinkedList<Movie> movies){
-		mainPanel.removeAll();
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0,0, mainPanel.getWidth(), mainPanel.getHeight());
-		scrollPane.setBackground(mainPanel.getBackground());
-		scrollPane.setBorder(null);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
 		
+		mainPanel.repaint();
 		
-		JPanel listPanel = new JPanel();
-		listPanel.setLayout(null);
-		listPanel.setBounds(0,0, mainPanel.getWidth(), mainPanel.getHeight());
-		listPanel.setBackground(mainPanel.getBackground());
-		
-
-
-		scrollPane.setViewportView(listPanel);
 		
 		
 		

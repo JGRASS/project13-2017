@@ -33,8 +33,8 @@ import javax.swing.UIManager;
 public class UserReservationsDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	//private JPanel scrollPaneParent, scrollPaneContent;
-	//private JScrollPane scrollPane;
+	private JPanel scrollPaneParent, scrollPaneContent;
+	private JScrollPane scrollPane;
 
 	
 	public UserReservationsDialog() {
@@ -64,18 +64,18 @@ public class UserReservationsDialog extends JDialog {
 		lblVaeRezervacije.setForeground(Color.WHITE);
 		lblVaeRezervacije.setFont(new Font("Arial", Font.BOLD, 20));
 		
-		JPanel scrollPaneParent = new JPanel();
+		scrollPaneParent = new JPanel();
 		scrollPaneParent.setBounds(0, 41, 430, 283);
 		contentPanel.add(scrollPaneParent);
 		scrollPaneParent.setBorder(null);
 		scrollPaneParent.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 430, 283);;
 		scrollPane.setBorder(null);
 		scrollPaneParent.add(scrollPane);
 		
-		JPanel scrollPaneContent = new JPanel();
+		scrollPaneContent = new JPanel();
 		scrollPaneContent.setBackground(MainWindow.grayDark);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -84,75 +84,6 @@ public class UserReservationsDialog extends JDialog {
 		scrollPane.setViewportView(scrollPaneContent);
 		scrollPaneContent.setBorder(null);
 		scrollPaneContent.setLayout(null);
-		
-		LinkedList<Reservation> reservations;
-		TicketplexClient tc=new TicketplexClient();
-		//tc.register("test123", "test123", "sdadsa");
-		try {
-			tc.login("test123", "test123");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		reservations = tc.getUserReservations();
-		for(int k=0; k<100; k++){
-			reservations.add(reservations.getFirst());
-			
-		}
-		
-		int i=0; 
-		int height=35;
-		int heightD=36;
-		for(Reservation res: reservations){
-			JLabel txtMov=new JLabel(res.getMovieName());
-			txtMov.setFont(new Font("Arial", Font.BOLD, 14));
-			txtMov.setForeground(new Color(211,211,211));
-			txtMov.setBounds(10, i*height, 300, height);
-			scrollPaneContent.add(txtMov);
-			
-
-			SimpleDateFormat fmt=new SimpleDateFormat("dd/MM/yyyy");
-			String datum=fmt.format(res.getDateAsCalendar().getTime());
-			
-			JLabel txtDate=new JLabel(datum);
-			txtDate.setFont(new Font("Arial", Font.PLAIN, 14));
-			txtDate.setForeground(new Color(211,211,211));
-			txtDate.setBounds(100, i*height, 100, height);
-			scrollPaneContent.add(txtDate);
-			
-			SimpleDateFormat fmtH=new SimpleDateFormat("kk:mm");
-			String sat=fmtH.format(res.getDateAsCalendar().getTime());
-			
-			JLabel txtHour=new JLabel(sat);
-			txtHour.setFont(new Font("Arial", Font.PLAIN, 14));
-			txtHour.setForeground(new Color(211,211,211));
-			txtHour.setBounds(220, i*height, 50, height);
-			scrollPaneContent.add(txtHour);
-			
-			JLabel txtSeats=new JLabel(res.getNumber_of_seats()+"");
-			txtSeats.setFont(new Font("Arial", Font.PLAIN, 14));
-			txtSeats.setForeground(new Color(211,211,211));
-			txtSeats.setBounds(300, i*height, 10, height);
-			scrollPaneContent.add(txtSeats);
-			
-			JLabel txtDel=new JLabel("<html><u>odustani</u></html>");
-			txtDel.setFont(new Font("Arial",Font.PLAIN, 14));
-			txtDel.setForeground(new Color(211,211,211));
-			txtDel.setBounds(360, i*height, 300, height);
-			txtDel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			
-			txtDel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					
-				}
-			});
-			scrollPaneContent.add(txtDel);
-			
-			i++;
-			
-		}
-		scrollPaneContent.setPreferredSize(new Dimension(scrollPane.getWidth(), i*height));
 
 		
 		JLabel lblBack = new JLabel("<html><u>Nazad</u></html>");
@@ -173,12 +104,16 @@ public class UserReservationsDialog extends JDialog {
 	}
 
 
-	public void renderList(LinkedList<Reservation> userReservations) {
-		/*
+	public void renderList(LinkedList<Reservation> reservations) {
+		
+		scrollPaneContent.removeAll();
+		scrollPaneContent.repaint();
+		
 		int i=0; 
 		int height=35;
 		int heightD=36;
 		for(Reservation res: reservations){
+			System.out.println(res.getMovieName());
 			JLabel txtMov=new JLabel(res.getMovieName());
 			txtMov.setFont(new Font("Arial", Font.BOLD, 14));
 			txtMov.setForeground(new Color(211,211,211));
@@ -228,7 +163,7 @@ public class UserReservationsDialog extends JDialog {
 			
 		}
 		scrollPaneContent.setPreferredSize(new Dimension(scrollPane.getWidth(), i*height));
-		 */
+		 
 		
 	}
 }

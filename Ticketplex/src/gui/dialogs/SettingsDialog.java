@@ -15,6 +15,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
 import gui.MainWindow;
+import gui.Controller;
 import gui.HeaderPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -30,13 +31,14 @@ import javax.swing.JScrollBar;
 public class SettingsDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JLabel lblError;
 
 	public static Color okvir = new Color(22, 22, 22); 
 	
 	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
 	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
 	private JTextField txtNew;
-	private JTextField textOld;
+	private JTextField txtOld;
 	
 	public SettingsDialog() {
 		setBounds(0, 0, 255, 277);
@@ -77,19 +79,19 @@ public class SettingsDialog extends JDialog {
 			}
 		});
 		
-		textOld = new JTextField();
-		textOld.setText("Stara lozinka");
-		textOld.setForeground(new Color(153, 153, 153));
-		textOld.setFont(new Font("Arial", Font.PLAIN, 14));
-		textOld.setColumns(10);
-		textOld.setBorder(emptyBorder);
-		textOld.setBounds(10, 50, 236, 35);
-		contentPanel.add(textOld);
+		txtOld = new JTextField();
+		txtOld.setText("Stara lozinka");
+		txtOld.setForeground(new Color(153, 153, 153));
+		txtOld.setFont(new Font("Arial", Font.PLAIN, 14));
+		txtOld.setColumns(10);
+		txtOld.setBorder(emptyBorder);
+		txtOld.setBounds(10, 50, 236, 35);
+		contentPanel.add(txtOld);
 		
-		textOld.addFocusListener(new FocusAdapter() {
+		txtOld.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
-				if(textOld.getText().equals("Stara lozinka")) textOld.setText("");
+				if(txtOld.getText().equals("Stara lozinka")) txtOld.setText("");
 			}
 		});
 		
@@ -104,7 +106,13 @@ public class SettingsDialog extends JDialog {
 		btnNewPass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		
+		
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent evt){
+				Controller.processSetNewPassword(txtOld.getText(),txtNew.getText());
+			}
+			
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		        btnNewPass.setBackground(new Color(25, 25, 25));
 		    }
@@ -115,13 +123,13 @@ public class SettingsDialog extends JDialog {
 		});
 		
 		
-		JLabel label = new JLabel("Uspesno ste se registrovali");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(new Color(211, 211, 211));
-		label.setFont(new Font("Arial", Font.BOLD, 13));
+		lblError= new JLabel("");
+		lblError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblError.setForeground(new Color(211, 211, 211));
+		lblError.setFont(new Font("Arial", Font.BOLD, 13));
 		
-		label.setBounds(0, 205, 255, 25);
-		contentPanel.add(label);
+		lblError.setBounds(0, 205, 255, 25);
+		contentPanel.add(lblError);
 		
 		JLabel lblBack = new JLabel("<html><u>Nazad</u></html>");
 		lblBack.setForeground(new Color(153, 153, 153));
@@ -142,4 +150,11 @@ public class SettingsDialog extends JDialog {
 		a.requestFocus();
 		contentPanel.add(a);
 	}
+	
+	
+	public void showMsg(String msg) {
+		lblError.setText(msg);
+	}
+		
+	
 }

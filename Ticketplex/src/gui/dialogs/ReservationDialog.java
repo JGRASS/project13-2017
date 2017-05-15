@@ -33,10 +33,13 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ReservationDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JLabel lblError;
 
 	/**
 	 * Launch the application.
@@ -87,6 +90,7 @@ public class ReservationDialog extends JDialog {
 		contentPanel.add(lblSeats);
 		
 		JComboBox<Showtime> boxTime = new JComboBox<Showtime>();
+
 		boxTime.setBounds(27, 82, 195, 20);
 		
 		for(Showtime s : showtimes){
@@ -106,16 +110,6 @@ public class ReservationDialog extends JDialog {
 		btnReserve.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		
-		btnReserve.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        btnReserve.setBackground(new Color(25, 25, 25));
-		    }
-
-		    public void mouseExited(java.awt.event.MouseEvent evt) {
-		        btnReserve.setBackground(MainWindow.grayDark);
-		    }
-		});
-		
 		contentPanel.add(btnReserve);
 		
 		JLabel lblBack = new JLabel("<html><u>Nazad</u></html>");
@@ -126,17 +120,17 @@ public class ReservationDialog extends JDialog {
 		
 		contentPanel.add(lblBack);
 		
-		JSlider slider = new JSlider();
-		slider.setForeground(UIManager.getColor("Button.background"));
-		slider.setSnapToTicks(true);
-		slider.setPaintLabels(true);
-		slider.setMajorTickSpacing(1);
-		slider.setMaximum(5);
-		slider.setMinimum(1);
-		slider.setBounds(22, 161, 200, 45);
-		slider.setBorder(null);
-		slider.setBackground(MainWindow.grayLight);
-		Dictionary dictionary = slider.getLabelTable();
+		JSlider seatsSlider = new JSlider();
+		seatsSlider.setForeground(UIManager.getColor("Button.background"));
+		seatsSlider.setSnapToTicks(true);
+		seatsSlider.setPaintLabels(true);
+		seatsSlider.setMajorTickSpacing(1);
+		seatsSlider.setMaximum(5);
+		seatsSlider.setMinimum(1);
+		seatsSlider.setBounds(22, 161, 200, 45);
+		seatsSlider.setBorder(null);
+		seatsSlider.setBackground(MainWindow.grayLight);
+		Dictionary dictionary = seatsSlider.getLabelTable();
 	      if (dictionary != null) {
 	         Enumeration keys = dictionary.keys();
 	         while (keys.hasMoreElements()) {
@@ -147,14 +141,14 @@ public class ReservationDialog extends JDialog {
 	            label.setBackground(MainWindow.grayLight);
 	         }
 	      }
-		contentPanel.add(slider);
+		contentPanel.add(seatsSlider);
 		
-		JLabel lblUspesnoSteRezervisali = new JLabel("Uspe\u0161no ste rezervisali mesta");
-		lblUspesnoSteRezervisali.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUspesnoSteRezervisali.setForeground(new Color(211, 211, 211));
-		lblUspesnoSteRezervisali.setFont(new Font("Arial", Font.BOLD, 13));
-		lblUspesnoSteRezervisali.setBounds(0, 258, 255, 25);
-		contentPanel.add(lblUspesnoSteRezervisali);
+		lblError = new JLabel("");
+		lblError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblError.setForeground(new Color(211, 211, 211));
+		lblError.setFont(new Font("Arial", Font.BOLD, 13));
+		lblError.setBounds(0, 258, 255, 25);
+		contentPanel.add(lblError);
 		
 		lblBack.addMouseListener(new MouseAdapter() {
 			@Override
@@ -163,7 +157,28 @@ public class ReservationDialog extends JDialog {
 			}
 		});
 		
+		
+		btnReserve.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt){
+				Showtime showtime=(Showtime) boxTime.getSelectedItem();
+				Controller.processNewReservation(showtime.getId(),seatsSlider.getValue());
+				
+			}
+			
+			
+		    public void mouseEntered(MouseEvent evt) {
+		        btnReserve.setBackground(new Color(25, 25, 25));
+		    }
+
+		    public void mouseExited(MouseEvent evt) {
+		        btnReserve.setBackground(MainWindow.grayDark);
+		    }
+		});
+		
 }
+	public void showMsg(String msg) {
+		lblError.setText(msg);
+	}
 	
 	
 }

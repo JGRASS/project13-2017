@@ -16,7 +16,7 @@ public class SOReservationLoadByMovie {
 		Connection con = Database.getInstance().getConnection();
 
 		String sql = "SELECT reservations.id as 'id', reservations.showtime_id as 'showtime_id', reservations.user_id as 'user_id', reservations.number_of_seats as 'number_of_seats', movies.name as 'movie_name', showtimes.timestamp as 'showtime_timesamp'";
-		sql += " FROM reservations JOIN showtimes ON showtimes.id = reservations.id JOIN movies ON movies.id = showtimes.movie_id";
+		sql += " FROM reservations JOIN showtimes ON showtimes.id = reservations.showtime_id JOIN movies ON movies.id = showtimes.movie_id";
 		sql += " WHERE movie_id = ?";
 
 

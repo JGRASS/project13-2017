@@ -161,4 +161,25 @@ public class Controller {
 		}
 	}
 
+	public static void processNewReservation(int showtime_id, int number_of_seats) {
+		try {
+			ticketplexClient.makeReservation(showtime_id, number_of_seats);
+			resDialog.showMsg("Uspešno ste rezervisali projekciju.");
+		} catch (Exception e) {
+			resDialog.showMsg("Došlo je do greške");
+		}
+		
+	}
+
+	public static void processSetNewPassword(String old_password,String new_password) {
+		try {
+			ticketplexClient.changePassword(old_password, new_password);
+			settDialog.showMsg("Uspešno ste promenili lozinku.");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			settDialog.showMsg(e.getMessage());
+		}
+		
+	}
+
 }
