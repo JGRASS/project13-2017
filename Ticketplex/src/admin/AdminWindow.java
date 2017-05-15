@@ -24,6 +24,8 @@ import java.awt.Component;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JMenuBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminWindow extends JFrame {
 
@@ -58,6 +60,11 @@ public class AdminWindow extends JFrame {
 		menuBar.add(mnOpcije);
 		
 		mntmKorisnici = new JMenuItem("Korisnici");
+		mntmKorisnici.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AdminController.showUsers();
+			}
+		});
 		mnOpcije.add(mntmKorisnici);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

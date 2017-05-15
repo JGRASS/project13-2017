@@ -15,8 +15,10 @@ import java.util.GregorianCalendar;
 import admin.dialogs.NewMovieDialog;
 import admin.dialogs.NewShowtimeDialog;
 import ticketplex.Movie;
+import ticketplex.Reservation;
 import ticketplex.Showtime;
 import ticketplex.TicketplexAdmin;
+import ticketplex.User;
 
 public class AdminController {
 
@@ -26,6 +28,7 @@ public class AdminController {
 	static TicketplexAdmin ticketplexAdmin;
 	static NewMovieDialog newMovieDialog;
 	static NewShowtimeDialog newShowtimeDialog;
+	static UserWindow userWindow;
 	
 	
 	public static void startAdminPanel() {
@@ -59,6 +62,7 @@ public class AdminController {
 	public static void showUsers(){
 		usersWindow = new UsersWindow();
 		usersWindow.setVisible(true);
+		usersWindow.setList(ticketplexAdmin.getAllUsers());
 	}
 	
 	
@@ -81,8 +85,9 @@ public class AdminController {
 	}
 	
 	
-	public static void processAddNewShowtime(Movie movie, long timestamp){
-		//todo
+	public static void processAddNewShowtime(Movie movie, long timestamp) throws Exception{
+		ticketplexAdmin.addMovieShowtime(movie.getId(), timestamp);
+		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(movie.getId()));
 	}
 	
 	public static void processRemoveShowtime(Showtime s) {
@@ -121,6 +126,31 @@ public class AdminController {
 		}
 		return bos != null ? bos.toByteArray() : null;
 	}
+
+	public static void showUser(User u) {
+		if(userWindow == null){
+			userWindow = new UserWindow();
+		}
+		userWindow.setVisible(true);
+		userWindow.setUser(u);
+		userWindow.setList(ticketplexAdmin.getUserReservations(u.getId()));
+	}
+
+	public static void processRemoveReservation(Reservation r) {
+		ticketplexAdmin.removeReservation(r.getId());
+		userWindow.setList(ticketplexAdmin.getUserReservations(r.getUser_id()));
+		
+	}
+
+	public static void processRemoveUser(int id) {
+		ticketplexAdmin.removeUser(id);
+		userWindow.setVisible(false);
+		usersWindow.setList(ticketplexAdmin.getAllUsers());
+		
+		
+	}
+	
+
 
 
 	

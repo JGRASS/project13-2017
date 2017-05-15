@@ -83,8 +83,8 @@ public class MovieWindow extends JFrame {
 		scrollPane.setBounds(0, 0, listPanel.getWidth(), listPanel.getHeight());
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		innerPanel = new JPanel();
-		innerPanel.setLayout(null);
 		scrollPane.setViewportView(innerPanel);
+		innerPanel.setLayout(null);
 		
 		listPanel.add(scrollPane);
 		contentPane.add(listPanel);
@@ -95,7 +95,7 @@ public class MovieWindow extends JFrame {
 				AdminController.addNewShowtime(m);
 			}
 		});
-		btnDodajPrikazivanje.setBounds(577, 142, 121, 23);
+		btnDodajPrikazivanje.setBounds(525, 142, 173, 23);
 		contentPane.add(btnDodajPrikazivanje);
 		
 		JLabel lblPrikazivanja = new JLabel("Prikazivanja");
@@ -153,7 +153,7 @@ public class MovieWindow extends JFrame {
 	private JLabel getLblName() {
 		if (lblName == null) {
 			lblName = new JLabel("Ime");
-			lblName.setBounds(20, 21, 46, 14);
+			lblName.setBounds(20, 21, 153, 14);
 		}
 		return lblName;
 	}
@@ -176,14 +176,14 @@ public class MovieWindow extends JFrame {
 	private JLabel getLblCast() {
 		if (lblCast == null) {
 			lblCast = new JLabel("Cast");
-			lblCast.setBounds(20, 91, 46, 14);
+			lblCast.setBounds(20, 91, 163, 14);
 		}
 		return lblCast;
 	}
 	private JLabel getLblDirector() {
 		if (lblDirector == null) {
 			lblDirector = new JLabel("Director");
-			lblDirector.setBounds(20, 116, 46, 14);
+			lblDirector.setBounds(20, 116, 153, 14);
 		}
 		return lblDirector;
 	}
@@ -204,14 +204,14 @@ public class MovieWindow extends JFrame {
 	private JLabel getLblImdblink() {
 		if (lblImdblink == null) {
 			lblImdblink = new JLabel("imdbLink");
-			lblImdblink.setBounds(20, 201, 100, 14);
+			lblImdblink.setBounds(20, 201, 153, 14);
 		}
 		return lblImdblink;
 	}
 	private JLabel getLblGenre() {
 		if (lblGenre == null) {
 			lblGenre = new JLabel("Genre");
-			lblGenre.setBounds(20, 66, 46, 14);
+			lblGenre.setBounds(20, 66, 153, 14);
 		}
 		return lblGenre;
 	}
