@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import gui.MainWindow;
 import ticketplex.Reservation;
 import ticketplex.TicketplexClient;
+import gui.Controller;
 import gui.HeaderPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -28,6 +29,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 public class UserReservationsDialog extends JDialog {
@@ -145,19 +147,33 @@ public class UserReservationsDialog extends JDialog {
 			txtSeats.setBounds(300, i*height, 10, height);
 			scrollPaneContent.add(txtSeats);
 			
-			JLabel txtDel=new JLabel("<html><u>odustani</u></html>");
-			txtDel.setFont(new Font("Arial",Font.PLAIN, 14));
-			txtDel.setForeground(new Color(211,211,211));
-			txtDel.setBounds(360, i*height, 300, height);
-			txtDel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			JLabel lblDel=new JLabel("<html><u>odustani</u></html>");
+			lblDel.setFont(new Font("Arial",Font.PLAIN, 14));
+			lblDel.setForeground(new Color(211,211,211));
+			lblDel.setBounds(360, i*height, 300, height);
+			lblDel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			
-			txtDel.addMouseListener(new MouseAdapter() {
+			JLabel lblRemoved=new JLabel("REZERVACIJA OTKAZANA");
+			lblRemoved.setFont(new Font("Arial", Font.BOLD, 16));
+			lblRemoved.setForeground(new Color(255,255,255));
+			lblRemoved.setBounds(0, i*height, 430, height);
+			lblRemoved.setVisible(false);
+			lblRemoved.setHorizontalAlignment(SwingConstants.CENTER);
+			scrollPaneContent.add(lblRemoved);
+			
+			lblDel.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					
+					Controller.processRemoveReservation(res.getId());
+					txtMov.setVisible(false);
+					txtHour.setVisible(false);
+					txtDate.setVisible(false);
+					txtSeats.setVisible(false);
+					lblDel.setVisible(false);
+					lblRemoved.setVisible(true);
 				}
 			});
-			scrollPaneContent.add(txtDel);
+			scrollPaneContent.add(lblDel);
 			
 			i++;
 			

@@ -190,4 +190,9 @@ public class Controller {
 		
 	}
 
+	public static void processRemoveReservation(int reservation_id) {
+		ticketplexClient.deleteReservation(reservation_id);
+		
+	}
+
 }

@@ -61,9 +61,11 @@ public class MainWindow extends JFrame {
 	public static Color grayDark = new Color(32, 32, 32);
 	public static Color grayLight = new Color(49, 49, 49);
 	public static Color okvir = new Color(22, 22, 22);
+
 	public static Color white = new Color(255, 255, 255);
 
 	int title_width = 120, title_height = 200;
+
 
 	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
 	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
