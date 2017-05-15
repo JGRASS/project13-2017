@@ -55,7 +55,6 @@ public class MainWindow extends JFrame {
 	public static Color grayDark = new Color(32, 32, 32); 
 	public static Color grayLight = new Color(49, 49, 49); 
 	public static Color okvir = new Color(22, 22, 22);
-	public static Color white = new Color(255,255,255);
 	
 	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
 	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
@@ -226,6 +225,7 @@ public class MainWindow extends JFrame {
 		btnLogin.setBackground(grayDark);
 		btnLogin.setBorder(null);
 		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
 		
 
 		btnLogin.addActionListener(new ActionListener() {
