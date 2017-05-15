@@ -12,11 +12,11 @@ public class Showtime {
 	
 	private int _num_of_reservations;
 
-	public Showtime(int id, int movie_id, int timestamp) {
+	public Showtime(int id, int movie_id, long l) {
 		super();
 		this.id = id;
 		this.movie_id = movie_id;
-		this.timestamp = timestamp;
+		this.timestamp = l;
 	}
 
 	public int getMovie_id() {
@@ -39,6 +39,7 @@ public class Showtime {
 	public GregorianCalendar getDateAsCalendar(){
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(this.timestamp);
+		System.out.println(this.timestamp);
 		return cal;
 	}
 	

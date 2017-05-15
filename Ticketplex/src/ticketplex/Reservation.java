@@ -1,5 +1,7 @@
 package ticketplex;
 
+import java.util.GregorianCalendar;
+
 public class Reservation {
 	private int id;
 	private int showtime_id;
@@ -52,6 +54,11 @@ public class Reservation {
 		return id;
 	}
 	
+	public GregorianCalendar getDateAsCalendar(){
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTimeInMillis(this._showtime_timestamp);
+		return cal;
+	}
 	
 	
 	

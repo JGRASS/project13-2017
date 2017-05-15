@@ -16,10 +16,9 @@ public class SOShowtimeLoadByMovie {
 		
 		Connection con = Database.getInstance().getConnection();
 	
-		String sql = "SELECT showtimes.id as 'id', showtimes.movie_id as 'movie_id', showtimes.timestamp as 'timestamp', count(reservations.id) as 'num_of_reservations'";
-		sql += " FROM showtimes JOIN reservations ON reservations.showtime_id = showtimes.id";
+		String sql = "SELECT showtimes.id as 'id', showtimes.movie_id as 'movie_id', showtimes.timestamp as 'timestamp'";
+		sql += " FROM showtimes";
 		sql += " WHERE showtimes.movie_id = ?";
-		sql += " GROUP BY showtimes.id";
 	
 		try (PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, movie_id);
@@ -28,8 +27,8 @@ public class SOShowtimeLoadByMovie {
 	    	
 	        while (rs.next()) {
 	        		        	
-	        	Showtime showtime = new Showtime(rs.getInt("id"), rs.getInt("movie_id"), rs.getInt("timestamp"));
-	        	showtime.setNumOfReservations(rs.getInt("num_of_reservations"));
+	        	Showtime showtime = new Showtime(rs.getInt("id"), rs.getInt("movie_id"), rs.getLong("timestamp"));
+	        	//showtime.setNumOfReservations(rs.getInt("num_of_reservations"));
 	        	showtimes.add(showtime);
 	        }
 	        System.out.println("Loaded showtimes.");

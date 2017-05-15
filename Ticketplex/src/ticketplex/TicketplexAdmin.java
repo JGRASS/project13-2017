@@ -103,6 +103,9 @@ public class TicketplexAdmin implements TicketplexAdminInterface{
 		GregorianCalendar now = new GregorianCalendar();
 		now.add(GregorianCalendar.MONTH, -1);
 		
+		if(movie_id <= 0){
+			throw new Exception("Movie id ne sme biti null");
+		}
 		if(timestamp < now.getTimeInMillis()){
 			throw new Exception("Vreme prikazivanja mora biti u buducnosti");
 		}
