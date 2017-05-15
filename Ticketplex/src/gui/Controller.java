@@ -32,6 +32,7 @@ public class Controller {
 					ticketplexClient = new TicketplexClient();
 					mainWindow = new MainWindow();
 					mainWindow.setVisible(true);
+
 					
 					init();
 				} catch (Exception e) {
@@ -101,8 +102,9 @@ public class Controller {
 	}
 	
 	public static void showUserReservationsDialog(){
-		urDialog=new UserReservationsDialog();
+		urDialog = new UserReservationsDialog();
 		urDialog.setVisible(true);
+		urDialog.renderList(ticketplexClient.getUserReservations());
 	}
 
 	
@@ -122,11 +124,13 @@ public class Controller {
 		}
 		
 		try {
-			System.out.println(user + pass);
+			
 			ticketplexClient.login(user, pass);
+			System.out.println("logged");
 			hideGuestGUI();
 			mainWindow.setSideUser(ticketplexClient.user);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			if(e.getMessage().equals("error password"))
 				return 1;
 			return 0;

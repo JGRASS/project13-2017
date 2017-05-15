@@ -33,6 +33,8 @@ import javax.swing.UIManager;
 public class UserReservationsDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	//private JPanel scrollPaneParent, scrollPaneContent;
+	//private JScrollPane scrollPane;
 
 	
 	public UserReservationsDialog() {
@@ -167,6 +169,66 @@ public class UserReservationsDialog extends JDialog {
 		});
 		contentPanel.add(lblBack);
 
+		
+	}
+
+
+	public void renderList(LinkedList<Reservation> userReservations) {
+		/*
+		int i=0; 
+		int height=35;
+		int heightD=36;
+		for(Reservation res: reservations){
+			JLabel txtMov=new JLabel(res.getMovieName());
+			txtMov.setFont(new Font("Arial", Font.BOLD, 14));
+			txtMov.setForeground(new Color(211,211,211));
+			txtMov.setBounds(10, i*height, 300, height);
+			scrollPaneContent.add(txtMov);
+			
+
+			SimpleDateFormat fmt=new SimpleDateFormat("dd/MM/yyyy");
+			String datum=fmt.format(res.getDateAsCalendar().getTime());
+			
+			JLabel txtDate=new JLabel(datum);
+			txtDate.setFont(new Font("Arial", Font.PLAIN, 14));
+			txtDate.setForeground(new Color(211,211,211));
+			txtDate.setBounds(100, i*height, 100, height);
+			scrollPaneContent.add(txtDate);
+			
+			SimpleDateFormat fmtH=new SimpleDateFormat("kk:mm");
+			String sat=fmtH.format(res.getDateAsCalendar().getTime());
+			
+			JLabel txtHour=new JLabel(sat);
+			txtHour.setFont(new Font("Arial", Font.PLAIN, 14));
+			txtHour.setForeground(new Color(211,211,211));
+			txtHour.setBounds(220, i*height, 50, height);
+			scrollPaneContent.add(txtHour);
+			
+			JLabel txtSeats=new JLabel(res.getNumber_of_seats()+"");
+			txtSeats.setFont(new Font("Arial", Font.PLAIN, 14));
+			txtSeats.setForeground(new Color(211,211,211));
+			txtSeats.setBounds(300, i*height, 10, height);
+			scrollPaneContent.add(txtSeats);
+			
+			JLabel txtDel=new JLabel("<html><u>odustani</u></html>");
+			txtDel.setFont(new Font("Arial",Font.PLAIN, 14));
+			txtDel.setForeground(new Color(211,211,211));
+			txtDel.setBounds(360, i*height, 300, height);
+			txtDel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			
+			txtDel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					
+				}
+			});
+			scrollPaneContent.add(txtDel);
+			
+			i++;
+			
+		}
+		scrollPaneContent.setPreferredSize(new Dimension(scrollPane.getWidth(), i*height));
+		 */
 		
 	}
 }
