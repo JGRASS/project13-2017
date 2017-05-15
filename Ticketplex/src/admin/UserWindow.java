@@ -1,6 +1,6 @@
 package admin;
 
-import java.awt.BorderLayout;
+
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -12,24 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.Controller;
-import ticketplex.Movie;
 import ticketplex.Reservation;
-import ticketplex.Showtime;
-import ticketplex.TicketplexClient;
 import ticketplex.User;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class UserWindow extends JFrame {
 
@@ -39,9 +27,7 @@ public class UserWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel listPanel, innerPanel;
-	private JLabel lblNazivFilma;
 	private JScrollPane scrollPane;
-	private JButton btnNewButton;
 	private JLabel lblUsername;
 	private JLabel lblEmail;
 	private JButton btnIzbrisiKorisnika;

@@ -1,6 +1,5 @@
 package admin;
 
-import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -12,20 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.Controller;
 import ticketplex.Movie;
 import ticketplex.Showtime;
-import ticketplex.TicketplexClient;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -37,9 +29,7 @@ public class MovieWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel listPanel, innerPanel;
-	private JLabel lblNazivFilma;
 	private JScrollPane scrollPane;
-	private JButton btnNewButton;
 	private JLabel lblName;
 	private JLabel lblYear;
 	private JLabel lblDescription;
@@ -102,6 +92,15 @@ public class MovieWindow extends JFrame {
 		lblPrikazivanja.setBounds(284, 141, 121, 14);
 		contentPane.add(lblPrikazivanja);
 		
+		JButton btnIzmeniDetalje = new JButton("Izmeni detalje");
+		btnIzmeniDetalje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AdminController.showEditMovieDialog(m);
+			}
+		});
+		btnIzmeniDetalje.setBounds(20, 300, 148, 23);
+		contentPane.add(btnIzmeniDetalje);
+		
 	
 	}
 	//prosiriiiii//
@@ -153,14 +152,14 @@ public class MovieWindow extends JFrame {
 	private JLabel getLblName() {
 		if (lblName == null) {
 			lblName = new JLabel("Ime");
-			lblName.setBounds(20, 21, 153, 14);
+			lblName.setBounds(20, 21, 240, 14);
 		}
 		return lblName;
 	}
 	private JLabel getLblYear() {
 		if (lblYear == null) {
 			lblYear = new JLabel("Year");
-			lblYear.setBounds(20, 41, 46, 14);
+			lblYear.setBounds(20, 41, 240, 14);
 		}
 		return lblYear;
 	}
@@ -176,49 +175,49 @@ public class MovieWindow extends JFrame {
 	private JLabel getLblCast() {
 		if (lblCast == null) {
 			lblCast = new JLabel("Cast");
-			lblCast.setBounds(20, 91, 163, 14);
+			lblCast.setBounds(20, 91, 240, 14);
 		}
 		return lblCast;
 	}
 	private JLabel getLblDirector() {
 		if (lblDirector == null) {
 			lblDirector = new JLabel("Director");
-			lblDirector.setBounds(20, 116, 153, 14);
+			lblDirector.setBounds(20, 116, 240, 14);
 		}
 		return lblDirector;
 	}
 	private JLabel getLblLength() {
 		if (lblLength == null) {
 			lblLength = new JLabel("Length");
-			lblLength.setBounds(20, 151, 46, 14);
+			lblLength.setBounds(20, 151, 240, 14);
 		}
 		return lblLength;
 	}
 	private JLabel getLblimdbRating() {
 		if (lblimdbRating == null) {
 			lblimdbRating = new JLabel("ImdbRating");
-			lblimdbRating.setBounds(20, 174, 78, 14);
+			lblimdbRating.setBounds(20, 174, 240, 14);
 		}
 		return lblimdbRating;
 	}
 	private JLabel getLblImdblink() {
 		if (lblImdblink == null) {
 			lblImdblink = new JLabel("imdbLink");
-			lblImdblink.setBounds(20, 201, 153, 14);
+			lblImdblink.setBounds(20, 201, 240, 14);
 		}
 		return lblImdblink;
 	}
 	private JLabel getLblGenre() {
 		if (lblGenre == null) {
 			lblGenre = new JLabel("Genre");
-			lblGenre.setBounds(20, 66, 153, 14);
+			lblGenre.setBounds(20, 66, 240, 14);
 		}
 		return lblGenre;
 	}
 	private JLabel getLblReservationNumber() {
 		if (lblReservationNumber == null) {
 			lblReservationNumber = new JLabel("New label");
-			lblReservationNumber.setBounds(20, 226, 46, 14);
+			lblReservationNumber.setBounds(20, 226, 240, 14);
 		}
 		return lblReservationNumber;
 	}

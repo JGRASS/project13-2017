@@ -28,6 +28,7 @@ public class HeaderPanel extends JPanel {
 	private Point initialClick;
 	@SuppressWarnings("unused")
 	private JFrame parent;
+	@SuppressWarnings("unused")
 	private JDialog dialog;
 
 	/* 

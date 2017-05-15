@@ -10,10 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import admin.AdminController;
-import admin.AdminWindow;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 public class NewMovieDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -30,7 +31,7 @@ public class NewMovieDialog extends JDialog {
 	private JLabel lblNewLabel;
 	private JTextField textFieldYear;
 	private JLabel lblNewLabel_1;
-	private JTextField textFieldDescription;
+	private JTextArea textFieldDescription;
 	private JLabel lblNewDescription;
 	private JTextField textFieldGenre;
 	private JLabel lblNewLabel_3;
@@ -47,14 +48,16 @@ public class NewMovieDialog extends JDialog {
 	private JButton btnImg;
 	private JLabel lblImage;
 	private JLabel lblException;
-	private  File file;
+	private File file;
 
 
 	/**
 	 * Create the dialog.
 	 */
 	public NewMovieDialog() {
-		setBounds(100, 100, 472, 340);
+		setTitle("Dodaj novi film");
+		setResizable(false);
+		setBounds(100, 100, 608, 382);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -142,7 +145,7 @@ public class NewMovieDialog extends JDialog {
 	private JTextField getTextFieldName() {
 		if (textFieldName == null) {
 			textFieldName = new JTextField();
-			textFieldName.setBounds(112, 18, 86, 20);
+			textFieldName.setBounds(122, 21, 141, 20);
 			textFieldName.setColumns(10);
 		}
 		return textFieldName;
@@ -157,7 +160,7 @@ public class NewMovieDialog extends JDialog {
 	private JTextField getTextFieldYear() {
 		if (textFieldYear == null) {
 			textFieldYear = new JTextField();
-			textFieldYear.setBounds(112, 49, 86, 20);
+			textFieldYear.setBounds(122, 52, 141, 20);
 			textFieldYear.setColumns(10);
 		}
 		return textFieldYear;
@@ -165,29 +168,30 @@ public class NewMovieDialog extends JDialog {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("Zanr:");
-			lblNewLabel_1.setBounds(26, 114, 46, 14);
+			lblNewLabel_1.setBounds(26, 80, 46, 14);
 		}
 		return lblNewLabel_1;
 	}
-	private JTextField getTextFieldDescription() {
+	private JTextArea getTextFieldDescription() {
 		if (textFieldDescription == null) {
-			textFieldDescription = new JTextField();
-			textFieldDescription.setBounds(112, 80, 86, 20);
-			textFieldDescription.setColumns(10);
+			textFieldDescription = new JTextArea();
+			textFieldDescription.setBounds(284, 43, 298, 110);
+			textFieldDescription.setLineWrap(true);
+			textFieldDescription.setWrapStyleWord(true);
 		}
 		return textFieldDescription;
 	}
 	private JLabel getLblNewDescription() {
 		if (lblNewDescription == null) {
 			lblNewDescription = new JLabel("Opis:");
-			lblNewDescription.setBounds(26, 83, 46, 14);
+			lblNewDescription.setBounds(285, 21, 46, 14);
 		}
 		return lblNewDescription;
 	}
 	private JTextField getTextFieldGenre() {
 		if (textFieldGenre == null) {
 			textFieldGenre = new JTextField();
-			textFieldGenre.setBounds(112, 111, 86, 20);
+			textFieldGenre.setBounds(122, 80, 141, 20);
 			textFieldGenre.setColumns(10);
 		}
 		return textFieldGenre;
@@ -195,14 +199,14 @@ public class NewMovieDialog extends JDialog {
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("Uloge:");
-			lblNewLabel_3.setBounds(26, 147, 46, 14);
+			lblNewLabel_3.setBounds(26, 108, 46, 14);
 		}
 		return lblNewLabel_3;
 	}
 	private JTextField getTextFieldCast() {
 		if (textFieldCast == null) {
 			textFieldCast = new JTextField();
-			textFieldCast.setBounds(112, 144, 86, 20);
+			textFieldCast.setBounds(122, 108, 141, 20);
 			textFieldCast.setColumns(10);
 		}
 		return textFieldCast;
@@ -210,14 +214,14 @@ public class NewMovieDialog extends JDialog {
 	private JLabel getLblReziser() {
 		if (lblReziser == null) {
 			lblReziser = new JLabel("Reziser:");
-			lblReziser.setBounds(242, 21, 46, 14);
+			lblReziser.setBounds(26, 139, 46, 14);
 		}
 		return lblReziser;
 	}
 	private JTextField getTextFieldDirector() {
 		if (textFieldDirector == null) {
 			textFieldDirector = new JTextField();
-			textFieldDirector.setBounds(338, 18, 86, 20);
+			textFieldDirector.setBounds(122, 136, 141, 20);
 			textFieldDirector.setColumns(10);
 		}
 		return textFieldDirector;
@@ -225,14 +229,14 @@ public class NewMovieDialog extends JDialog {
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("Trajanje filma:");
-			lblNewLabel_2.setBounds(242, 49, 76, 14);
+			lblNewLabel_2.setBounds(26, 171, 86, 14);
 		}
 		return lblNewLabel_2;
 	}
 	private JTextField getTextField_4() {
 		if (textFieldLength == null) {
 			textFieldLength = new JTextField();
-			textFieldLength.setBounds(338, 46, 86, 20);
+			textFieldLength.setBounds(122, 168, 141, 20);
 			textFieldLength.setColumns(10);
 		}
 		return textFieldLength;
@@ -240,14 +244,14 @@ public class NewMovieDialog extends JDialog {
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("IMDb ocena:");
-			lblNewLabel_4.setBounds(242, 83, 76, 14);
+			lblNewLabel_4.setBounds(26, 209, 76, 14);
 		}
 		return lblNewLabel_4;
 	}
 	private JTextField getTextField_5() {
 		if (textFieldImdbRating == null) {
 			textFieldImdbRating = new JTextField();
-			textFieldImdbRating.setBounds(338, 80, 86, 20);
+			textFieldImdbRating.setBounds(122, 206, 141, 20);
 			textFieldImdbRating.setColumns(10);
 		}
 		return textFieldImdbRating;
@@ -255,14 +259,14 @@ public class NewMovieDialog extends JDialog {
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
 			lblNewLabel_5 = new JLabel("IMDb link:");
-			lblNewLabel_5.setBounds(242, 114, 58, 14);
+			lblNewLabel_5.setBounds(26, 240, 58, 14);
 		}
 		return lblNewLabel_5;
 	}
 	private JTextField getTextField_6() {
 		if (textFieldImdbLink == null) {
 			textFieldImdbLink = new JTextField();
-			textFieldImdbLink.setBounds(338, 111, 86, 20);
+			textFieldImdbLink.setBounds(122, 237, 141, 20);
 			textFieldImdbLink.setColumns(10);
 		}
 		return textFieldImdbLink;
@@ -270,7 +274,7 @@ public class NewMovieDialog extends JDialog {
 	private JLabel getLblNewLabel_6() {
 		if (lblNewLabel_6 == null) {
 			lblNewLabel_6 = new JLabel("Slika:");
-			lblNewLabel_6.setBounds(242, 147, 46, 14);
+			lblNewLabel_6.setBounds(284, 171, 46, 14);
 		}
 		return lblNewLabel_6;
 	}
@@ -293,14 +297,14 @@ public class NewMovieDialog extends JDialog {
 		                }
 				}
 			});
-			btnImg.setBounds(242, 165, 76, 23);
+			btnImg.setBounds(284, 189, 76, 23);
 		}
 		return btnImg;
 	}
 	private JLabel getLblImage() {
 		if (lblImage == null) {
 			lblImage = new JLabel("");
-			lblImage.setBounds(353, 157, 60, 100);
+			lblImage.setBounds(395, 181, 60, 100);
 		}
 		return lblImage;
 	}

@@ -5,15 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
+import admin.dialogs.EditMovieDialog;
 import admin.dialogs.NewMovieDialog;
 import admin.dialogs.NewShowtimeDialog;
+import gui.Controller;
 import ticketplex.Movie;
 import ticketplex.Reservation;
 import ticketplex.Showtime;
@@ -26,9 +22,11 @@ public class AdminController {
 	static MovieWindow movieWindow;
 	static UsersWindow usersWindow;
 	static TicketplexAdmin ticketplexAdmin;
+	static EditMovieDialog editMovieDialog;
 	static NewMovieDialog newMovieDialog;
 	static NewShowtimeDialog newShowtimeDialog;
 	static UserWindow userWindow;
+	
 	
 	
 	public static void startAdminPanel() {
@@ -37,6 +35,17 @@ public class AdminController {
 		adminWindow = new AdminWindow();
 		adminWindow.setVisible(true);
 		adminWindow.setList(ticketplexAdmin.getAllMovies());
+	}
+	
+	public static void closeAdminPanel(){
+		adminWindow.setVisible(false);
+		if(movieWindow != null) movieWindow.setVisible(false);
+		if(usersWindow != null) usersWindow.setVisible(false);
+		if(editMovieDialog != null) editMovieDialog.setVisible(false);
+		if(newMovieDialog != null) newMovieDialog.setVisible(false);
+		if(newShowtimeDialog != null) newShowtimeDialog.setVisible(false);
+		if(userWindow != null) userWindow.setVisible(false);
+		Controller.startMainWindow();
 	}
 
 	public static void addNewMovie() {
@@ -58,6 +67,13 @@ public class AdminController {
 		movieWindow.setVisible(true);
 	}
 	
+
+	public static void showEditMovieDialog(Movie movie) {
+		if(editMovieDialog == null)
+			editMovieDialog = new EditMovieDialog(movie);
+		editMovieDialog.setVisible(true);
+		
+	}
 	
 	public static void showUsers(){
 		usersWindow = new UsersWindow();
@@ -80,6 +96,16 @@ public class AdminController {
 		adminWindow.setList(ticketplexAdmin.getAllMovies());
 	}
 	
+
+	public static void processEditNewMovie(int movie_id, String name, int year, String genre, String description,
+			String cast, String director, int length, String imdbRating, String imdbLink, byte[] img) throws Exception {
+		ticketplexAdmin.editMovie(movie_id, name, year, genre, description, cast, director, length, imdbRating, imdbLink, img);
+		editMovieDialog.closeDialog();
+		movieWindow.setMovie(ticketplexAdmin.getMovie(movie_id));
+		adminWindow.setList(ticketplexAdmin.getAllMovies());
+		
+	}
+	
 	public static int processGetNumberOfReservations(int movie_id){
 		return ticketplexAdmin.getMovieNumOfReservations(movie_id);
 	}
@@ -95,37 +121,7 @@ public class AdminController {
 		movieWindow.setList(ticketplexAdmin.getAllMovieShowings(s.getMovie_id()));
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// stackoverflow
-	public static byte[] readImageFile(String file) {
-		ByteArrayOutputStream bos = null;
-		try {
-			File f = new File(file);
-			FileInputStream fis = new FileInputStream(f);
-			byte[] buffer = new byte[1024];
-			bos = new ByteArrayOutputStream();
-			for (int len; (len = fis.read(buffer)) != -1;) {
-				bos.write(buffer, 0, len);
-			}
-			fis.close();
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-		} catch (IOException e2) {
-			System.err.println(e2.getMessage());
-		}
-		return bos != null ? bos.toByteArray() : null;
-	}
+		
 
 	public static void showUser(User u) {
 		if(userWindow == null){
@@ -150,6 +146,28 @@ public class AdminController {
 		
 	}
 	
+	
+	// stackoverflow
+		public static byte[] readImageFile(String file) {
+			ByteArrayOutputStream bos = null;
+			try {
+				File f = new File(file);
+				FileInputStream fis = new FileInputStream(f);
+				byte[] buffer = new byte[1024];
+				bos = new ByteArrayOutputStream();
+				for (int len; (len = fis.read(buffer)) != -1;) {
+					bos.write(buffer, 0, len);
+				}
+				fis.close();
+			} catch (FileNotFoundException e) {
+				System.err.println(e.getMessage());
+			} catch (IOException e2) {
+				System.err.println(e2.getMessage());
+			}
+			return bos != null ? bos.toByteArray() : null;
+		}
+
+
 
 
 

@@ -2,26 +2,18 @@ package admin.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Image;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import admin.AdminController;
-import admin.AdminWindow;
 import ticketplex.Movie;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+@SuppressWarnings("serial")
 public class NewShowtimeDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -37,15 +30,16 @@ public class NewShowtimeDialog extends JDialog {
 	private JLabel lblNewLabel;
 	private JTextField textFieldTime;
 	private JLabel lblException;
-	private  File file;
+
 
 
 	/**
 	 * Create the dialog.
 	 * @param movie 
 	 */
-	public NewShowtimeDialog(Movie movie) {
-		setBounds(100, 100, 472, 340);
+	public NewShowtimeDialog(Movie movie) {		
+		setTitle("Dodaj prikazivanje za film: "+movie.getName());
+		setBounds(100, 100, 388, 167);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

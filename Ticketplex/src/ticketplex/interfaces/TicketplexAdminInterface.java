@@ -10,12 +10,15 @@ import ticketplex.User;
 public interface TicketplexAdminInterface {
 	
 	public LinkedList<Movie> getAllMovies();
+	public Movie getMovie(int movie_id);
 	public LinkedList<Showtime> getAllMovieShowings(int movie_id);
 	public LinkedList<Reservation> getAllMovieReservations(int movie_id);
 	
 
 	public int getMovieNumOfReservations(int movie_id);
 	public void addMovie(String name, int year, String genre, String description, String cast, String director,
+			int length, String imdbRating, String imdbLink, byte[] img) throws Exception;
+	public void editMovie(int movie_id, String name, int year, String genre, String description, String cast, String director,
 			int length, String imdbRating, String imdbLink, byte[] img) throws Exception;
 	public void setMovieStatus(int movie_id, int status) throws Exception;
 	public void removeMovie(int movie_id);

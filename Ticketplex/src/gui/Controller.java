@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.EventQueue;
-import java.util.LinkedList;
 
 import admin.AdminController;
 import gui.dialogs.AlertDialog;
@@ -11,7 +10,6 @@ import gui.dialogs.ReservationDialog;
 import gui.dialogs.SettingsDialog;
 import gui.dialogs.UserReservationsDialog;
 import ticketplex.Movie;
-import ticketplex.Showtime;
 import ticketplex.TicketplexClient;
 
 public class Controller {
@@ -29,11 +27,7 @@ public class Controller {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ticketplexClient = new TicketplexClient();
-					mainWindow = new MainWindow();
-					mainWindow.setVisible(true);
-
-					init();
+					startMainWindow();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,7 +42,12 @@ public class Controller {
 	
 	
 	
-	
+	public static void startMainWindow(){
+		ticketplexClient = new TicketplexClient();
+		if(mainWindow == null) mainWindow = new MainWindow();
+		mainWindow.setVisible(true);
+		init();
+	}
 	public static void hideGuestGUI(){
 		if(regDialog != null) regDialog.setVisible(false);
 		if(fpDialog != null) fpDialog.setVisible(false);

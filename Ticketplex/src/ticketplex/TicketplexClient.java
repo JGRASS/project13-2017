@@ -2,8 +2,6 @@ package ticketplex;
 
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import ticketplex.interfaces.TicketplexClientInterface;
 import ticketplex.systemoperations.SOUserEmailExists;
