@@ -102,6 +102,12 @@ public class ForgotPasswordDialog extends JDialog {
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				txtUsername.setBorder(MainWindow.emptyBorder);
+				if(txtUsername.getText().length()<4){
+					
+					txtUsername.setBorder(MainWindow.errorBorder);
+					return;
+					
+				}
 				Controller.processResetPassword(txtUsername.getText());
 				
 				//btnNewPass.setVisible(false);

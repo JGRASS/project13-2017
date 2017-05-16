@@ -4,15 +4,39 @@ package ticketplex;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-
+/**
+ *Klasa predstavlja projekciju filma
+ * @author skakac
+ *
+ */
 public class Showtime {
+	/**
+	 * Označava broj sedišta
+	 */
 	static int seats = 120;
-	
+	/**
+	 * Označava id projekcije
+	 */
 	private int id;
+	/**
+	 * Označava id filma koji se prikazuje
+	 */
 	private int movie_id;
+	/**
+	 * Označava vreme projekcije
+	 */
 	private long timestamp;
+	/**
+	 *  Označava broj rezervacija napravljenih za ovu projekciju
+	 */
 	private int _num_of_reservations;
 
+	/**
+	 * Konstruktor klase Showtime
+	 * @param id
+	 * @param movie_id
+	 * @param l
+	 */
 	public Showtime(int id, int movie_id, long l) {
 		super();
 		this.id = id;
@@ -36,7 +60,10 @@ public class Showtime {
 	public void setDatetime(int datetime) {
 		this.timestamp = datetime;
 	}
-	
+	/**
+	 * Funkcija vraća vreme projekcije
+	 * @return GregorianCalendar
+	 */
 	public GregorianCalendar getDateAsCalendar(){
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(this.timestamp);

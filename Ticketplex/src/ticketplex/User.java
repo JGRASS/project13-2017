@@ -1,13 +1,34 @@
 package ticketplex;
-
+/**
+ * Klasa predstavlja korisnika koji je registrovan
+ * @author skakac
+ *
+ */
 public class User {
-	
+	/**
+	 * Označava id korisnika
+	 */
 	private int id;
+	/**
+	 * Označava jedinstveni username korisnika
+	 */
 	private String username;
+	/**
+	 * Označava šifru korisnika
+	 */
 	private String password;
+	/**
+	 *  Označava email korisnika
+	 */
 	private String email;
 
-
+	/**
+	 * Konstruktor klase User
+	 * @param id
+	 * @param username
+	 * @param password
+	 * @param email
+	 */
 	public User(int id, String username, String password, String email) {
 		super();
 		this.id = id;

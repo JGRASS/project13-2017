@@ -1,25 +1,69 @@
 package ticketplex;
 
+/**
+ * @author skakac
+ * @version 1.0
+ * Ova klasa prestavlja film
+ */
 
 public class Movie {
 	
+	/**
+	 *Statička promenljiva označava da film nije u repertoaru
+	 */
 	public static final int STATUS_INACTIVE = 0;
+	/**
+	 * Statička promenljiva označava da film jeste u repertoaru
+	 */
 	public static final int STATUS_ACTIVE   = 1;
 	
+	/**
+	 * Označava ID filma
+	 */
 	private int id;
+	/**
+	 * Označava ime filma
+	 */
 	private String name;
+	/**
+	 * Označava godinu izlaska filma
+	 */
 	private int year;
+	/**
+	 * Označava žanr filma
+	 */
 	private String genre;
+	/**
+	 * Predstavlja kratak opis filma
+	 */
 	private String description;
+	/**
+	 * Označava ime režisera i uloge u filmu
+	 */
 	private String cast, director;
+	/**
+	 * Predstavlja trajanje filma u minutima
+	 */
 	private int length;
+	/**
+	 * Predstavlja ocenu filma na sajtu imdb
+	 */
 	private String imdbRating;
+	/**
+	 * Predstavlja link ka filmu na sajtu imdb
+	 */
 	private String imdbLink;
+	/**
+	 * Predstavlja sliku filma
+	 */
 	private byte[] img;
-	
+	/**
+	 * Označava da li  je film u repertoaru ili nije.
+	 */
 	private int status;
 	
 	/**
+	 * Konstuktor klase Movie
 	 * @param id
 	 * @param name
 	 * @param year
