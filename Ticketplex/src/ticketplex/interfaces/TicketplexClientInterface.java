@@ -13,8 +13,8 @@ public interface TicketplexClientInterface {
 	public void logout();
 	
 	public boolean isGuest();
-	public String resetPassword(String username);
-	public void changePassword(String old_password, String new_password);
+	public String resetPassword(String username) throws Exception;
+	public void changePassword(String old_password, String new_password) throws Exception;
 	
 	public LinkedList<Movie> getAllMovies();
 	public Movie loadMovie(int movie_id);

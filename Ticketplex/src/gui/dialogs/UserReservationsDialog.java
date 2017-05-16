@@ -1,28 +1,21 @@
 package gui.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gui.MainWindow;
 import ticketplex.Reservation;
-import ticketplex.TicketplexClient;
 import gui.Controller;
 import gui.HeaderPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.ScrollPane;
-import java.awt.Scrollbar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -30,8 +23,8 @@ import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class UserReservationsDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -113,7 +106,7 @@ public class UserReservationsDialog extends JDialog {
 		
 		int i=0; 
 		int height=35;
-		int heightD=36;
+		//int heightD=36;
 		for(Reservation res: reservations){
 			System.out.println(res.getMovieName());
 			JLabel txtMov=new JLabel(res.getMovieName());

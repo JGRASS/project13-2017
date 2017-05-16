@@ -2,6 +2,7 @@ package admin;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -50,9 +51,11 @@ public class MovieWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MovieWindow(Movie m) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Admin-48.png"));
 		movie_id = m.getId();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 724, 396);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -101,6 +104,8 @@ public class MovieWindow extends JFrame {
 	}
 	//prosiriiiii//
 	void setMovie(Movie m){
+		movie_id = m.getId();
+		setTitle("Film: "+m.getName());
 		lblName.setText(m.getName());
 		lblYear.setText(String.valueOf(m.getYear()));
 		lblGenre.setText(m.getGenre());
@@ -110,7 +115,7 @@ public class MovieWindow extends JFrame {
 		lblLength.setText(String.valueOf(m.getLength()));
 		lblimdbRating.setText(m.getImdbRating());
 		lblImdblink.setText(m.getImdbLink());
-		lblReservationNumber.setText(String.valueOf(AdminController.processGetNumberOfReservations(m.getId())));
+		lblReservationNumber.setText("Broj rezervacija: "+String.valueOf(AdminController.processGetNumberOfReservations(m.getId())));
 		
 
 		for( ActionListener al : btnDodajPrikazivanje.getActionListeners() ) {
@@ -144,13 +149,17 @@ public class MovieWindow extends JFrame {
 			
 			
 			
-			JLabel lblNewLabel = new JLabel(datum);
-			lblNewLabel.setBounds(0, h*i, 200, h);
-			innerPanel.add(lblNewLabel);
+			JLabel lblDate = new JLabel(datum);
+			lblDate.setBounds(10, h*i, 100, h);
+			innerPanel.add(lblDate);
+			
+			JLabel lblRes = new JLabel(s.getNumOfReservations()+" rezervacija");
+			lblRes.setBounds(150, h*i, 100, h);
+			innerPanel.add(lblRes);
 			
 			JLabel lblDelete = new JLabel("<HTML><u>Izbrisi</u></HTML>");
 			lblDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblDelete.setBounds(220, h*i, 60, h);
+			lblDelete.setBounds(250, h*i, 60, h);
 			lblDelete.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e)  
 			    {  

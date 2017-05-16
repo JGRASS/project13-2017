@@ -58,6 +58,7 @@ public class NewMovieDialog extends JDialog {
 		setTitle("Dodaj novi film");
 		setResizable(false);
 		setBounds(100, 100, 608, 382);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

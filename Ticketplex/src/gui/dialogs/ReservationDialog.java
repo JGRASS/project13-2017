@@ -1,7 +1,6 @@
 package gui.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,10 +15,6 @@ import gui.Controller;
 import gui.HeaderPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Dictionary;
@@ -28,14 +23,12 @@ import java.util.LinkedList;
 import java.awt.Color;
 import java.awt.Cursor;
 
-import javax.swing.JList;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class ReservationDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -130,12 +123,13 @@ public class ReservationDialog extends JDialog {
 		seatsSlider.setBounds(22, 161, 200, 45);
 		seatsSlider.setBorder(null);
 		seatsSlider.setBackground(MainWindow.grayLight);
+		@SuppressWarnings("rawtypes")
 		Dictionary dictionary = seatsSlider.getLabelTable();
 	      if (dictionary != null) {
-	         Enumeration keys = dictionary.keys();
+	         @SuppressWarnings("rawtypes")
+			Enumeration keys = dictionary.keys();
 	         while (keys.hasMoreElements()) {
 	            JLabel label = (JLabel) dictionary.get(keys.nextElement());
-	            // uncomment these following lines to get a background for your labels
 	            label.setOpaque(true);
 	            label.setForeground(new Color(211,211,211));
 	            label.setBackground(MainWindow.grayLight);

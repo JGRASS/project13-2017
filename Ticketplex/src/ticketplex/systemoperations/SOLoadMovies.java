@@ -30,7 +30,6 @@ public class SOLoadMovies {
 
 				movies.add(movie);
 			}
-			System.out.println("Loaded movies.");
 
 		} catch (SQLException e) {
 			System.out.println(e);

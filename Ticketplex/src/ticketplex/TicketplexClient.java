@@ -33,9 +33,15 @@ public class TicketplexClient implements TicketplexClientInterface{
 		}
 		if(username.isEmpty() || username.equals("Username"))
 			throw new Exception("Username prazan");
+		
+		if(username.length() < 4)
+			throw new Exception("Unesite duzi username");
 
 		if(password.isEmpty() || password.equals("Password"))
-			throw new Exception("Password prazan");
+			throw new Exception("Lozinka prazana");
+		
+		if(password.length() < 4)
+			throw new Exception("Unesite duzu lozinku");
 
 		if(email.isEmpty())
 			throw new Exception("Popunite email!");
@@ -82,24 +88,30 @@ public class TicketplexClient implements TicketplexClientInterface{
 	
 
 	@Override
-	public String resetPassword(String username) {
+	public String resetPassword(String username) throws Exception {
 		Random rnd = new Random();
 		String npwd = String.valueOf(1000 + rnd.nextInt(9000));
 		
 		if(!SOUserSetPassword.execute(username, npwd))
-			throw new RuntimeException("Ne postoji takav korisnik!");
+			throw new Exception("Ne postoji takav korisnik!");
 		
 		
 		return npwd;
 	}
 
 	@Override
-	public void changePassword(String old_password, String new_password) {
+	public void changePassword(String old_password, String new_password) throws Exception {
 		if(isGuest())
-			throw new RuntimeException("Morate biti ulogovani!");
+			throw new Exception("Morate biti ulogovani!");
 		
 		if(!SOGenerateSHA2.execute(old_password).equals(this.user.getPassword()))
-			throw new RuntimeException("Pogrešna lozinka!");		
+			throw new Exception("Pogrešna lozinka!");		
+		
+		if(new_password.isEmpty() || new_password.equals("Password"))
+			throw new Exception("Unesite novu lozinku");
+		
+		if(new_password.length() < 4)
+			throw new Exception("Unesite duzu lozinku");
 		
 		SOUserSetPassword.execute(this.user.getUsername(), new_password);
 		

@@ -31,7 +31,6 @@ public class SOShowtimeLoadByMovie {
 	        	//showtime.setNumOfReservations(rs.getInt("num_of_reservations"));
 	        	showtimes.add(showtime);
 	        }
-	        System.out.println("Loaded showtimes.");
 	
 	    } catch (SQLException e) {
 	    	System.out.println(e);

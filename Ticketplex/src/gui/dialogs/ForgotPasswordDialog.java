@@ -1,14 +1,11 @@
 package gui.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
 import gui.Controller;
@@ -27,15 +24,13 @@ import java.awt.Cursor;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
-import java.awt.TextField;
 
+@SuppressWarnings("serial")
 public class ForgotPasswordDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	public static Color okvir = new Color(22, 22, 22); 
 	
-	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
-	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
 	private JTextField txtUsername;
 	private JLabel lblError;
 	
@@ -91,7 +86,7 @@ public class ForgotPasswordDialog extends JDialog {
 		txtUsername = new JTextField();
 		txtUsername.setForeground(new Color(153, 153, 153));
 		txtUsername.setFont(new Font("Arial", Font.PLAIN, 14));
-		txtUsername.setBorder(emptyBorder);
+		txtUsername.setBorder(MainWindow.emptyBorder);
 		txtUsername.setText("Username");
 		txtUsername.setBounds(10, 50, 236, 35);
 		contentPanel.add(txtUsername);
@@ -106,8 +101,10 @@ public class ForgotPasswordDialog extends JDialog {
 		
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
+				txtUsername.setBorder(MainWindow.emptyBorder);
 				Controller.processResetPassword(txtUsername.getText());
-				btnNewPass.setVisible(false);
+				
+				//btnNewPass.setVisible(false);
 			}
 			
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -138,7 +135,7 @@ public class ForgotPasswordDialog extends JDialog {
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setFont(new Font("Arial", Font.BOLD, 13));
 		lblError.setForeground(new Color(211, 211, 211));
-		lblError.setBounds(0, 100, 255, 25);
+		lblError.setBounds(0, 130, 255, 25);
 		contentPanel.add(lblError);
 		
 		
@@ -152,6 +149,9 @@ public class ForgotPasswordDialog extends JDialog {
 
 	public void showMsg(String msg) {
 		lblError.setText(msg);
+		if(msg.equals("Ne postoji takav korisnik!")){
+			txtUsername.setBorder(MainWindow.errorBorder);
+		}
 		
 	}
 }

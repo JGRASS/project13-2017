@@ -134,11 +134,9 @@ public class Controller {
 		try {
 			
 			ticketplexClient.login(user, pass);
-			System.out.println("logged");
 			hideGuestGUI();
 			mainWindow.setSideUser(ticketplexClient.user);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			if(e.getMessage().equals("error password"))
 				return 1;
 			return 0;

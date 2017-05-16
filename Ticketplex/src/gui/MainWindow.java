@@ -42,6 +42,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class MainWindow extends JFrame {
 
@@ -67,10 +68,12 @@ public class MainWindow extends JFrame {
 	int title_width = 120, title_height = 200;
 
 
-	Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
-	CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
+	public static Border emptyBorder = new EmptyBorder(0, 5, 0, 0);
+	public static CompoundBorder errorBorder = new CompoundBorder(BorderFactory.createLineBorder(Color.red), emptyBorder);
 
 	public MainWindow() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Client-48.png"));
+		setTitle("Ticketplex");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setUndecorated(true);
@@ -291,7 +294,6 @@ public class MainWindow extends JFrame {
 		}
 
 		if (!error[0] && !error[1]) {
-			System.out.println("test");
 			int feedback = Controller.handleLogin(user, pass);
 			if (feedback <= 1)
 				error[feedback] = true;

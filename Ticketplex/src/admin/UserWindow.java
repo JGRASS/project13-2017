@@ -3,6 +3,7 @@ package admin;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -39,8 +40,11 @@ public class UserWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public UserWindow() {
+		setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Admin-48.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 724, 396);
+		setBounds(100, 100, 435, 330);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -49,7 +53,7 @@ public class UserWindow extends JFrame {
 		contentPane.add(getLblEmail());
 		
 		listPanel = new JPanel();
-		listPanel.setBounds(70, 155, 414, 191);
+		listPanel.setBounds(20, 91, 385, 191);
 		listPanel.setLayout(null);
 		
 		
@@ -64,7 +68,7 @@ public class UserWindow extends JFrame {
 		contentPane.add(listPanel);
 		
 		JLabel lblRezervacije = new JLabel("Rezervacije:");
-		lblRezervacije.setBounds(70, 101, 121, 14);
+		lblRezervacije.setBounds(20, 66, 121, 14);
 		contentPane.add(lblRezervacije);
 		contentPane.add(getBtnIzbrisiKorisnika());
 		
@@ -72,6 +76,7 @@ public class UserWindow extends JFrame {
 	}
 	
 	void setUser(User u){
+		setTitle("Korisnik: "+u.getUsername());
 		lblUsername.setText(u.getUsername());
 		lblEmail.setText(u.getEmail());
 		
@@ -98,14 +103,20 @@ public class UserWindow extends JFrame {
 			
 			
 			JLabel lblMovieName = new JLabel(r.getMovieName());
-			lblMovieName.setBounds(0, h*i, 100, h);
-			JLabel lblNewLabel = new JLabel(datum);
-			lblNewLabel.setBounds(100, h*i, 100, h);
-			innerPanel.add(lblNewLabel);
+			lblMovieName.setBounds(0, h*i, 120, h);
+			innerPanel.add(lblMovieName);
+			
+			JLabel lblDate = new JLabel(datum);
+			lblDate.setBounds(130, h*i, 100, h);
+			innerPanel.add(lblDate);
+			
+			JLabel lblSeats = new JLabel("sedista: "+r.getNumber_of_seats());
+			lblSeats.setBounds(250, h*i, 100, h);
+			innerPanel.add(lblSeats);
 			
 			JLabel lblDelete = new JLabel("<HTML><u>Izbrisi</u></HTML>");
 			lblDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblDelete.setBounds(220, h*i, 60, h);
+			lblDelete.setBounds(330, h*i, 60, h);
 			lblDelete.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e)  
 			    {  
@@ -114,7 +125,6 @@ public class UserWindow extends JFrame {
 			    }  
 			});
 			innerPanel.add(lblDelete);
-			innerPanel.add(lblMovieName);
 			i++;
 		}
 		innerPanel.setPreferredSize(new Dimension(listPanel.getWidth(), i*h));
@@ -131,7 +141,7 @@ public class UserWindow extends JFrame {
 	private JLabel getLblEmail() {
 		if (lblEmail == null) {
 			lblEmail = new JLabel("Email");
-			lblEmail.setBounds(20, 41, 46, 14);
+			lblEmail.setBounds(20, 41, 171, 14);
 		}
 		return lblEmail;
 	}
@@ -139,7 +149,7 @@ public class UserWindow extends JFrame {
 		if (btnIzbrisiKorisnika == null) {
 			btnIzbrisiKorisnika = new JButton("Izbrisi korisnika");
 			
-			btnIzbrisiKorisnika.setBounds(217, 68, 132, 23);
+			btnIzbrisiKorisnika.setBounds(273, 17, 132, 23);
 		}
 		return btnIzbrisiKorisnika;
 	}

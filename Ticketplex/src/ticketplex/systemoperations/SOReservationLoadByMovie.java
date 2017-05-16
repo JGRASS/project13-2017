@@ -34,7 +34,6 @@ public class SOReservationLoadByMovie {
 				reservation.setShowtimeTimesamp(rs.getLong("showtime_timesamp"));
 				reservations.add(reservation);
 			}
-			System.out.println("Loaded reservations from movie: "+movie_id);
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

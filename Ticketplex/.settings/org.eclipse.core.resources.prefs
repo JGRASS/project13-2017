@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/gui/MainWindow.java=UTF-8
+encoding//src/gui/dialogs/RegistrationDialog.java=UTF-8
+encoding//src/gui/dialogs/SettingsDialog.java=UTF-8
 encoding//src/ticketplex/TicketplexClient.java=UTF-8

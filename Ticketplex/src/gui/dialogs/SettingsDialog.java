@@ -3,7 +3,6 @@ package gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -26,8 +25,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.JScrollBar;
 
+@SuppressWarnings("serial")
 public class SettingsDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -110,8 +109,10 @@ public class SettingsDialog extends JDialog {
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent evt){
+				txtOld.setBorder(MainWindow.emptyBorder);
+				txtNew.setBorder(MainWindow.emptyBorder);
 				Controller.processSetNewPassword(txtOld.getText(),txtNew.getText());
-				btnNewPass.setVisible(false);
+				//btnNewPass.setVisible(false);
 			}
 			
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -129,7 +130,7 @@ public class SettingsDialog extends JDialog {
 		lblError.setForeground(new Color(211, 211, 211));
 		lblError.setFont(new Font("Arial", Font.BOLD, 13));
 		
-		lblError.setBounds(0, 145, 255, 25);
+		lblError.setBounds(0, 176, 255, 25);
 		contentPanel.add(lblError);
 		
 		JLabel lblBack = new JLabel("<html><u>Nazad</u></html>");
@@ -155,6 +156,12 @@ public class SettingsDialog extends JDialog {
 	
 	public void showMsg(String msg) {
 		lblError.setText(msg);
+		
+		if(msg.equals("Pogrešna lozinka!"))
+			txtOld.setBorder(MainWindow.errorBorder);
+		
+		if(msg.equals("Unesite novu lozinku") || msg.equals("Unesite duzu lozinku"))
+			txtNew.setBorder(MainWindow.errorBorder);
 	}
 		
 	

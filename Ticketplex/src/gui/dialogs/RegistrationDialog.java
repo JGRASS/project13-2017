@@ -1,7 +1,6 @@
 package gui.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,8 +14,6 @@ import javax.swing.border.EmptyBorder;
 import gui.Controller;
 import gui.HeaderPanel;
 import gui.MainWindow;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -31,6 +28,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class RegistrationDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -137,7 +135,13 @@ public class RegistrationDialog extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				showMsg("");
+				txtUsername.setBorder(MainWindow.emptyBorder);
+				txtEmail.setBorder(MainWindow.emptyBorder);
+				txtPassword.setBorder(MainWindow.emptyBorder);			
+				
 				Controller.processRegister(txtUsername.getText(), txtPassword.getText(), txtEmail.getText());
+				
+				
 			}			
 
 
@@ -187,6 +191,15 @@ public class RegistrationDialog extends JDialog {
 	
 	public void showMsg(String msg){
 		lblError.setText(msg);
+		
+		if(msg.equals("Username prazan") || msg.equals("Unesite duzi username") || msg.equals("Username već postoji!"))
+			txtUsername.setBorder(MainWindow.errorBorder);
+		
+		if(msg.equals("Lozinka prazana") || msg.equals("Unesite duzu lozinku"))
+			txtPassword.setBorder(MainWindow.errorBorder);
+		
+		if(msg.equals("Popunite email!") || msg.equals("Email već postoji!") || msg.equals("Email mora biti validan!"))
+			txtEmail.setBorder(MainWindow.errorBorder);
 	}
 	
 	

@@ -33,7 +33,6 @@ public class SOReservationLoadByUser {
 				reservations.add(reservation);
 			}
 			
-			System.out.println("Loaded reservations from user: "+user_id);
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

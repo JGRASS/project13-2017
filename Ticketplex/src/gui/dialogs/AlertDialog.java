@@ -3,7 +3,6 @@ package gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -21,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class AlertDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

@@ -8,7 +8,6 @@ import db.Database;
 
 public class SOShowtimeInsert {
 	public static boolean execute(int movie_id, long timestamp) {
-		System.out.println(movie_id+" "+timestamp);
 		Connection con = Database.getInstance().getConnection();
 
 		String sql = "INSERT INTO showtimes(movie_id, timestamp) VALUES(?,?)";

@@ -27,7 +27,6 @@ public class SOUserLoadAll {
 
 				users.add(user);
 			}
-			System.out.println("Loaded users.");
 
 		} catch (SQLException e) {
 			System.out.println(e);

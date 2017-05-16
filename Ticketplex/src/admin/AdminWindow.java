@@ -2,6 +2,7 @@ package admin;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -45,6 +46,8 @@ public class AdminWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public AdminWindow() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Admin-48.png"));
+		setTitle("Admin panel [Ticketplex]");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 329);
 
