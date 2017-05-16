@@ -40,9 +40,13 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * Funkcija vraca objekta trazenog filma
 	 * @param movie_id id filma
 	 * @return objekat movie ili null u slucaju da nije pronadjen film
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 */
 	@Override
 	public Movie getMovie(int movie_id) {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		LinkedList<Movie> movies = getAllMovies();
 		for (Movie movie : movies) {
 			if (movie.getId() == movie_id)
@@ -55,9 +59,13 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * Funkcija vraca listu svih prikazivanja odredjednog filma
 	 * @param movie_id id filma
 	 * @return lista prikazivanja
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 */
 	@Override
-	public LinkedList<Showtime> getAllMovieShowings(int movie_id) {		
+	public LinkedList<Showtime> getAllMovieShowings(int movie_id) {	
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		LinkedList<Showtime> showtimes = SOShowtimeLoadByMovie.execute(movie_id);
 		for (Showtime showtime : showtimes) {
 			showtime.setNumOfReservations(SOShowtimeNumOfReservations.execute(showtime.getId()));
@@ -71,9 +79,13 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * Funkcija vraca listu svih rezervacija za odredjeni film
 	 * @param movie_id id filma
 	 * @return lista rezervacija
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 */
 	@Override
 	public LinkedList<Reservation> getAllMovieReservations(int movie_id) {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		return SOReservationLoadByMovie.execute(movie_id);
 	}
 	
@@ -81,9 +93,13 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * Funkcija vraca ukupan broj rezervacija za odredjeni film
 	 * @param movie_id id filma
 	 * @return ukupan broj rezervacija
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 */
 	@Override
 	public int getMovieNumOfReservations(int movie_id) {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		LinkedList<Showtime> showtimes = getAllMovieShowings(movie_id);
 		int res = 0;
 		for (Showtime showtime : showtimes) {
@@ -162,6 +178,7 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * @param imdbRating ocena filma
 	 * @param imdbLink imdb link filma
 	 * @param img slika/poster filma
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 * @throws Exception U sledeci slucajevima
 	 * 	<ul>
 	 * 	<li>Prazan bilo koji parametar osim slike</li>
@@ -173,6 +190,9 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	@Override
 	public void editMovie(int movie_id, String name, int year, String genre, String description, String cast,
 			String director, int length, String imdbRating, String imdbLink, byte[] img) throws Exception {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		if (movie_id <= 0)
 			throw new Exception("Film je obavezan.");
 		
@@ -211,9 +231,14 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * Funkcija menja status filma (active/inactive)
 	 * @oaram movie_id id filma
 	 * @param status vrednost statusa
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
+	 * @throws Exception Ako status nije jedan od predefinisanih iz klase Movie
 	 */
 	@Override
 	public void setMovieStatus(int movie_id, int status) throws Exception {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		if (status != Movie.STATUS_ACTIVE && status != Movie.STATUS_INACTIVE) {
 			throw new Exception("Nevazeci status");
 		}
@@ -224,9 +249,13 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	/**
 	 * Funkcija brise film
 	 * @param movie_id id filma koje se brise
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 */
 	@Override
 	public void removeMovie(int movie_id) {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		SOMovieDelete.execute(movie_id);
 
 	}
@@ -235,15 +264,17 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * Funkcija dodaje prikazivanje za odredjeni film
 	 * @param movie_id id filma
 	 * @param timestamp vreme prikazivanja
+	 * @throws Exception Ako je id filma negativan, ili vreme prikazivanja u proslosti
 	 */
 	@Override
 	public void addMovieShowtime(int movie_id, long timestamp) throws Exception {
+		if (movie_id <= 0) {
+			throw new Exception("ID filma ne sme biti nepozitivan broj");
+		}
+		
 		GregorianCalendar now = new GregorianCalendar();
 		now.add(GregorianCalendar.MONTH, -1);
-
-		if (movie_id <= 0) {
-			throw new Exception("Movie id ne sme biti null");
-		}
+		
 		if (timestamp < now.getTimeInMillis()) {
 			throw new Exception("Vreme prikazivanja mora biti u buducnosti");
 		}
@@ -254,9 +285,12 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	/**
 	 * Funkcija brise prikazivanje filma
 	 * @oaram showtime_id id prikazivanja
+	 * @throws RuntimeException Ako je ID prikazivanja nepozitivan broj
 	 */
 	@Override
 	public void removeMovieShowtime(int showtime_id) {
+		if(showtime_id <= 0)
+			throw new RuntimeException("ID prikazivanja mora biti pozitivan broj");
 		SOShowtimeDelete.execute(showtime_id);
 
 	}
@@ -273,9 +307,12 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	/**
 	 * Funkcija brise odredjenog korisnika
 	 * @param user_id id korisnika
+	 * @throws RuntimeException Ako je ID korisnika nepozitivan broj
 	 */
 	@Override
 	public void removeUser(int user_id) {
+		if(user_id <= 0)
+			throw new RuntimeException("ID korisnika mora biti pozitivan broj");
 		SOUserDelete.execute(user_id);
 
 	}
@@ -284,18 +321,26 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	 * Funkcija vraca listu svih rezervacija jednog korisnika
 	 * @param user_id id korisnika
 	 * @return lista rezervacija
+	 * @throws RuntimeException Ako je ID korisnika nepozitivan broj
 	 */
 	@Override
 	public LinkedList<Reservation> getUserReservations(int user_id) {
+		if(user_id <= 0)
+			throw new RuntimeException("ID korisnika mora biti pozitivan broj");
+		
 		return SOReservationLoadByUser.execute(user_id);
 	}
 
 	/**
 	 * Funkcija brise odredjenu rezervaciju jednog korisnika
 	 * @param reservation_id id rezervacije
+	 * @throws RuntimeException Ako je ID rezervacije nepozitivan broj
 	 */
 	@Override
 	public void removeReservation(int reservation_id) {
+		if(reservation_id <= 0)
+			throw new RuntimeException("ID korisnika mora biti pozitivan broj");
+		
 		SOReservationRemove.execute(reservation_id);
 
 	}

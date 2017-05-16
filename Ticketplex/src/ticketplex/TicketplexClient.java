@@ -209,10 +209,14 @@ public class TicketplexClient implements TicketplexClientInterface {
 	 * Funkcija koja vraća određeni film
 	 * @param movie_id
 	 * @return film 
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 */
 
 	@Override
 	public Movie loadMovie(int movie_id) {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		LinkedList<Movie> movies = getAllMovies();
 		for (Movie movie : movies) {
 			if (movie.getId() == movie_id)
@@ -225,19 +229,27 @@ public class TicketplexClient implements TicketplexClientInterface {
 	 * Funkcija koja vraća listu svih projekcija datog filma
 	 * @param movie_id
 	 * @return lista projekcija
+	 * @throws RuntimeException Ako je ID filma nepozitivan broj
 	 */
 	@Override
 	public LinkedList<Showtime> getAllMovieShowings(int movie_id) {
+		if(movie_id <= 0)
+			throw new RuntimeException("ID filma mora biti pozitivan broj");
+		
 		return SOShowtimeLoadByMovie.execute(movie_id);
 	}
 
 	/**
 	 * Funkcija koja proverava koliko je ostalo slobodnih mesta za projekciju
 	 * @param showtime_id
+	 * @throws RuntimeException Ako je ID prikazivanja nepozitivan broj
 	 * @return broj slobodnih mesta 
 	 */
 	@Override
 	public int getShowtimeSpace(int showtime_id) {
+		if(showtime_id <= 0)
+			throw new RuntimeException("ID prikazivanja mora biti pozitivan broj");
+		
 		int used = SOShowtimeNumOfReservationsSeats.execute(showtime_id);
 		return Showtime.seats - used;
 	}
@@ -245,6 +257,7 @@ public class TicketplexClient implements TicketplexClientInterface {
 	 * Funkcija koja služi za rezervisanje projekcije
 	 * @param showtime_id
 	 * @param number_of_seats
+	 * @throws RuntimeException Ako je ID prikazivanja nepozitivan broj
 	 * @throws Exception ako korisnik nije ulogovan
 	 * @throws Exception ako nema dovoljno slobodnih mesta
 	 */
@@ -252,6 +265,9 @@ public class TicketplexClient implements TicketplexClientInterface {
 	public void makeReservation(int showtime_id, int number_of_seats) throws Exception {
 		if (isGuest())
 			throw new Exception("Morate biti ulogovani");
+		
+		if(showtime_id <= 0)
+			throw new RuntimeException("ID prikazivanja mora biti pozitivan broj");
 		
 		int space = getShowtimeSpace(showtime_id);
 		if(space <= 0)
@@ -281,13 +297,17 @@ public class TicketplexClient implements TicketplexClientInterface {
 	
 	/**
 	 * Funkcija briše rezervaciju ulogovanog korisnika.
+	 * @param reservation_id ID rezervacije
+	 * @throws RuntimeException Ako je ID rezervacije nepozitivan broj
 	 * @throws Exception ako korisnik nije ulogovan
 	 */
-
 	@Override
 	public void deleteReservation(int reservation_id) throws Exception {
 		if (isGuest())
 			throw new Exception("Morate biti ulogovani");
+		
+		if(reservation_id <= 0)
+			throw new RuntimeException("ID rezervacije mora biti pozitivan broj");
 
 		SOReservationRemove.execute(reservation_id);
 	}
