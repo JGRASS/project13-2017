@@ -48,7 +48,7 @@ public class ForgotPasswordDialog extends JDialog {
 		setUndecorated(true);
 		setResizable(false);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setBounds(0, 0, 255, 233);
+		setBounds(0, 0, 255, 181);
 		getRootPane().setBorder(BorderFactory.createMatteBorder(
                 1, 1, 1, 1, okvir));
 		contentPanel.requestFocus();
@@ -107,6 +107,7 @@ public class ForgotPasswordDialog extends JDialog {
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				Controller.processResetPassword(txtUsername.getText());
+				btnNewPass.setVisible(false);
 			}
 			
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -130,14 +131,14 @@ public class ForgotPasswordDialog extends JDialog {
 			}
 		});
 		
-		lblBack.setBounds(10, 197, 46, 25);
+		lblBack.setBounds(10, 149, 46, 25);
 		contentPanel.add(lblBack);
 		
 		lblError = new JLabel("");
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setFont(new Font("Arial", Font.BOLD, 13));
 		lblError.setForeground(new Color(211, 211, 211));
-		lblError.setBounds(0, 161, 255, 25);
+		lblError.setBounds(0, 100, 255, 25);
 		contentPanel.add(lblError);
 		
 		

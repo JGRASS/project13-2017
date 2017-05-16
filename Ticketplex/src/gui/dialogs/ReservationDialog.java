@@ -101,7 +101,7 @@ public class ReservationDialog extends JDialog {
 		contentPanel.add(boxTime);
 		
 		JButton btnReserve = new JButton("REZERVI\u0160I");
-		btnReserve.setBounds(10, 217, 236, 30);
+		btnReserve.setBounds(10, 227, 236, 30);
 		UIManager.put(btnReserve.getBackground(), MainWindow.grayDark);
 		btnReserve.setForeground(new Color(153,153,153));
 		btnReserve.setBackground(MainWindow.grayDark);
@@ -147,7 +147,7 @@ public class ReservationDialog extends JDialog {
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setForeground(new Color(211, 211, 211));
 		lblError.setFont(new Font("Arial", Font.BOLD, 13));
-		lblError.setBounds(0, 258, 255, 25);
+		lblError.setBounds(0, 230, 255, 25);
 		contentPanel.add(lblError);
 		
 		lblBack.addMouseListener(new MouseAdapter() {
@@ -162,6 +162,7 @@ public class ReservationDialog extends JDialog {
 			public void mouseClicked(MouseEvent evt){
 				Showtime showtime=(Showtime) boxTime.getSelectedItem();
 				Controller.processNewReservation(showtime.getId(),seatsSlider.getValue());
+				btnReserve.setVisible(false);
 				
 			}
 			

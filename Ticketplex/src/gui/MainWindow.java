@@ -76,7 +76,7 @@ public class MainWindow extends JFrame {
 		setUndecorated(true);
 		setResizable(false);
 		setVisible(true);
-		setBounds(100, 100, 900, 520);
+		setBounds(100, 100, 900, 540);
 		setLocationRelativeTo(null);
 
 		containerPane = new JPanel();
@@ -126,7 +126,7 @@ public class MainWindow extends JFrame {
 
 	public void initMain() {
 		mainPanel = new JPanel();
-		mainPanel.setBounds(0, 30, 690, 490);
+		mainPanel.setBounds(0, 30, 690, 510);
 		mainPanel.setBackground(grayDark);
 		containerPane.add(mainPanel);
 		mainPanel.setLayout(null);
@@ -441,7 +441,7 @@ public class MainWindow extends JFrame {
 		mainPanel.repaint();
 
 		JLabel lblMovie = new JLabel("");
-		lblMovie.setBounds(21, 25, (int) (title_width * 1.2), (int) (title_height * 1.2));
+		lblMovie.setBounds(21, 25, (int) (title_width * 1.2), (int) (title_height * 1.1));
 		ImageIcon imageIcon = new ImageIcon(new ImageIcon(mov.getImg()).getImage()
 				.getScaledInstance(lblMovie.getWidth(), lblMovie.getHeight(), Image.SCALE_SMOOTH));
 		lblMovie.setIcon(imageIcon);
@@ -550,7 +550,7 @@ public class MainWindow extends JFrame {
 		mainPanel.add(btnReserve);
 
 		JLabel lblImdbIcon = new JLabel();
-		lblImdbIcon.setBounds(25, 260, 60, 60);
+		lblImdbIcon.setBounds(25, 237, 60, 60);
 		lblImdbIcon.setIcon(new ImageIcon("res/IMDb-48.png"));
 		lblImdbIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mainPanel.add(lblImdbIcon);
@@ -559,12 +559,12 @@ public class MainWindow extends JFrame {
 				new ImageIcon("res/Star-48.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
 
 		JLabel lblImdbStar = new JLabel();
-		lblImdbStar.setBounds(140, 259, 60, 60);
+		lblImdbStar.setBounds(140, 239, 60, 60);
 		lblImdbStar.setIcon(starIcon);
 		mainPanel.add(lblImdbStar);
 
 		JLabel lblRating = new JLabel(mov.getImdbRating());
-		lblRating.setBounds(90, 260, 60, 60);
+		lblRating.setBounds(90, 240, 60, 60);
 		lblRating.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRating.setFont(new Font("Arial", Font.BOLD, 19));
 		lblRating.setForeground(new Color(211, 211, 211));
@@ -584,7 +584,7 @@ public class MainWindow extends JFrame {
 		});
 
 		JLabel lblBack = new JLabel("< Povratak na repertoar");
-		lblBack.setBounds(10, 455, 230, 30);
+		lblBack.setBounds(10, 475, 230, 30);
 		lblBack.setFont(new Font("Arial", Font.BOLD, 14));
 		lblBack.setForeground(new Color(255, 255, 255));
 		lblBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -615,18 +615,18 @@ public class MainWindow extends JFrame {
 		mainPanel.repaint();
 
 		setBreadcrumbs(new String[] { "Repertoar" });
-		int title_padding = 15, per_line = 5;
+		int title_padding = 50, per_line = 4;
 		int i = 0;
 
 		for (Movie movie : movies) {
-			ImageIcon imageIcon = new ImageIcon(new ImageIcon(movie.getImg()).getImage().getScaledInstance(title_width,
-					title_height, Image.SCALE_SMOOTH));
-			int x = 13 + (title_width + title_padding) * (i % per_line);
-			int y = 10 + (title_height + title_padding) * (i / per_line);
+			int x = 9 + (title_width + title_padding) * (i % per_line);
+			int y = 11 + (title_height + title_padding) * (i / per_line);
 
 			JLabel lblMovie = new JLabel("");
-			lblMovie.setBounds(x, y, title_width, title_height);
-			lblMovie.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, okvir));
+			lblMovie.setBounds(x, y, (int)(title_width*1.35), (int)(title_height*1.2));
+			ImageIcon imageIcon = new ImageIcon(new ImageIcon(movie.getImg()).getImage().getScaledInstance(lblMovie.getWidth(),
+					lblMovie.getHeight(), Image.SCALE_SMOOTH));
+			lblMovie.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0,0,0)));
 			lblMovie.setIcon(imageIcon);
 			lblMovie.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			listPanel.add(lblMovie);

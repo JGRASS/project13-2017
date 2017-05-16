@@ -41,7 +41,7 @@ public class SettingsDialog extends JDialog {
 	private JTextField txtOld;
 	
 	public SettingsDialog() {
-		setBounds(0, 0, 255, 277);
+		setBounds(0, 0, 255, 234);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -111,6 +111,7 @@ public class SettingsDialog extends JDialog {
 			
 			public void mouseClicked(MouseEvent evt){
 				Controller.processSetNewPassword(txtOld.getText(),txtNew.getText());
+				btnNewPass.setVisible(false);
 			}
 			
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -128,13 +129,13 @@ public class SettingsDialog extends JDialog {
 		lblError.setForeground(new Color(211, 211, 211));
 		lblError.setFont(new Font("Arial", Font.BOLD, 13));
 		
-		lblError.setBounds(0, 205, 255, 25);
+		lblError.setBounds(0, 145, 255, 25);
 		contentPanel.add(lblError);
 		
 		JLabel lblBack = new JLabel("<html><u>Nazad</u></html>");
 		lblBack.setForeground(new Color(153, 153, 153));
 		lblBack.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblBack.setBounds(10, 245, 46, 25);
+		lblBack.setBounds(10, 198, 46, 25);
 		contentPanel.add(lblBack);
 		lblBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblBack.addMouseListener(new MouseAdapter() {

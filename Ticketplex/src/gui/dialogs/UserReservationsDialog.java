@@ -40,7 +40,7 @@ public class UserReservationsDialog extends JDialog {
 
 	
 	public UserReservationsDialog() {
-		setBounds(100, 100, 430, 370);
+		setBounds(100, 100, 500, 370);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setUndecorated(true);
@@ -57,23 +57,23 @@ public class UserReservationsDialog extends JDialog {
 		
 		HeaderPanel headerPanel = new HeaderPanel(this);
 		headerPanel.setLayout(null);
-		headerPanel.setBounds(0, 0, 430, 42);
+		headerPanel.setBounds(0, 0, 500, 42);
 		contentPanel.add(headerPanel);
 		
 		JLabel lblVaeRezervacije = new JLabel("Va\u0161e rezervacije");
-		lblVaeRezervacije.setBounds(10, 0, 430, 42);
+		lblVaeRezervacije.setBounds(10, 0, 500, 42);
 		headerPanel.add(lblVaeRezervacije);
 		lblVaeRezervacije.setForeground(Color.WHITE);
 		lblVaeRezervacije.setFont(new Font("Arial", Font.BOLD, 20));
 		
 		scrollPaneParent = new JPanel();
-		scrollPaneParent.setBounds(0, 41, 430, 283);
+		scrollPaneParent.setBounds(0, 41, 500, 283);
 		contentPanel.add(scrollPaneParent);
 		scrollPaneParent.setBorder(null);
 		scrollPaneParent.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 430, 283);;
+		scrollPane.setBounds(0, 0, 500, 283);;
 		scrollPane.setBorder(null);
 		scrollPaneParent.add(scrollPane);
 		
@@ -119,7 +119,7 @@ public class UserReservationsDialog extends JDialog {
 			JLabel txtMov=new JLabel(res.getMovieName());
 			txtMov.setFont(new Font("Arial", Font.BOLD, 14));
 			txtMov.setForeground(new Color(211,211,211));
-			txtMov.setBounds(10, i*height, 300, height);
+			txtMov.setBounds(10, i*height, 140, height);
 			scrollPaneContent.add(txtMov);
 			
 
@@ -129,7 +129,7 @@ public class UserReservationsDialog extends JDialog {
 			JLabel txtDate=new JLabel(datum);
 			txtDate.setFont(new Font("Arial", Font.PLAIN, 14));
 			txtDate.setForeground(new Color(211,211,211));
-			txtDate.setBounds(100, i*height, 100, height);
+			txtDate.setBounds(170, i*height, 100, height);
 			scrollPaneContent.add(txtDate);
 			
 			SimpleDateFormat fmtH=new SimpleDateFormat("kk:mm");
@@ -138,25 +138,25 @@ public class UserReservationsDialog extends JDialog {
 			JLabel txtHour=new JLabel(sat);
 			txtHour.setFont(new Font("Arial", Font.PLAIN, 14));
 			txtHour.setForeground(new Color(211,211,211));
-			txtHour.setBounds(220, i*height, 50, height);
+			txtHour.setBounds(290, i*height, 50, height);
 			scrollPaneContent.add(txtHour);
 			
 			JLabel txtSeats=new JLabel(res.getNumber_of_seats()+"");
 			txtSeats.setFont(new Font("Arial", Font.PLAIN, 14));
 			txtSeats.setForeground(new Color(211,211,211));
-			txtSeats.setBounds(300, i*height, 10, height);
+			txtSeats.setBounds(370, i*height, 10, height);
 			scrollPaneContent.add(txtSeats);
 			
 			JLabel lblDel=new JLabel("<html><u>odustani</u></html>");
 			lblDel.setFont(new Font("Arial",Font.PLAIN, 14));
 			lblDel.setForeground(new Color(211,211,211));
-			lblDel.setBounds(360, i*height, 300, height);
+			lblDel.setBounds(430, i*height, 300, height);
 			lblDel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			
 			JLabel lblRemoved=new JLabel("REZERVACIJA OTKAZANA");
 			lblRemoved.setFont(new Font("Arial", Font.BOLD, 16));
 			lblRemoved.setForeground(new Color(255,255,255));
-			lblRemoved.setBounds(0, i*height, 430, height);
+			lblRemoved.setBounds(0, i*height, 500, height);
 			lblRemoved.setVisible(false);
 			lblRemoved.setHorizontalAlignment(SwingConstants.CENTER);
 			scrollPaneContent.add(lblRemoved);
