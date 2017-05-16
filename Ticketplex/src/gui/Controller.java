@@ -117,10 +117,10 @@ public class Controller {
 
 	
 	/**
-	 * Handle login information
-	 * @param user
-	 * @param pass
-	 * @return 0-user 1-pass 2-ok
+	 * Funkcija obradjuje zahtev za login
+	 * @param user username korisnika
+	 * @param pass lozinka korisnika
+	 * @return <ul> <li> 0 - problem sa username-om</li> <li>1 - problem sa lozinkom</li> <li>2 - uspesna prijava</li></ul>
 	 */
 	public static int handleLogin(String user, String pass) {
 		if(user.equals("admin") && pass.equals("admin")){
@@ -131,8 +131,7 @@ public class Controller {
 			return 2;
 		}
 		
-		try {
-			
+		try {			
 			ticketplexClient.login(user, pass);
 			hideGuestGUI();
 			mainWindow.setSideUser(ticketplexClient.user);
@@ -182,7 +181,6 @@ public class Controller {
 			ticketplexClient.changePassword(old_password, new_password);
 			settDialog.showMsg("Uspešno ste promenili lozinku.");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			settDialog.showMsg(e.getMessage());
 		}
 		

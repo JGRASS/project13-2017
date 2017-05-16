@@ -4,11 +4,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
+/**
+ * Klasa zaduzena za sqlite bazu
+ * @author skakac
+ * @version 1.0
+ */
 public class Database {
+	/**
+	 * Istanca baze
+	 */
 	private static Database dbIsntance;
-    private static Connection conn;
-
+    /**
+     * Konekcija sa bazom
+     */
+	private static Connection conn;
+    
+    /**
+     * Funkcija vraca objekat klase Database
+     * @return objekat Database
+     */
     public static Database getInstance(){
     	if(dbIsntance == null){
     		dbIsntance = new Database();
@@ -16,7 +30,10 @@ public class Database {
     	return dbIsntance;
     	
     }
-
+    /**
+     * Funkcija vraca sql konekciju sa bazom
+     * @return
+     */
     public  Connection getConnection(){
 
         if(conn == null){
