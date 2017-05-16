@@ -334,14 +334,17 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 	/**
 	 * Funkcija brise odredjenu rezervaciju jednog korisnika
 	 * @param reservation_id id rezervacije
+	 * @param user_id id korisnika kome pripada rezervacija
 	 * @throws RuntimeException Ako je ID rezervacije nepozitivan broj
 	 */
 	@Override
-	public void removeReservation(int reservation_id) {
+	public void removeReservation(int reservation_id, int user_id) {
 		if(reservation_id <= 0)
+			throw new RuntimeException("ID rezervacije mora biti pozitivan broj");
+		if(user_id <= 0)
 			throw new RuntimeException("ID korisnika mora biti pozitivan broj");
 		
-		SOReservationRemove.execute(reservation_id);
+		SOReservationRemove.execute(reservation_id, user_id);
 
 	}
 

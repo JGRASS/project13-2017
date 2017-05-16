@@ -93,19 +93,74 @@ public class TicketplexClientTest {
 		tc.login("username", "password");
 	}
 	
-	//testLoginUserEmpty
-	//testLoginPasswordEmpty
 	
-	//testChangePasswordUser
-	//testChangePasswordNewPasswordEmpty
-	//testChangePasswordNewPasswordShort
+	@Test(expected=java.lang.Exception.class)
+	public void testLoginUserEmpty() throws Exception{
+		tc.login("", "password");
+	}
 	
-	//testGetShowtimeSpaceIDNegative
-	//testMakeReservationUser
-	//testMakeReservationIDNegative
+	@Test(expected=java.lang.Exception.class)
+	public void testLoginPasswordEmpty() throws Exception{
+		tc.login("username", "");
+	}
 	
-	//testGetUserReservationUser
-	//testDeleteReservationIDNegative
+	
+	@Test(expected=java.lang.Exception.class)
+	public void testChangePasswordUser() throws Exception{
+		User user = new User(1, "username", "password", "test@gmail.com");
+		tc.user = user;
+		
+		tc.changePassword("old_pass", "new_pass");
+	}	
+	@Test(expected=java.lang.Exception.class)
+	public void testChangePasswordNewPasswordEmpty() throws Exception{	
+		tc.changePassword("old_pass", "");
+	}	
+	@Test(expected=java.lang.Exception.class)
+	public void testChangePasswordNewPasswordShort() throws Exception{	
+		tc.changePassword("old_pass", "asd");
+	}
+	
+	@Test(expected=java.lang.RuntimeException.class)
+	public void testGetShowtimeSpaceIDNegative(){
+		tc.getShowtimeSpace(-1);
+	}
+	
+	@Test(expected=java.lang.Exception.class)
+	public void testMakeReservationGuest() throws Exception{
+		tc.makeReservation(1, 3);
+	}	
+	@Test(expected=java.lang.Exception.class)
+	public void testMakeReservationIDNegative() throws Exception{		
+		User user = new User(1, "username", "password", "test@gmail.com");
+		tc.user = user;
+		
+		tc.makeReservation(-1, 3);
+	}
+	
+	@Test(expected=java.lang.Exception.class)
+	public void testGetUserReservationGuest() throws Exception{
+		
+		tc.getUserReservations();
+	}
+	
+	@Test(expected=java.lang.Exception.class)
+	public void testDeleteReservationGuest() throws Exception{
+		tc.deleteReservation(1);
+	}
+	@Test(expected=java.lang.Exception.class)
+	public void testDeleteReservationIDNegative() throws Exception{
+		User user = new User(1, "username", "password", "test@gmail.com");
+		tc.user = user;
+		
+		tc.deleteReservation(-1);
+	}
+	
+	@Test(expected=java.lang.RuntimeException.class)
+	public void testGetAllMovieShowings(){		
+		tc.getAllMovieShowings(-1);
+	}
+	
 	
 
 }

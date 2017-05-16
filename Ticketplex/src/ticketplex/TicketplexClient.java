@@ -309,7 +309,7 @@ public class TicketplexClient implements TicketplexClientInterface {
 		if(reservation_id <= 0)
 			throw new RuntimeException("ID rezervacije mora biti pozitivan broj");
 
-		SOReservationRemove.execute(reservation_id);
+		SOReservationRemove.execute(reservation_id, this.user.getId());
 	}
 
 }

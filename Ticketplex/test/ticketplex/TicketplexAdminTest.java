@@ -179,7 +179,11 @@ public class TicketplexAdminTest {
 	
 	@Test(expected=java.lang.RuntimeException.class)
 	public void testRemoveReservationNegative(){
-		ta.removeReservation(-1);
+		ta.removeReservation(-1, 1);
+	}
+	@Test(expected=java.lang.RuntimeException.class)
+	public void testRemoveReservationUserIDNegative(){
+		ta.removeReservation(1, -1);
 	}
 	
 	

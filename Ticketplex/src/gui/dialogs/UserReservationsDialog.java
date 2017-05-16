@@ -108,7 +108,6 @@ public class UserReservationsDialog extends JDialog {
 		int height=35;
 		//int heightD=36;
 		for(Reservation res: reservations){
-			System.out.println(res.getMovieName());
 			JLabel txtMov=new JLabel(res.getMovieName());
 			txtMov.setFont(new Font("Arial", Font.BOLD, 14));
 			txtMov.setForeground(new Color(211,211,211));

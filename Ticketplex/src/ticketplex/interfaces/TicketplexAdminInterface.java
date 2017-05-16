@@ -31,6 +31,6 @@ public interface TicketplexAdminInterface {
 	public void removeUser(int user_id);
 	
 	public LinkedList<Reservation> getUserReservations(int user_id);
-	public void removeReservation(int reservation_id);
+	public void removeReservation(int reservation_id, int user_id);
 	
 }

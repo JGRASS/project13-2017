@@ -117,7 +117,6 @@ public class AdminWindow extends JFrame {
 			lblDelete.setBounds(220, h * i, 60, h);
 			lblDelete.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("Izbrisan film: " + m.getName() + ".");
 					AdminController.processRemoveMovie(m);
 				}
 			});

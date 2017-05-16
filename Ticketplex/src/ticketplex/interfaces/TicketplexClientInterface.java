@@ -7,20 +7,8 @@ import ticketplex.Reservation;
 import ticketplex.Showtime;
 
 public interface TicketplexClientInterface {
-	/**
-	 * 
-	 * @param username
-	 * @param password
-	 * @param email
-	 * @throws Exception
-	 */
+
 	public void register(String username, String password, String email) throws Exception;
-	/**
-	 * 
-	 * @param username
-	 * @param password
-	 * @throws Exception
-	 */
 	public void login(String username, String password) throws Exception;
 	public void logout();
 	

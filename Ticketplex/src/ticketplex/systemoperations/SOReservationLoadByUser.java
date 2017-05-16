@@ -25,7 +25,6 @@ public class SOReservationLoadByUser {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.println(rs.getString("movie_name"));
 				Reservation reservation = new Reservation(rs.getInt("id"), rs.getInt("showtime_id"),
 						rs.getInt("user_id"), rs.getInt("number_of_seats"));
 				reservation.setMovieName(rs.getString("movie_name"));

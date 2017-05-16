@@ -429,13 +429,6 @@ public class MainWindow extends JFrame {
 		return;
 	}
 
-	public void showRegisterDialog() {
-		System.out.println("register clicked");
-	}
-
-	public void showfpDialog() {
-		System.out.println("forgot clicked");
-	}
 
 	public void setMovie(Movie mov) {
 		setBreadcrumbs(new String[] { "Repertoar", mov.getName() });

@@ -144,7 +144,7 @@ public class AdminController {
 	}
 
 	public static void processRemoveReservation(Reservation r) {
-		ticketplexAdmin.removeReservation(r.getId());
+		ticketplexAdmin.removeReservation(r.getId(), r.getUser_id());
 		userWindow.setList(ticketplexAdmin.getUserReservations(r.getUser_id()));
 		
 	}
