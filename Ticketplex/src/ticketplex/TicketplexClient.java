@@ -11,7 +11,7 @@ import ticketplex.systemoperations.SOReservationInsert;
 import ticketplex.systemoperations.SOReservationLoadByUser;
 import ticketplex.systemoperations.SOReservationRemove;
 import ticketplex.systemoperations.SOShowtimeLoadByMovie;
-import ticketplex.systemoperations.SOShowtimeNumOfReservations;
+import ticketplex.systemoperations.SOShowtimeNumOfReservationsSeats;
 import ticketplex.systemoperations.SOUserExists;
 import ticketplex.systemoperations.SOUserLogin;
 import ticketplex.systemoperations.SOUserRegister;
@@ -238,45 +238,56 @@ public class TicketplexClient implements TicketplexClientInterface {
 	 */
 	@Override
 	public int getShowtimeSpace(int showtime_id) {
-		int used = SOShowtimeNumOfReservations.execute(showtime_id);
-
+		int used = SOShowtimeNumOfReservationsSeats.execute(showtime_id);
 		return Showtime.seats - used;
 	}
 	/**
 	 * Funkcija koja služi za rezervisanje projekcije
 	 * @param showtime_id
 	 * @param number_of_seats
-	 * @throws RuntimeException ako korisnik nije ulogovan
+	 * @throws Exception ako korisnik nije ulogovan
+	 * @throws Exception ako nema dovoljno slobodnih mesta
 	 */
 	@Override
-	public void makeReservation(int showtime_id, int number_of_seats) {
+	public void makeReservation(int showtime_id, int number_of_seats) throws Exception {
 		if (isGuest())
-			throw new RuntimeException("Morate biti ulogovani");
+			throw new Exception("Morate biti ulogovani");
+		
+		int space = getShowtimeSpace(showtime_id);
+		if(space <= 0)
+			throw new Exception("Sva mesta su zauzeta");
+		
+		if(space < number_of_seats){
+			if(space == 1) throw new Exception("Ostalo je samo jedno slobodno mesto");
+			if(space < 5) throw new Exception("Ostalo je samo "+space+" slobodna mesta");
+			throw new Exception("Ostalo je samo "+space+" slobodnih mesta");
+		}
+			
 
 		SOReservationInsert.execute(showtime_id, this.user.getId(), number_of_seats);
 	}
 	/**
 	 * Funkcija vraća rezervacije ulogovanog korisnika.
 	 * @return rezervacije
-	 * @throws RuntimeException ako korisnik nije ulogovan
+	 * @throws Exception ako korisnik nije ulogovan
 	 */
 	@Override
-	public LinkedList<Reservation> getUserReservations() {
+	public LinkedList<Reservation> getUserReservations() throws Exception {
 		if (isGuest())
-			throw new RuntimeException("Morate biti ulogovani!");
+			throw new Exception("Morate biti ulogovani!");
 
 		return SOReservationLoadByUser.execute(this.user.getId());
 	}
 	
 	/**
 	 * Funkcija briše rezervaciju ulogovanog korisnika.
-	 * @throws RuntimeException ako korisnik nije ulogovan
+	 * @throws Exception ako korisnik nije ulogovan
 	 */
 
 	@Override
-	public void deleteReservation(int reservation_id) {
+	public void deleteReservation(int reservation_id) throws Exception {
 		if (isGuest())
-			throw new RuntimeException("Morate biti ulogovani");
+			throw new Exception("Morate biti ulogovani");
 
 		SOReservationRemove.execute(reservation_id);
 	}

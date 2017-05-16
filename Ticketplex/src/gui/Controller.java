@@ -112,7 +112,11 @@ public class Controller {
 		if(urDialog == null)
 			urDialog = new UserReservationsDialog();
 		urDialog.setVisible(true);
-		urDialog.renderList(ticketplexClient.getUserReservations());
+		try {
+			urDialog.renderList(ticketplexClient.getUserReservations());
+		} catch (Exception e) {
+			showAlertDialog();
+		}
 	}
 
 	
@@ -166,13 +170,15 @@ public class Controller {
 		}
 	}
 
-	public static void processNewReservation(int showtime_id, int number_of_seats) {
+	public static boolean processNewReservation(int showtime_id, int number_of_seats) {
 		try {
 			ticketplexClient.makeReservation(showtime_id, number_of_seats);
 			resDialog.showMsg("Uspešno ste rezervisali projekciju.");
+			return true;
 		} catch (Exception e) {
-			resDialog.showMsg("Došlo je do greške");
+			resDialog.showMsg(e.getMessage());
 		}
+		return false;
 		
 	}
 
@@ -187,7 +193,11 @@ public class Controller {
 	}
 
 	public static void processRemoveReservation(int reservation_id) {
-		ticketplexClient.deleteReservation(reservation_id);
+		try {
+			ticketplexClient.deleteReservation(reservation_id);
+		} catch (Exception e) {
+			showAlertDialog();
+		}
 		
 	}
 

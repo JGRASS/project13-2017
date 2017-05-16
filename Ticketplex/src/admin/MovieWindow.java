@@ -157,9 +157,13 @@ public class MovieWindow extends JFrame {
 			lblRes.setBounds(150, h*i, 100, h);
 			innerPanel.add(lblRes);
 			
+			JLabel lblSeats = new JLabel(s.getNumOfSeats()+"/"+Showtime.seats+" mesta");
+			lblSeats.setBounds(250, h*i, 100, h);
+			innerPanel.add(lblSeats);
+			
 			JLabel lblDelete = new JLabel("<HTML><u>Izbrisi</u></HTML>");
 			lblDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblDelete.setBounds(250, h*i, 60, h);
+			lblDelete.setBounds(370, h*i, 60, h);
 			lblDelete.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e)  
 			    {  

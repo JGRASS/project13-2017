@@ -141,7 +141,7 @@ public class ReservationDialog extends JDialog {
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setForeground(new Color(211, 211, 211));
 		lblError.setFont(new Font("Arial", Font.BOLD, 13));
-		lblError.setBounds(0, 230, 255, 25);
+		lblError.setBounds(0, 265, 255, 25);
 		contentPanel.add(lblError);
 		
 		lblBack.addMouseListener(new MouseAdapter() {
@@ -155,8 +155,10 @@ public class ReservationDialog extends JDialog {
 		btnReserve.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt){
 				Showtime showtime=(Showtime) boxTime.getSelectedItem();
-				Controller.processNewReservation(showtime.getId(),seatsSlider.getValue());
-				btnReserve.setVisible(false);
+				if(Controller.processNewReservation(showtime.getId(),seatsSlider.getValue())){
+					btnReserve.setVisible(false);
+					lblError.setBounds(0, btnReserve.getY(), lblError.getWidth(), lblError.getHeight());
+				}				
 				
 			}
 			

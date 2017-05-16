@@ -9,6 +9,7 @@ import ticketplex.systemoperations.SOReservationLoadByUser;
 import ticketplex.systemoperations.SOReservationRemove;
 import ticketplex.systemoperations.SOShowtimeLoadByMovie;
 import ticketplex.systemoperations.SOShowtimeNumOfReservations;
+import ticketplex.systemoperations.SOShowtimeNumOfReservationsSeats;
 import ticketplex.systemoperations.SOShowtimeDelete;
 import ticketplex.systemoperations.SOShowtimeInsert;
 import ticketplex.systemoperations.SOUserDelete;
@@ -60,6 +61,7 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 		LinkedList<Showtime> showtimes = SOShowtimeLoadByMovie.execute(movie_id);
 		for (Showtime showtime : showtimes) {
 			showtime.setNumOfReservations(SOShowtimeNumOfReservations.execute(showtime.getId()));
+			showtime.setNumOfSeats(SOShowtimeNumOfReservationsSeats.execute(showtime.getId()));
 		}
 
 		return showtimes;

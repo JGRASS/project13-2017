@@ -13,7 +13,7 @@ public class Showtime {
 	/**
 	 * Označava broj sedišta
 	 */
-	static int seats = 120;
+	public static int seats = 120;
 	/**
 	 * Označava id projekcije
 	 */
@@ -30,18 +30,22 @@ public class Showtime {
 	 *  Označava broj rezervacija napravljenih za ovu projekciju
 	 */
 	private int _num_of_reservations;
+	/**
+	 *  Označava broj zauzetih sedišta
+	 */
+	private int _num_of_seats;
 
 	/**
 	 * Konstruktor klase Showtime
 	 * @param id
 	 * @param movie_id
-	 * @param l
+	 * @param timestamp
 	 */
-	public Showtime(int id, int movie_id, long l) {
+	public Showtime(int id, int movie_id, long timestamp) {
 		super();
 		this.id = id;
 		this.movie_id = movie_id;
-		this.timestamp = l;
+		this.timestamp = timestamp;
 	}
 
 	public int getMovie_id() {
@@ -79,6 +83,14 @@ public class Showtime {
 
 	}
 
+	public int getNumOfSeats() {
+		return _num_of_seats;
+	}
+
+	public void setNumOfSeats(int _num_of_seats) {
+		this._num_of_seats = _num_of_seats;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -89,6 +101,7 @@ public class Showtime {
 		
 		return datum;
 	}
+
 	
 	
 	
