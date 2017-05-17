@@ -109,6 +109,7 @@ public class SettingsDialog extends JDialog {
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent evt){
+				showMsg("");
 				txtOld.setBorder(MainWindow.emptyBorder);
 				txtNew.setBorder(MainWindow.emptyBorder);
 				Controller.processSetNewPassword(txtOld.getText(),txtNew.getText());
@@ -157,7 +158,7 @@ public class SettingsDialog extends JDialog {
 	public void showMsg(String msg) {
 		lblError.setText(msg);
 		
-		if(msg.equals("Pogrešna stara lozinka!"))
+		if(msg.equals("Pogrešna stara lozinka!") || msg.equals("Unesite staru lozinku"))
 			txtOld.setBorder(MainWindow.errorBorder);
 		
 		if(msg.equals("Unesite novu lozinku") || msg.equals("Unesite duzu lozinku"))

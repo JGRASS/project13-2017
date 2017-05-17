@@ -149,7 +149,11 @@ public class TicketplexClient implements TicketplexClientInterface {
 	public String resetPassword(String username) throws Exception {
 		Random rnd = new Random();
 		String npwd = String.valueOf(1000 + rnd.nextInt(9000));
-
+		
+		if (username.isEmpty() || username.equals("Username")) {
+			throw new Exception("Unesite username!");
+		}
+		
 		if (!SOUserSetPassword.execute(username, npwd))
 			throw new Exception("Ne postoji takav korisnik!");
 
@@ -178,6 +182,9 @@ public class TicketplexClient implements TicketplexClientInterface {
 		if (!SOGenerateSHA2.execute(old_password).equals(this.user.getPassword()))
 			throw new Exception("Pogrešna stara lozinka!");
 
+		if (old_password.isEmpty() || old_password.equals("Stara lozinka"))
+			throw new Exception("Unesite staru lozinku");
+		
 		if (new_password.isEmpty() || new_password.equals("Nova lozinka"))
 			throw new Exception("Unesite novu lozinku");
 

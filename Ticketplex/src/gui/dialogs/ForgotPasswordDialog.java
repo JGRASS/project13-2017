@@ -102,7 +102,8 @@ public class ForgotPasswordDialog extends JDialog {
 		btnNewPass.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				txtUsername.setBorder(MainWindow.emptyBorder);
-				if(txtUsername.getText().length()<4){
+				showMsg("");
+				if(txtUsername.getText().length() < 4 || txtUsername.getText().equals("Username")){
 					
 					txtUsername.setBorder(MainWindow.errorBorder);
 					return;
@@ -155,7 +156,7 @@ public class ForgotPasswordDialog extends JDialog {
 
 	public void showMsg(String msg) {
 		lblError.setText(msg);
-		if(msg.equals("Ne postoji takav korisnik!")){
+		if(msg.equals("Ne postoji takav korisnik!") || msg.equals("Unesite username!")){
 			txtUsername.setBorder(MainWindow.errorBorder);
 		}
 		

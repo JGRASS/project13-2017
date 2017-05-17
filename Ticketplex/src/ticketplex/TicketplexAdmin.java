@@ -278,6 +278,14 @@ public class TicketplexAdmin implements TicketplexAdminInterface {
 		if (timestamp < now.getTimeInMillis()) {
 			throw new Exception("Vreme prikazivanja mora biti u buducnosti");
 		}
+		
+		LinkedList<Showtime> showtimes = getAllMovieShowings(movie_id);
+		for(Showtime showtime : showtimes){
+			if(showtime.getDatetime() == timestamp){
+				throw new Exception("Prikazivanje u ovom vremenu vec postoji");
+			}
+		}
+		
 		SOShowtimeInsert.execute(movie_id, timestamp);
 
 	}
