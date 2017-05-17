@@ -135,7 +135,7 @@ public class NewShowtimeDialog extends JDialog {
 	private JLabel getLblException() {
 		if (lblException == null) {
 			lblException = new JLabel("");
-			lblException.setBounds(26, 243, 292, 14);
+			lblException.setBounds(10, 77, 292, 14);
 		}
 		return lblException;
 	}

@@ -39,28 +39,47 @@ public class AdminController {
 	
 	public static void closeAdminPanel(){
 		adminWindow.setVisible(false);
-		if(movieWindow != null) movieWindow.setVisible(false);
-		if(usersWindow != null) usersWindow.setVisible(false);
-		if(editMovieDialog != null) editMovieDialog.setVisible(false);
-		if(newMovieDialog != null) newMovieDialog.setVisible(false);
-		if(newShowtimeDialog != null) newShowtimeDialog.setVisible(false);
-		if(userWindow != null) userWindow.setVisible(false);
+		adminWindow.dispose();
+		adminWindow = null;
+		hideMovieWindow();
+		hideUsers();
+		hideEditMovie();
+		hideNewMovie();
+		hideNewShowtime();
+		hideUser();
 		Controller.restartMainWindow();
 	}
 
 	public static void addNewMovie() {
+		hideNewMovie();		
 		if(newMovieDialog == null)
 			newMovieDialog = new NewMovieDialog();
 		newMovieDialog.setVisible(true);
 	}
+	public static void hideNewMovie(){
+		if(newMovieDialog != null){
+			newMovieDialog.setVisible(false);
+			newMovieDialog.dispose();
+			newMovieDialog = null;
+		}
+	}
 	
 	public static void addNewShowtime(Movie movie) {
+		hideNewShowtime();		
 		if(newShowtimeDialog == null)
 			newShowtimeDialog = new NewShowtimeDialog(movie);
 		newShowtimeDialog.setVisible(true);
 	}
+	public static void hideNewShowtime(){
+		if(newShowtimeDialog != null){
+			newShowtimeDialog.setVisible(false);
+			newShowtimeDialog.dispose();
+			newShowtimeDialog = null;
+		}
+	}
 	
 	public static void showMovie(int movie_id){
+		hideMovieWindow();
 		if(movieWindow == null)
 			movieWindow  = new MovieWindow(ticketplexAdmin.getMovie(movie_id));
 		movieWindow.setMovie(ticketplexAdmin.getMovie(movie_id));
@@ -71,11 +90,26 @@ public class AdminController {
 	public static void hideMovieWindow(int movie_id){
 		if(movieWindow == null || movieWindow.movie_id != movie_id) return;
 		movieWindow.setVisible(false);
-		if(editMovieDialog != null) editMovieDialog.setVisible(false);
+		hideMovieWindow();
+		
+		if(editMovieDialog != null){
+			editMovieDialog.setVisible(false);
+			hideEditMovie();
+		}		
+		
+	}
+	public static void hideMovieWindow(){
+		if(movieWindow != null){
+			movieWindow.setVisible(false);
+			movieWindow.dispose();
+			movieWindow = null;
+		}
 	}
 	
 
 	public static void showEditMovieDialog(int movie_id) {
+		hideEditMovie();
+		
 		if(editMovieDialog == null)
 			editMovieDialog = new EditMovieDialog();
 		
@@ -83,14 +117,28 @@ public class AdminController {
 		editMovieDialog.setVisible(true);
 		
 	}
+	public static void hideEditMovie(){
+		if(editMovieDialog != null){
+			editMovieDialog.setVisible(false);
+			editMovieDialog.dispose();
+			editMovieDialog = null;
+		}
+	}
 	
 	public static void showUsers(){
+		hideUsers();
 		if(usersWindow == null)
 			usersWindow = new UsersWindow();
 		usersWindow.setVisible(true);
 		usersWindow.setList(ticketplexAdmin.getAllUsers());
 	}
-	
+	public static void hideUsers(){
+		if(usersWindow != null){
+			usersWindow.setVisible(false);
+			usersWindow.dispose();
+			usersWindow = null;
+		}
+	}
 	
 	
 	
@@ -142,6 +190,13 @@ public class AdminController {
 		userWindow.setUser(u);
 		userWindow.setList(ticketplexAdmin.getUserReservations(u.getId()));
 	}
+	public static void hideUser(){
+		if(userWindow != null){
+			userWindow.setVisible(false);
+			userWindow.dispose();
+			userWindow = null;
+		}
+	}
 
 	public static void processRemoveReservation(Reservation r) {
 		ticketplexAdmin.removeReservation(r.getId(), r.getUser_id());
@@ -151,7 +206,7 @@ public class AdminController {
 
 	public static void processRemoveUser(int id) {
 		ticketplexAdmin.removeUser(id);
-		userWindow.setVisible(false);
+		hideUser();
 		usersWindow.setList(ticketplexAdmin.getAllUsers());
 		
 		

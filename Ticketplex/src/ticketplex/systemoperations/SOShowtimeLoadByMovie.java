@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 import db.Database;
@@ -33,10 +35,19 @@ public class SOShowtimeLoadByMovie {
 	        }
 	
 	    } catch (SQLException e) {
-	    	System.out.println(e);
 	        System.out.println(e.getMessage());
 	    }
-	    
+
+		Collections.sort(showtimes, new Comparator<Showtime>() {
+	        public int compare(Showtime s1, Showtime s2) {
+	        	long comp = s1.getDatetime() - s2.getDatetime();
+	        	if(comp == 0) return 0;
+	        	if(comp < 0) return -1;
+	        	return 1;
+	        }
+	    });
+
+		
 	    return showtimes;
 
 	}

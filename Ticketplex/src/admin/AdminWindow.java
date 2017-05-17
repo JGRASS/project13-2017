@@ -150,6 +150,10 @@ public class AdminWindow extends JFrame {
 		}
 		return btnNewButton;
 	}
+	
+	public void closeWindow() {
+		dispose();
+	}
 
 	
 }

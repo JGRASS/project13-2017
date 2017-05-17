@@ -153,4 +153,8 @@ public class UserWindow extends JFrame {
 		}
 		return btnIzbrisiKorisnika;
 	}
+	
+	public void closeWindow() {
+		dispose();
+	}
 }

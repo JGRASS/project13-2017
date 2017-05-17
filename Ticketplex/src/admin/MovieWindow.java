@@ -249,4 +249,8 @@ public class MovieWindow extends JFrame {
 		}
 		return lblReservationNumber;
 	}
+	
+	public void closeWindow() {
+		dispose();
+	}
 }

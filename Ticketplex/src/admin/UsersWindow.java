@@ -94,5 +94,9 @@ public class UsersWindow extends JFrame {
 		contentPane.add(listPanel);
 		
 	}
+	
+	public void closeWindow() {
+		dispose();
+	}
 
 }
