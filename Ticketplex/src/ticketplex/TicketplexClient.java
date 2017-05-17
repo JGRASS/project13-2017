@@ -178,13 +178,14 @@ public class TicketplexClient implements TicketplexClientInterface {
 		if (!SOGenerateSHA2.execute(old_password).equals(this.user.getPassword()))
 			throw new Exception("Pogrešna stara lozinka!");
 
-		if (new_password.isEmpty() || new_password.equals("Password"))
+		if (new_password.isEmpty() || new_password.equals("Nova lozinka"))
 			throw new Exception("Unesite novu lozinku");
 
 		if (new_password.length() < 4)
 			throw new Exception("Unesite duzu lozinku");
 
 		SOUserSetPassword.execute(this.user.getUsername(), new_password);
+		this.user.setPassword(SOGenerateSHA2.execute(new_password));
 
 	}
 

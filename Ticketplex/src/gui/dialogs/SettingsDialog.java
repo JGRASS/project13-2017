@@ -157,7 +157,7 @@ public class SettingsDialog extends JDialog {
 	public void showMsg(String msg) {
 		lblError.setText(msg);
 		
-		if(msg.equals("Pogrešna lozinka!"))
+		if(msg.equals("Pogrešna stara lozinka!"))
 			txtOld.setBorder(MainWindow.errorBorder);
 		
 		if(msg.equals("Unesite novu lozinku") || msg.equals("Unesite duzu lozinku"))
