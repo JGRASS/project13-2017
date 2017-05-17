@@ -165,12 +165,15 @@ public class MainWindow extends JFrame {
 	public void setSideGuest() {
 		sidePanel.removeAll();
 		sidePanel.repaint();
-		JLabel lblName = new JLabel("TICKETPLEX");
+		
+		JLabel lblName = new JLabel("");
 		lblName.setBackground(new Color(175, 238, 238));
+		lblName.setBounds(15, 9, 170, 41);
+		ImageIcon imageIcon = new ImageIcon(new ImageIcon("res/logo.png").getImage().getScaledInstance(lblName.getWidth(),lblName.getHeight(), Image.SCALE_SMOOTH));
+		lblName.setIcon(imageIcon);
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName.setForeground(new Color(255, 255, 255));
 		lblName.setFont(new Font("Arial", Font.BOLD, 18));
-		lblName.setBounds(10, 21, 190, 36);
 
 		JTextField tfUsername = new JTextField();
 		tfUsername.setForeground(new Color(153, 153, 153));
@@ -312,11 +315,14 @@ public class MainWindow extends JFrame {
 	public void setSideUser(User user) {
 		sidePanel.removeAll();
 		sidePanel.repaint();
-		JLabel lblName = new JLabel("TICKETPLEX");
+		
+		JLabel lblName = new JLabel("");
+		lblName.setBounds(15, 9, 170, 41);
+		ImageIcon imageIcon = new ImageIcon(new ImageIcon("res/logo.png").getImage().getScaledInstance(lblName.getWidth(),lblName.getHeight(), Image.SCALE_SMOOTH));
+		lblName.setIcon(imageIcon);
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName.setForeground(new Color(255, 255, 255));
 		lblName.setFont(new Font("Arial", Font.BOLD, 18));
-		lblName.setBounds(10, 21, 190, 36);
 		sidePanel.add(lblName);
 
 		JLabel lblUser = new JLabel(user.getUsername());
