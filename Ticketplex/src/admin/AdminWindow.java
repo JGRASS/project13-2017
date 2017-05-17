@@ -46,10 +46,11 @@ public class AdminWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public AdminWindow() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Admin-48.png"));
 		setTitle("Admin panel [Ticketplex]");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 329);
+		setBounds(100, 100, 442, 311);
 
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -70,7 +71,7 @@ public class AdminWindow extends JFrame {
 		contentPane.setLayout(null);
 
 		lblNazivFilma = new JLabel("Lista filmova");
-		lblNazivFilma.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNazivFilma.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNazivFilma.setBounds(10, 22, 183, 14);
 		contentPane.add(lblNazivFilma);
 
@@ -146,7 +147,7 @@ public class AdminWindow extends JFrame {
 					AdminController.addNewMovie();
 				}
 			});
-			btnNewButton.setBounds(279, 18, 125, 23);
+			btnNewButton.setBounds(299, 18, 125, 23);
 		}
 		return btnNewButton;
 	}

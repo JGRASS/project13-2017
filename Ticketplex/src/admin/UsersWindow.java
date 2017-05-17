@@ -34,11 +34,12 @@ public class UsersWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public UsersWindow() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Admin-48.png"));
 		setTitle("Lista korisnika");
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 442, 300);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,13 +73,13 @@ public class UsersWindow extends JFrame {
 			JLabel lblNewLabel;
 			JLabel lblOpcije;
 			lblNewLabel = new JLabel(u.getUsername());
-			lblNewLabel.setBounds(0, h*i, 200, h);
+			lblNewLabel.setBounds(10, h*i, 200, h);
 			panel.add(lblNewLabel);
 			
 
 			lblOpcije = new JLabel("<HTML><u>Opcije</u></HTML>");
 			lblOpcije.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblOpcije.setBounds(330, h*i, 147, h);
+			lblOpcije.setBounds(360, h*i, 147, h);
 			lblOpcije.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e)  
 			    {  

@@ -37,7 +37,8 @@ public class NewShowtimeDialog extends JDialog {
 	 * Create the dialog.
 	 * @param movie 
 	 */
-	public NewShowtimeDialog(Movie movie) {		
+	public NewShowtimeDialog(Movie movie) {
+		setResizable(false);		
 		setTitle("Dodaj prikazivanje za film: "+movie.getName());
 		setBounds(100, 100, 388, 167);
 		setLocationRelativeTo(null);
@@ -105,14 +106,14 @@ public class NewShowtimeDialog extends JDialog {
 	private JLabel getLblImeFilma() {
 		if (lblImeFilma == null) {
 			lblImeFilma = new JLabel("Datum prikazivanja [dd/mm/yyyy]");
-			lblImeFilma.setBounds(26, 21, 199, 14);
+			lblImeFilma.setBounds(26, 23, 199, 14);
 		}
 		return lblImeFilma;
 	}
 	private JTextField getTextFieldDate() {
 		if (textFieldDate == null) {
 			textFieldDate = new JTextField();
-			textFieldDate.setBounds(268, 18, 86, 20);
+			textFieldDate.setBounds(268, 21, 86, 20);
 			textFieldDate.setColumns(10);
 		}
 		return textFieldDate;
@@ -120,14 +121,14 @@ public class NewShowtimeDialog extends JDialog {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("Vreme prikazivanja [hh:mm]");
-			lblNewLabel.setBounds(26, 46, 171, 20);
+			lblNewLabel.setBounds(26, 60, 171, 20);
 		}
 		return lblNewLabel;
 	}
 	private JTextField getTextFieldTime() {
 		if (textFieldTime == null) {
 			textFieldTime = new JTextField();
-			textFieldTime.setBounds(268, 49, 86, 20);
+			textFieldTime.setBounds(268, 62, 86, 20);
 			textFieldTime.setColumns(10);
 		}
 		return textFieldTime;

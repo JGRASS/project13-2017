@@ -51,10 +51,11 @@ public class MovieWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MovieWindow(Movie m) {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Admin-48.png"));
 		movie_id = m.getId();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 724, 396);
+		setBounds(100, 100, 713, 396);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,8 +88,12 @@ public class MovieWindow extends JFrame {
 		contentPane.add(listPanel);
 		
 		btnDodajPrikazivanje = new JButton("Dodaj prikazivanje");
+		btnDodajPrikazivanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
-		btnDodajPrikazivanje.setBounds(525, 142, 173, 23);
+		btnDodajPrikazivanje.setBounds(549, 131, 148, 23);
 		contentPane.add(btnDodajPrikazivanje);
 		
 		JLabel lblPrikazivanja = new JLabel("Prikazivanja");
@@ -97,7 +102,7 @@ public class MovieWindow extends JFrame {
 		
 		btnIzmeniDetalje = new JButton("Izmeni detalje");
 
-		btnIzmeniDetalje.setBounds(20, 300, 148, 23);
+		btnIzmeniDetalje.setBounds(549, 107, 148, 23);
 		contentPane.add(btnIzmeniDetalje);
 		
 	
@@ -106,15 +111,15 @@ public class MovieWindow extends JFrame {
 	void setMovie(Movie m){
 		movie_id = m.getId();
 		setTitle("Film: "+m.getName());
-		lblName.setText(m.getName());
-		lblYear.setText(String.valueOf(m.getYear()));
-		lblGenre.setText(m.getGenre());
+		lblName.setText("Ime: "+m.getName());
+		lblYear.setText("Godina: "+String.valueOf(m.getYear()));
+		lblGenre.setText("Žanr: "+m.getGenre());
 		lblDescription.setText("<html>"+m.getDescription()+"</html>");
-		lblCast.setText(m.getCast());
-		lblDirector.setText(m.getDirector());
-		lblLength.setText(String.valueOf(m.getLength()));
-		lblimdbRating.setText(m.getImdbRating());
-		lblImdblink.setText(m.getImdbLink());
+		lblCast.setText("Uloge: "+m.getCast());
+		lblDirector.setText("Režiser:  "+ m.getDirector());
+		lblLength.setText("Trajanje: "+String.valueOf(m.getLength())+" min");
+		lblimdbRating.setText("Ocena: "+m.getImdbRating());
+		lblImdblink.setText("Link: "+m.getImdbLink());
 		lblReservationNumber.setText("Broj rezervacija: "+String.valueOf(AdminController.processGetNumberOfReservations(m.getId())));
 		
 
@@ -180,14 +185,14 @@ public class MovieWindow extends JFrame {
 	private JLabel getLblName() {
 		if (lblName == null) {
 			lblName = new JLabel("Ime");
-			lblName.setBounds(20, 21, 240, 14);
+			lblName.setBounds(10, 21, 240, 14);
 		}
 		return lblName;
 	}
 	private JLabel getLblYear() {
 		if (lblYear == null) {
 			lblYear = new JLabel("Year");
-			lblYear.setBounds(20, 41, 240, 14);
+			lblYear.setBounds(10, 59, 240, 14);
 		}
 		return lblYear;
 	}
@@ -203,49 +208,49 @@ public class MovieWindow extends JFrame {
 	private JLabel getLblCast() {
 		if (lblCast == null) {
 			lblCast = new JLabel("Cast");
-			lblCast.setBounds(20, 91, 240, 14);
+			lblCast.setBounds(10, 135, 240, 14);
 		}
 		return lblCast;
 	}
 	private JLabel getLblDirector() {
 		if (lblDirector == null) {
 			lblDirector = new JLabel("Director");
-			lblDirector.setBounds(20, 116, 240, 14);
+			lblDirector.setBounds(10, 173, 240, 14);
 		}
 		return lblDirector;
 	}
 	private JLabel getLblLength() {
 		if (lblLength == null) {
 			lblLength = new JLabel("Length");
-			lblLength.setBounds(20, 151, 240, 14);
+			lblLength.setBounds(10, 211, 240, 14);
 		}
 		return lblLength;
 	}
 	private JLabel getLblimdbRating() {
 		if (lblimdbRating == null) {
 			lblimdbRating = new JLabel("ImdbRating");
-			lblimdbRating.setBounds(20, 174, 240, 14);
+			lblimdbRating.setBounds(10, 249, 240, 14);
 		}
 		return lblimdbRating;
 	}
 	private JLabel getLblImdblink() {
 		if (lblImdblink == null) {
 			lblImdblink = new JLabel("imdbLink");
-			lblImdblink.setBounds(20, 201, 240, 14);
+			lblImdblink.setBounds(10, 287, 240, 14);
 		}
 		return lblImdblink;
 	}
 	private JLabel getLblGenre() {
 		if (lblGenre == null) {
 			lblGenre = new JLabel("Genre");
-			lblGenre.setBounds(20, 66, 240, 14);
+			lblGenre.setBounds(10, 97, 240, 14);
 		}
 		return lblGenre;
 	}
 	private JLabel getLblReservationNumber() {
 		if (lblReservationNumber == null) {
 			lblReservationNumber = new JLabel("New label");
-			lblReservationNumber.setBounds(20, 226, 240, 14);
+			lblReservationNumber.setBounds(10, 325, 240, 14);
 		}
 		return lblReservationNumber;
 	}

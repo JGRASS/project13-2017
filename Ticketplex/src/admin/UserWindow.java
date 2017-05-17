@@ -20,6 +20,7 @@ import ticketplex.User;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 
 public class UserWindow extends JFrame {
 
@@ -43,7 +44,7 @@ public class UserWindow extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("res/Icon-Admin-48.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 435, 330);
+		setBounds(100, 100, 430, 331);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,14 +134,14 @@ public class UserWindow extends JFrame {
 
 	private JLabel getLblUsername() {
 		if (lblUsername == null) {
-			lblUsername = new JLabel("Ime");
+			lblUsername = new JLabel("Ime:");
 			lblUsername.setBounds(20, 21, 153, 14);
 		}
 		return lblUsername;
 	}
 	private JLabel getLblEmail() {
 		if (lblEmail == null) {
-			lblEmail = new JLabel("Email");
+			lblEmail = new JLabel("Email:");
 			lblEmail.setBounds(20, 41, 171, 14);
 		}
 		return lblEmail;
@@ -148,8 +149,12 @@ public class UserWindow extends JFrame {
 	private JButton getBtnIzbrisiKorisnika() {
 		if (btnIzbrisiKorisnika == null) {
 			btnIzbrisiKorisnika = new JButton("Izbrisi korisnika");
+			btnIzbrisiKorisnika.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 			
-			btnIzbrisiKorisnika.setBounds(273, 17, 132, 23);
+			btnIzbrisiKorisnika.setBounds(273, 57, 132, 23);
 		}
 		return btnIzbrisiKorisnika;
 	}
