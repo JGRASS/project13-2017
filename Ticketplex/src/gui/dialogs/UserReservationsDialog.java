@@ -172,6 +172,14 @@ public class UserReservationsDialog extends JDialog {
 		}
 		scrollPaneContent.setPreferredSize(new Dimension(scrollPane.getWidth(), i*height));
 		 
+		if(reservations.isEmpty()) {
+			JLabel lblNoRes=new JLabel("Nemate rezervacija!");
+			lblNoRes.setFont(new Font("Arial", Font.BOLD, 26));
+			lblNoRes.setForeground(new Color(255,255,255));
+			lblNoRes.setBounds(0,115,500,42);
+			lblNoRes.setHorizontalAlignment(SwingConstants.CENTER);
+			scrollPaneContent.add(lblNoRes);
+		}
 		
 	}
 }
